@@ -7,14 +7,16 @@ SRCDIR ?= ./src
 OUTDIR ?= ./build
 OBJDIR ?= $(OUTDIR)/objects
 
+SRCFILES := $(wildcard $(SRCDIR)/**/*.cpp) $(wildcard $(SRCDIR)/*.cpp)
+OBJFILES := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCFILES))
+HEADERFILES := $(wildcard $(SRCDIR)/**/*.h) $(wildcard $(SRCDIR)/*.h)
 
-$(OUTDIR)/main.exe: $(OBJDIR)/main.o
-	$(CXX) $^ -o $@ -L$(SFMLDIR)/lib $(CXXFLAGS)
+$(OUTDIR)/main.exe: $(OBJFILES) $(HEADERFILES)
+	$(CXX) $(OBJFILES) -o $@ -L$(SFMLDIR)/lib $(CXXFLAGS)
 
-$(OBJDIR)/main.o: $(SRCDIR)/main.cpp
-	mkdir -p $(OUTDIR)
-	mkdir -p $(OBJDIR)
-	$(CXX) -c $^ -I$(SFMLDIR)/include $(CXXFLAGS) -o $@ 
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	mkdir -p $(dir $@)
+	$(CXX) -c $< -I$(SFMLDIR)/include $(CXXFLAGS) -o $@
 
 clean:
 	rm -rf $(OUTDIR)
