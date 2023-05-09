@@ -1,11 +1,12 @@
+include ./build/vars.mk
+
 CXX=g++
 CXXFLAGS=-Wall -Wextra -Wshadow -Wpointer-arith -Wuninitialized -Winit-self -Wunreachable-code -std=c++17 -lsfml-graphics -lsfml-window -lsfml-system
 
-SRCDIR=./src
-OUTDIR=./build
-OBJDIR=$(OUTDIR)/objects
+SRCDIR ?= ./src
+OUTDIR ?= ./build
+OBJDIR ?= $(OUTDIR)/objects
 
-include ./build/vars.mk
 
 $(OUTDIR)/main.exe: $(OBJDIR)/main.o
 	$(CXX) $^ -o $@ -L$(SFMLDIR)/lib $(CXXFLAGS)
