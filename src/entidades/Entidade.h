@@ -1,5 +1,5 @@
+#pragma once
 #include "../Ente.h"
-#include "SFML/Graphics/CircleShape.hpp"
 
 namespace Jogo::Entidades {
 class Entidade : public Ente {
