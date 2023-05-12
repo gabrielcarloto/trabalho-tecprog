@@ -16,6 +16,8 @@ public:
 
   const sf::CircleShape &getShape() { return shape; }
 
+  virtual void mover() = 0;
+
 protected:
   int num_vidas;
   sf::CircleShape shape;
