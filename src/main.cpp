@@ -3,6 +3,8 @@
 
 int main() {
   sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+  window.setFramerateLimit(60);
+
   Jogo::Entidades::Personagens::Jogador teste;
 
   while (window.isOpen()) {
