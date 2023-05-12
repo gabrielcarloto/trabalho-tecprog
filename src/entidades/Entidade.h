@@ -5,7 +5,7 @@
 namespace Jogo::Entidades {
 class Entidade : public Ente {
 public:
-  Entidade();
+  Entidade(sf::Vector2f &velo) : vel(velo){};
   ~Entidade();
 
 protected:

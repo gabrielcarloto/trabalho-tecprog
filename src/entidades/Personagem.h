@@ -6,7 +6,8 @@
 namespace Jogo::Entidades::Personagens {
 class Personagem : public Entidade {
 public:
-  Personagem(sf::Vector2f &pos, float raio) : shape(raio) {
+  Personagem(sf::Vector2f &pos, sf::Vector2f &velo, float raio)
+      : Entidade(velo), shape(raio) {
     x = (int)pos.x;
     y = (int)pos.y;
 

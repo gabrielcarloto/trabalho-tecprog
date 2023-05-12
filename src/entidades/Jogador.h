@@ -6,10 +6,10 @@
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
-  Jogador(sf::Vector2f pos = {0, 0}, float raio = 20) : Personagem(pos, raio) {
+  Jogador(sf::Vector2f pos = {0, 0}, sf::Vector2f velo = {10, 10},
+          float raio = 20)
+      : Personagem(pos, velo, raio) {
     shape.setFillColor(sf::Color::Blue);
-    vel.x = 10;
-    vel.y = 10;
   }
 
   void executar() override {} // TODO: implementar
