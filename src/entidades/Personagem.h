@@ -7,8 +7,8 @@ namespace Jogo::Entidades::Personagens {
 class Personagem : public Entidade {
 public:
   Personagem(sf::Vector2f &pos, float raio) : shape(raio) {
-    x = pos.x;
-    y = pos.y;
+    x = (int)pos.x;
+    y = (int)pos.y;
 
     shape.setPosition(pos);
   }

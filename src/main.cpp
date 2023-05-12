@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 int main() {
-  sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+  sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
   window.setFramerateLimit(60);
 
   Jogo::Entidades::Personagens::Jogador teste;
@@ -18,6 +18,7 @@ int main() {
     }
 
     window.clear();
+    teste.mover();
     window.draw(teste.getShape());
     window.display();
   }
