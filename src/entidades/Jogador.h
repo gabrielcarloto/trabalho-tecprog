@@ -5,11 +5,9 @@
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
-  Jogador(sf::Vector2f pos = {0, 0}, sf::Vector2f velo = {10, 10},
-          float raio = 20)
-      : Personagem(pos, velo, raio) {
-    shape.setFillColor(sf::Color::Blue);
-  }
+  Jogador(const char *caminhoTextura, const sf::Vector2f pos = {0, 0},
+          const sf::Vector2f velo = {10, 10})
+      : Personagem(caminhoTextura, pos, velo) {}
 
   void executar() override {} // TODO: implementar
   void mover() override;

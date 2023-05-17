@@ -6,20 +6,14 @@
 namespace Jogo::Entidades::Personagens {
 class Personagem : public Entidade {
 public:
-  Personagem(sf::Vector2f &pos, sf::Vector2f &velo, float raio)
-      : Entidade(velo), shape(raio) {
-    x = (int)pos.x;
-    y = (int)pos.y;
-
-    shape.setPosition(pos);
-  }
-
-  const sf::CircleShape &getShape() { return shape; }
+  Personagem(const char *, const sf::Vector2f &, const sf::Vector2f &);
+  Personagem(const char *, const sf::IntRect &, const sf::Vector2f &,
+             const sf::Vector2f &);
 
   virtual void mover() = 0;
 
 protected:
   int num_vidas;
-  sf::CircleShape shape;
+  sf::Vector2f vel;
 };
 } // namespace Jogo::Entidades::Personagens
