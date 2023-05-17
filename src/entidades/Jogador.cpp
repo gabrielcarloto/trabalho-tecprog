@@ -4,12 +4,12 @@
 namespace Jogo::Entidades::Personagens {
 void Jogador::mover() {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-    shape.move(0, -vel.y);
+    pFig->move(0, -vel.y);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-    shape.move(-vel.x, 0);
+    pFig->move(-vel.x, 0);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-    shape.move(0, vel.y);
+    pFig->move(0, vel.y);
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-    shape.move(vel.x, 0);
+    pFig->move(vel.x, 0);
 }
 } // namespace Jogo::Entidades::Personagens
