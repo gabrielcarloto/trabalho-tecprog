@@ -17,10 +17,12 @@ protected:
   sf::Sprite *pFig;
   sf::Texture textura;
 
-  void inicializaSprite(const char *caminhoTextura);
-  void inicializaSprite(const char *caminhoTextura, sf::IntRect limite);
+  void inicializaSprite(const char *, const sf::Vector2f &);
+  void inicializaSprite(const char *, const sf::IntRect &,
+                        const sf::Vector2f &);
 
 private:
   void carregaTextura(const char *caminho) { textura.loadFromFile(caminho); }
+  void criaSprite(const char *, const sf::IntRect * = nullptr);
 };
 } // namespace Jogo
