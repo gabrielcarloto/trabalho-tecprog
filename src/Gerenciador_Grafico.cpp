@@ -7,4 +7,5 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 }
 
 void Gerenciador_Grafico::desenharEnte(const Ente *pE) { pE->desenhar(); }
+bool Gerenciador_Grafico::janelaAberta() const { return janela.isOpen(); }
 } // namespace Jogo::Gerenciadores

@@ -9,6 +9,7 @@ public:
   ~Gerenciador_Grafico() = default;
 
   void desenharEnte(const Ente *);
+  bool janelaAberta() const;
 
 private:
   sf::RenderWindow janela;
