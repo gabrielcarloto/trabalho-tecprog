@@ -10,7 +10,7 @@ public:
   ~Ente();
 
   virtual void executar() = 0;
-  void desenhar(){};
+  void desenhar() const;
 
 protected:
   int id; // pode trocar para um enum?

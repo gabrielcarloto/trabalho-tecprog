@@ -5,4 +5,6 @@ Gerenciador_Grafico::Gerenciador_Grafico()
     : janela(sf::VideoMode(384, 240), "Jogo") {
   janela.setFramerateLimit(60);
 }
+
+void Gerenciador_Grafico::desenharEnte(const Ente *pE) { pE->desenhar(); }
 } // namespace Jogo::Gerenciadores

@@ -8,7 +8,7 @@ public:
   Gerenciador_Grafico();
   ~Gerenciador_Grafico() = default;
 
-  void desenharEnte(Ente *); // TODO: implementar
+  void desenharEnte(const Ente *);
 
 private:
   sf::RenderWindow janela;
