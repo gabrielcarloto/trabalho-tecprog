@@ -15,5 +15,6 @@ public:
 
   void executar() override {} // TODO: implementar
   void mover() override;
+  void setEscalaFigura(float, float);
 };
 } // namespace Jogo::Entidades::Personagens

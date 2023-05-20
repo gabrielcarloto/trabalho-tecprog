@@ -12,4 +12,8 @@ void Jogador::mover() {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     pFig->move(vel.x, 0);
 }
+
+void Jogador::setEscalaFigura(float fatorX, float fatorY) {
+  pFig->setScale(fatorX, fatorY);
+}
 } // namespace Jogo::Entidades::Personagens

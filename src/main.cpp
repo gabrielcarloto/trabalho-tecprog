@@ -14,6 +14,8 @@ int main() {
   Jogo::Entidades::Personagens::Jogador teste(
       CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
 
+  teste.setEscalaFigura(2, 2);
+
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     sf::Event event;
     while (pGerenciadorGrafico->verificarEvento(event)) {
