@@ -13,6 +13,7 @@ public:
 
   void renderizar();
   void limparJanela();
+  void fecharJanela();
   void desenharEnte(const Ente *);
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);
