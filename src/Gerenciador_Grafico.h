@@ -5,13 +5,17 @@
 namespace Jogo::Gerenciadores {
 class Gerenciador_Grafico {
 public:
-  Gerenciador_Grafico();
   ~Gerenciador_Grafico() = default;
 
   void desenharEnte(const Ente *);
   bool janelaAberta() const;
 
+  static Gerenciador_Grafico *getInstancia();
+
 private:
+  Gerenciador_Grafico();
   sf::RenderWindow janela;
+
+  static Gerenciador_Grafico *instancia;
 };
 } // namespace Jogo::Gerenciadores

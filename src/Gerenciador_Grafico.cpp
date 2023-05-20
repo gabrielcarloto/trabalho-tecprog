@@ -8,4 +8,14 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
 void Gerenciador_Grafico::desenharEnte(const Ente *pE) { pE->desenhar(); }
 bool Gerenciador_Grafico::janelaAberta() const { return janela.isOpen(); }
+
+Gerenciador_Grafico *Gerenciador_Grafico::instancia(nullptr);
+
+Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
+  if (instancia == nullptr)
+    instancia = new Gerenciador_Grafico();
+
+  // TODO: ajeitar para as threads
+  return instancia;
+}
 } // namespace Jogo::Gerenciadores
