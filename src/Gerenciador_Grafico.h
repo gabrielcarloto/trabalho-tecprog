@@ -11,9 +11,10 @@ class Gerenciador_Grafico {
 public:
   ~Gerenciador_Grafico() = default;
 
+  void limparJanela();
   void desenharEnte(const Ente *);
   bool verificaJanelaAberta() const;
-  void limparJanela();
+  bool verificarEvento(sf::Event &);
 
   static Gerenciador_Grafico *getInstancia();
 
