@@ -2,5 +2,5 @@
 
 namespace Jogo::Entidades {
 // Entidade::Entidade() ;
-Entidade::~Entidade() = default;
+// Entidade::~Entidade() = default;
 } // namespace Jogo::Entidades
