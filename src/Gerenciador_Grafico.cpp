@@ -24,6 +24,12 @@ bool Gerenciador_Grafico::verificarEvento(sf::Event &e) {
 }
 
 void Gerenciador_Grafico::limparJanela() { janela.clear(); }
+float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
+
+void Gerenciador_Grafico::atualizaDeltaTempo() {
+  deltaTempo = relogio.getElapsedTime().asSeconds();
+  relogio.restart();
+}
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia(nullptr);
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics/RenderWindow.hpp"
+#include "SFML/System/Clock.hpp"
 
 constexpr const char *TITULO_PADRAO = "Jogo++";
 constexpr const unsigned int LARGURA_JANELA = 384, ALTURA_JANELA = 240,
@@ -16,15 +17,19 @@ public:
   void renderizar();
   void limparJanela();
   void fecharJanela();
+  void atualizaDeltaTempo();
   void desenharEnte(Ente *);
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);
+  float getDeltaTempo() const;
 
   static Gerenciador_Grafico *getInstancia();
 
 private:
   Gerenciador_Grafico();
   sf::RenderWindow janela;
+  sf::Clock relogio;
+  float deltaTempo = 0;
 
   static Gerenciador_Grafico *instancia;
 };
