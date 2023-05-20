@@ -8,7 +8,7 @@ public:
   ~Gerenciador_Grafico() = default;
 
   void desenharEnte(const Ente *);
-  bool janelaAberta() const;
+  bool verificaJanelaAberta() const;
 
   static Gerenciador_Grafico *getInstancia();
 
