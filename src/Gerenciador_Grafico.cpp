@@ -6,6 +6,7 @@ Gerenciador_Grafico::Gerenciador_Grafico()
   janela.setFramerateLimit(FRAMERATE_PADRAO);
 }
 
+void Gerenciador_Grafico::renderizar() { janela.display(); }
 void Gerenciador_Grafico::desenharEnte(const Ente *pE) { pE->desenhar(); }
 bool Gerenciador_Grafico::verificaJanelaAberta() const {
   return janela.isOpen();

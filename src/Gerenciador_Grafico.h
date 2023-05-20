@@ -11,6 +11,7 @@ class Gerenciador_Grafico {
 public:
   ~Gerenciador_Grafico() = default;
 
+  void renderizar();
   void limparJanela();
   void desenharEnte(const Ente *);
   bool verificaJanelaAberta() const;
