@@ -9,6 +9,7 @@ public:
 
   void desenharEnte(const Ente *);
   bool verificaJanelaAberta() const;
+  void limparJanela();
 
   static Gerenciador_Grafico *getInstancia();
 

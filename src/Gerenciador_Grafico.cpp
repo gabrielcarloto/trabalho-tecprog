@@ -11,6 +11,8 @@ bool Gerenciador_Grafico::verificaJanelaAberta() const {
   return janela.isOpen();
 }
 
+void Gerenciador_Grafico::limparJanela() { janela.clear(); }
+
 Gerenciador_Grafico *Gerenciador_Grafico::instancia(nullptr);
 
 Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
