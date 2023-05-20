@@ -1,4 +1,5 @@
 #include "Gerenciador_Grafico.h"
+#include "Ente.h"
 
 namespace Jogo::Gerenciadores {
 Gerenciador_Grafico::Gerenciador_Grafico()
@@ -8,7 +9,12 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 
 void Gerenciador_Grafico::renderizar() { janela.display(); }
 void Gerenciador_Grafico::fecharJanela() { janela.close(); }
-void Gerenciador_Grafico::desenharEnte(const Ente *pE) { pE->desenhar(); }
+
+void Gerenciador_Grafico::desenharEnte(const Ente *pE) {
+  auto fig = pE->getFigura();
+  janela.draw(fig);
+}
+
 bool Gerenciador_Grafico::verificaJanelaAberta() const {
   return janela.isOpen();
 }

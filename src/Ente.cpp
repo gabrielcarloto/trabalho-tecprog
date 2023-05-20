@@ -1,8 +1,15 @@
 #include "Ente.h"
 
 namespace Jogo {
-Ente::Ente() : pFig(nullptr) {}
+Ente::Ente() : pFig(nullptr) {
+  if (!pGG)
+    pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
+}
+
 Ente::~Ente() = default;
+
+void Ente::desenhar() const { pGG->desenharEnte(this); }
+const sf::Sprite &Ente::getFigura() const { return *pFig; };
 
 void Ente::criaSprite(const char *caminhoTextura, const sf::IntRect *limite) {
   if (pFig != nullptr)

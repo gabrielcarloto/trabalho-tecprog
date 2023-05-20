@@ -1,6 +1,7 @@
 #pragma once
-#include "SFML/Graphics/Sprite.hpp"
-#include "SFML/Graphics/Texture.hpp"
+#include "Gerenciador_Grafico.h"
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <stdexcept>
 
 namespace Jogo {
@@ -11,11 +12,13 @@ public:
 
   virtual void executar() = 0;
   void desenhar() const;
+  const sf::Sprite &getFigura() const;
 
 protected:
   int id; // pode trocar para um enum?
   sf::Sprite *pFig;
   sf::Texture textura;
+  static Gerenciadores::Gerenciador_Grafico *pGG;
 
   void inicializaSprite(const char *, const sf::Vector2f &);
   void inicializaSprite(const char *, const sf::IntRect &,
