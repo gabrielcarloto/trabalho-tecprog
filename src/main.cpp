@@ -1,4 +1,5 @@
 #include "Gerenciador_Grafico.h"
+#include "SFML/Graphics/Rect.hpp"
 #include "entidades/Jogador.h"
 #include <SFML/Graphics.hpp>
 
@@ -10,8 +11,8 @@ int main() {
   auto pGerenciadorGrafico =
       Jogo::Gerenciadores::Gerenciador_Grafico::getInstancia();
 
-  Jogo::Entidades::Personagens::Jogador teste(CAMINHO_IMAGENS
-                                              "/player-idle.png");
+  Jogo::Entidades::Personagens::Jogador teste(
+      CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
 
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     sf::Event event;
