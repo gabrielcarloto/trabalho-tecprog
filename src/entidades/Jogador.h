@@ -13,7 +13,7 @@ public:
           const sf::Vector2f pos = {0, 0}, const sf::Vector2f velo = {10, 10})
       : Personagem(caminhoTextura, lim, pos, velo) {}
 
-  void executar() override {} // TODO: implementar
+  void executar() override;
   void mover() override;
   void setEscalaFigura(float, float);
 };
