@@ -10,5 +10,6 @@ public:
 
 protected:
   int x, y;
+  sf::Vector2f vel;
 };
 } // namespace Jogo::Entidades

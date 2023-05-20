@@ -14,6 +14,5 @@ public:
 
 protected:
   int num_vidas;
-  sf::Vector2f vel;
 };
 } // namespace Jogo::Entidades::Personagens
