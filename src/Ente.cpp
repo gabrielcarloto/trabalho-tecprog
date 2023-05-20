@@ -8,6 +8,8 @@ Ente::Ente() : pFig(nullptr) {
 
 Ente::~Ente() = default;
 
+Gerenciadores::Gerenciador_Grafico *Ente::pGG = nullptr;
+
 void Ente::desenhar() const { pGG->desenharEnte(this); }
 const sf::Sprite &Ente::getFigura() const { return *pFig; };
 
