@@ -16,7 +16,7 @@ public:
   void renderizar();
   void limparJanela();
   void fecharJanela();
-  void desenharEnte(const Ente *);
+  void desenharEnte(Ente *);
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);
 

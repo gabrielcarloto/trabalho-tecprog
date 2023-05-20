@@ -10,9 +10,9 @@ Gerenciador_Grafico::Gerenciador_Grafico()
 void Gerenciador_Grafico::renderizar() { janela.display(); }
 void Gerenciador_Grafico::fecharJanela() { janela.close(); }
 
-void Gerenciador_Grafico::desenharEnte(const Ente *pE) {
-  auto fig = pE->getFigura();
-  janela.draw(fig);
+void Gerenciador_Grafico::desenharEnte(Ente *pE) {
+  pE->executar();
+  janela.draw(pE->getFigura());
 }
 
 bool Gerenciador_Grafico::verificaJanelaAberta() const {

@@ -11,7 +11,7 @@ public:
   ~Ente();
 
   virtual void executar() = 0;
-  void desenhar() const;
+  void desenhar();
   const sf::Sprite &getFigura() const;
 
 protected:
