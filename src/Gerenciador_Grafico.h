@@ -3,7 +3,7 @@
 #include "SFML/System/Clock.hpp"
 
 constexpr const char *TITULO_PADRAO = "Jogo++";
-constexpr const unsigned int LARGURA_JANELA = 384, ALTURA_JANELA = 240,
+constexpr const unsigned int LARGURA_JANELA = 1280, ALTURA_JANELA = 720,
                              FRAMERATE_PADRAO = 60;
 
 namespace Jogo {
