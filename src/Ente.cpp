@@ -17,12 +17,12 @@ void Ente::criaSprite(const char *caminhoTextura, const sf::IntRect *limite) {
   if (pFig != nullptr)
     return;
 
-  carregaTextura(caminhoTextura);
+  auto textura = pGG->carregarTextura(caminhoTextura);
 
   if (limite)
-    pFig = new sf::Sprite(textura, *limite);
+    pFig = new sf::Sprite(*textura, *limite);
   else
-    pFig = new sf::Sprite(textura);
+    pFig = new sf::Sprite(*textura);
 
   if (!pFig)
     throw std::runtime_error("Nao foi possivel criar sprite");

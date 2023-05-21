@@ -1,5 +1,8 @@
 #include "Gerenciador_Grafico.h"
 #include "Ente.h"
+#include "SFML/Graphics/Texture.hpp"
+#include <algorithm>
+#include <cstring>
 
 namespace Jogo::Gerenciadores {
 Gerenciador_Grafico::Gerenciador_Grafico()
@@ -29,6 +32,22 @@ float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
 void Gerenciador_Grafico::atualizaDeltaTempo() {
   deltaTempo = relogio.getElapsedTime().asSeconds();
   relogio.restart();
+}
+
+sf::Texture *Gerenciador_Grafico::carregarTextura(const char *path) {
+  auto it =
+      std::find_if(mapaTexturas.begin(), mapaTexturas.end(),
+                   [path](auto item) { return !strcmp(path, item.first); });
+
+  if (it != mapaTexturas.end())
+    return it->second;
+
+  auto *textura = new sf::Texture;
+  textura->loadFromFile(path);
+
+  mapaTexturas[path] = textura;
+
+  return textura;
 }
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia(nullptr);

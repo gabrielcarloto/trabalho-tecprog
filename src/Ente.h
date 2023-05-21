@@ -17,7 +17,6 @@ public:
 protected:
   int id; // pode trocar para um enum?
   sf::Sprite *pFig;
-  sf::Texture textura;
   static Gerenciadores::Gerenciador_Grafico *pGG;
 
   void inicializaSprite(const char *, const sf::Vector2f &);
@@ -25,7 +24,6 @@ protected:
                         const sf::Vector2f &);
 
 private:
-  void carregaTextura(const char *caminho) { textura.loadFromFile(caminho); }
   void criaSprite(const char *, const sf::IntRect * = nullptr);
 };
 } // namespace Jogo
