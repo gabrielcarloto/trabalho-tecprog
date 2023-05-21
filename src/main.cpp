@@ -1,7 +1,7 @@
 #include "Gerenciador_Grafico.h"
-#include "SFML/Graphics/Rect.hpp"
 #include "entidades/Jogador.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Rect.hpp>
 
 #define CAMINHO_ASSETS "./assets"
 #define CAMINHO_FONTES CAMINHO_ASSETS "/fonts"
