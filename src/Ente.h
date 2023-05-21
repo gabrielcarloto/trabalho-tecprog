@@ -13,6 +13,7 @@ public:
   virtual void executar() = 0;
   void desenhar();
   const sf::Sprite &getFigura() const;
+  void setEscalaFigura(float, float);
 
 protected:
   int id; // pode trocar para um enum?
