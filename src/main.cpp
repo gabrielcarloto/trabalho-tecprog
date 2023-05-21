@@ -29,6 +29,7 @@ int main() {
     pGerenciadorGrafico->limparJanela();
     pGerenciadorGrafico->desenharEnte(&teste);
     pGerenciadorGrafico->renderizar();
+    pGerenciadorGrafico->atualizaDeltaTempo();
   }
 
   return 0;
