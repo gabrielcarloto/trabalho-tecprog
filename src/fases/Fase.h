@@ -27,7 +27,7 @@ public:
       unsigned int indiceEntidade = 0;
 
       for (auto caractere : linha) {
-        if (caractere == '0') {
+        if (caractere != '1') {
           indiceEntidade++;
           continue;
         }
