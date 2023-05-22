@@ -14,6 +14,9 @@ int main() {
   teste.setEscalaFigura(2, 2);
 
   Jogo::Fases::Fase plau;
+  plau.carregarMapa<Jogo::Entidades::Personagens::Jogador>(
+      CAMINHO_FASE_PRIMEIRA "/inimigosFase1.txt",
+      CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
 
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     sf::Event event;
@@ -28,6 +31,7 @@ int main() {
 
     pGerenciadorGrafico->limparJanela();
     pGerenciadorGrafico->desenharEnte(&plau);
+    plau.executar();
     pGerenciadorGrafico->desenharEnte(&teste);
     pGerenciadorGrafico->atualizaDeltaTempo();
     pGerenciadorGrafico->renderizar();
