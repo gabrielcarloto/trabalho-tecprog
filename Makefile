@@ -1,9 +1,9 @@
 include ./build/vars.mk
 
-CXX = g++
-CXXFLAGS = -Wall -Wextra -Wshadow -Wpointer-arith -Wuninitialized -Winit-self -Wunreachable-code -std=c++17 -lsfml-graphics -lsfml-window -lsfml-system
+CXX ?= g++
+CXXFLAGS ?= -Wall -Wextra -Wshadow -Wpointer-arith -Wuninitialized -Winit-self -Wunreachable-code -std=c++17 -lsfml-graphics -lsfml-window -lsfml-system
 
-SRCDIR ?= src
+SRCDIR = src
 OUTDIR ?= build
 OBJDIR ?= $(OUTDIR)/objects
 
