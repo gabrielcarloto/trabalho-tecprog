@@ -8,6 +8,8 @@ constexpr const char *TITULO_PADRAO = "Jogo++";
 constexpr const unsigned int LARGURA_JANELA = 1178, ALTURA_JANELA = 736,
                              FRAMERATE_PADRAO = 60;
 
+constexpr const unsigned int TAMANHO_TILE = 64;
+
 #define CAMINHO_ASSETS "./assets"
 #define CAMINHO_FONTES CAMINHO_ASSETS "/fonts"
 #define CAMINHO_IMAGENS CAMINHO_ASSETS "/images"
@@ -25,7 +27,7 @@ public:
   void fecharJanela();
   void atualizaDeltaTempo();
   void desenharEnte(Ente *);
-  
+
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);
   float getDeltaTempo() const;

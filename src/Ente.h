@@ -11,12 +11,16 @@ public:
   ~Ente();
 
   virtual void executar() = 0;
+
   void desenhar();
-  const sf::Sprite &getFigura() const;
   void setEscalaFigura(float, float);
+  const sf::Sprite &getFigura() const;
+  int getId() const { return id; }
+
+  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE };
 
 protected:
-  int id; // pode trocar para um enum?
+  int id;
   sf::Sprite *pFig;
   static Gerenciadores::Gerenciador_Grafico *pGG;
 
