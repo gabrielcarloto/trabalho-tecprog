@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
-#define CAMINHO_ASSETS "../assets"
+#define CAMINHO_ASSETS "./assets"
 #define CAMINHO_FONTES CAMINHO_ASSETS "/fonts"
 #define CAMINHO_IMAGENS CAMINHO_ASSETS "/images"
 
@@ -18,7 +18,7 @@ int main() {
 
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     sf::Event event;
-    pGerenciadorGrafico->desenhaFundo();
+    
     while (pGerenciadorGrafico->verificarEvento(event)) {
       if (event.type == sf::Event::Closed)
         pGerenciadorGrafico->fecharJanela();
@@ -28,6 +28,7 @@ int main() {
     }
 
     pGerenciadorGrafico->limparJanela();
+
     
     pGerenciadorGrafico->desenharEnte(&teste);
     

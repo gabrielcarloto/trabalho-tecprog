@@ -21,7 +21,7 @@ public:
   void fecharJanela();
   void atualizaDeltaTempo();
   void desenharEnte(Ente *);
-  void desenhaFundo();
+  
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);
   float getDeltaTempo() const;

@@ -16,18 +16,7 @@ void Jogador::mover() {
 
   pFig->setPosition(static_cast<float>(x), static_cast<float>(y));
 
-  if(x < 0 ){
-    pFig->setPosition(0,y);
-  }
-  if(x > (int)LARGURA_JANELA){
-    pFig->setPosition(x-64,y);
-  }
-  if(y < 0 ){
-    pFig->setPosition(x,0);
-  }
-  if(y > (int)ALTURA_JANELA){
-    pFig->setPosition(y,y-64);
-  }
+  
 }
 
 void Jogador::setEscalaFigura(float fatorX, float fatorY) {
