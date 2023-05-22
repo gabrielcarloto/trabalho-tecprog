@@ -16,18 +16,17 @@ void Jogador::mover() {
 
   pFig->setPosition(static_cast<float>(x), static_cast<float>(y));
 
-  if (x < 0) {
-    pFig->setPosition(0, y);
-  }
-  if (x > (int)LARGURA_JANELA) {
-    pFig->setPosition(x - 64, y);
-  }
-  if (y < 0) {
-    pFig->setPosition(x, 0);
-  }
-  if (y > (int)ALTURA_JANELA) {
-    pFig->setPosition(y, y - 64);
-  }
+  if (x < 0)
+    x = 0;
+
+  if (x > (int)LARGURA_JANELA - (int)TAMANHO_TILE)
+    x = LARGURA_JANELA - TAMANHO_TILE;
+
+  if (y < 0)
+    y = 0;
+
+  if (y > (int)ALTURA_JANELA - (int)TAMANHO_TILE)
+    y = ALTURA_JANELA - TAMANHO_TILE;
 }
 
 void Jogador::executar() { mover(); }
