@@ -1,5 +1,6 @@
 #include "Gerenciador_Grafico.h"
 #include "entidades/Jogador.h"
+#include "fases/Fase.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
@@ -11,6 +12,8 @@ int main() {
       CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
 
   teste.setEscalaFigura(2, 2);
+
+  Jogo::Fases::Fase plau;
 
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     sf::Event event;
@@ -24,6 +27,7 @@ int main() {
     }
 
     pGerenciadorGrafico->limparJanela();
+    pGerenciadorGrafico->desenharEnte(&plau);
     pGerenciadorGrafico->desenharEnte(&teste);
     pGerenciadorGrafico->atualizaDeltaTempo();
     pGerenciadorGrafico->renderizar();
