@@ -19,9 +19,5 @@ void Jogador::mover() {
   
 }
 
-void Jogador::setEscalaFigura(float fatorX, float fatorY) {
-  pFig->setScale(fatorX, fatorY);
-}
-
 void Jogador::executar() { mover(); }
 } // namespace Jogo::Entidades::Personagens

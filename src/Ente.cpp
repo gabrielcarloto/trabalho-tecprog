@@ -34,6 +34,10 @@ void Ente::inicializaSprite(const char *caminhoTextura,
   pFig->setPosition(pos);
 }
 
+void Ente::setEscalaFigura(float fatorX, float fatorY) {
+  pFig->setScale(fatorX, fatorY);
+}
+
 void Ente::inicializaSprite(const char *caminhoTextura,
                             const sf::IntRect &limite,
                             const sf::Vector2f &pos) {
