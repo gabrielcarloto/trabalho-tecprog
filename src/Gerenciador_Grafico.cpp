@@ -50,6 +50,13 @@ sf::Texture *Gerenciador_Grafico::carregarTextura(const char *path) {
   return textura;
 }
 
+void Gerenciador_Grafico::desenhaFundo(){
+  sf::Texture texFundo;
+  sf::Sprite fundo(texFundo);
+  texFundo.loadFromFile("../assets/images/back.png");
+  janela.draw(fundo);
+}
+
 Gerenciador_Grafico *Gerenciador_Grafico::instancia(nullptr);
 
 Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {

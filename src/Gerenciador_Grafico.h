@@ -5,7 +5,7 @@
 #include <map>
 
 constexpr const char *TITULO_PADRAO = "Jogo++";
-constexpr const unsigned int LARGURA_JANELA = 1280, ALTURA_JANELA = 720,
+constexpr const unsigned int LARGURA_JANELA = 1178, ALTURA_JANELA = 736,
                              FRAMERATE_PADRAO = 60;
 
 namespace Jogo {
@@ -21,6 +21,7 @@ public:
   void fecharJanela();
   void atualizaDeltaTempo();
   void desenharEnte(Ente *);
+  void desenhaFundo();
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);
   float getDeltaTempo() const;
