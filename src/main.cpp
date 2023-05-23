@@ -14,9 +14,15 @@ int main() {
   teste.setEscalaFigura(2, 2);
 
   Jogo::Fases::Fase plau;
-  plau.carregarMapa<Jogo::Entidades::Personagens::Jogador>(
-      CAMINHO_FASE_PRIMEIRA "/inimigosFase1.txt",
-      CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
+  auto mockTilemap = []() -> Jogo::Entidades::Entidade * {
+    return new Jogo::Entidades::Personagens::Jogador(
+        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
+  };
+
+  plau.mapaEntidades['I'] = mockTilemap;
+  plau.mapaEntidades['#'] = mockTilemap;
+
+  plau.carregarMapa(CAMINHO_FASE_PRIMEIRA "/chaoFase1.txt");
 
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     sf::Event event;
