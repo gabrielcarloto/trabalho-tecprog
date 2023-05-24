@@ -6,7 +6,10 @@ Ente::Ente() : pFig(nullptr) {
     pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
 }
 
-Ente::~Ente() = default;
+Ente::~Ente() {
+  delete pFig;
+  pFig = nullptr;
+};
 
 Gerenciadores::Gerenciador_Grafico *Ente::pGG = nullptr;
 

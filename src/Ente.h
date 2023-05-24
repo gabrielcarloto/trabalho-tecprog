@@ -8,7 +8,7 @@ namespace Jogo {
 class Ente {
 public:
   Ente();
-  ~Ente();
+  virtual ~Ente();
 
   virtual void executar() = 0;
 
@@ -21,7 +21,7 @@ public:
 
 protected:
   ID id; // TODO: trocar para const
-  sf::Sprite *pFig;
+  sf::Sprite *pFig = nullptr;
   static Gerenciadores::Gerenciador_Grafico *pGG;
 
   void inicializaSprite(const char *, const sf::Vector2f &);
