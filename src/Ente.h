@@ -17,10 +17,10 @@ public:
   const sf::Sprite &getFigura() const;
   int getId() const { return id; }
 
-  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE };
+  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE, CHAO };
 
 protected:
-  int id;
+  ID id; // TODO: trocar para const
   sf::Sprite *pFig;
   static Gerenciadores::Gerenciador_Grafico *pGG;
 
