@@ -20,7 +20,7 @@ class Ente;
 namespace Gerenciadores {
 class Gerenciador_Grafico {
 public:
-  ~Gerenciador_Grafico() = default;
+  ~Gerenciador_Grafico();
 
   void renderizar();
   void limparJanela();

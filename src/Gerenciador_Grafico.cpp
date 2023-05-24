@@ -10,11 +10,18 @@ Gerenciador_Grafico::Gerenciador_Grafico()
   janela.setFramerateLimit(FRAMERATE_PADRAO);
 }
 
+Gerenciador_Grafico::~Gerenciador_Grafico() {
+  for (auto textura : mapaTexturas) {
+    delete textura.second;
+    textura.second = nullptr;
+  }
+}
+
 void Gerenciador_Grafico::renderizar() { janela.display(); }
 void Gerenciador_Grafico::fecharJanela() { janela.close(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
-  pE->executar();
+  // pE->executar(); // TODO: remover a execução daqui
   janela.draw(pE->getFigura());
 }
 
@@ -49,8 +56,6 @@ sf::Texture *Gerenciador_Grafico::carregarTextura(const char *path) {
 
   return textura;
 }
-
-
 
 Gerenciador_Grafico *Gerenciador_Grafico::instancia(nullptr);
 
