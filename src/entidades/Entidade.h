@@ -12,7 +12,7 @@ public:
   void setPosicao(const sf::Vector2<int> &);
 
 protected:
-  int x, y;
+  float x, y;
   sf::Vector2f vel;
 };
 } // namespace Jogo::Entidades
