@@ -14,7 +14,8 @@ namespace Jogo::Fases {
 class Fase : public Ente {
 public:
   Fase();
-  ~Fase() = default; // TODO: liberar memória no listaEntidades
+  ~Fase(); // TODO: liberar memória no listaEntidades
+
   void executar() override;
   // void gerenciar_colisoes();
   // void criarInimigosMedios();

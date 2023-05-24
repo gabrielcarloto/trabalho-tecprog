@@ -13,6 +13,13 @@ Fase::Fase() {
   carregarBackground();
 }
 
+Fase::~Fase() {
+  for (auto entidade : listaEntidades) {
+    delete entidade;
+    entidade = nullptr;
+  }
+}
+
 void Fase::carregarBackground() {
   inicializaSprite(CAMINHO_IMAGENS "/back.png", {0, 0});
 }
