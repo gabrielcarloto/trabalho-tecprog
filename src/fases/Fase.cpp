@@ -1,6 +1,9 @@
 #include "Fase.h"
 #include "../Gerenciador_Grafico.h"
+#include "../entidades/Chao.h"
 #include "../entidades/Entidade.h"
+#include "../entidades/Jogador.h"
+#include "SFML/Graphics/Rect.hpp"
 #include <type_traits>
 #include <utility>
 
@@ -46,8 +49,9 @@ void Fase::carregarMapa(const char *path) {
         // também provavelmente precisamos arrumar o posicionamento da entidade
         // criada.
         entidade->setEscalaFigura(2, 2);
-        entidade->setPosicao({static_cast<int>(indiceColuna * TAMANHO_TILE),
-                              static_cast<int>(indiceLinha * TAMANHO_TILE)});
+        entidade->setPosicao(
+            {static_cast<int>(indiceColuna * TAMANHO_TILE - TAMANHO_TILE / 2),
+             static_cast<int>(indiceLinha * TAMANHO_TILE - TAMANHO_TILE / 2)});
       }
 
       indiceColuna++;
@@ -55,5 +59,16 @@ void Fase::carregarMapa(const char *path) {
 
     indiceLinha++;
   });
+}
+
+void Fase::adicionarEntidadesDefault() {
+  mapaEntidades['J'] = []() -> Entidades::Entidade * {
+    return new Entidades::Personagens::Jogador(
+        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
+  };
+
+  mapaEntidades['C'] = []() -> Entidades::Entidade * {
+    return new Entidades::Chao(CAMINHO_IMAGENS "/floor.png");
+  };
 }
 } // namespace Jogo::Fases

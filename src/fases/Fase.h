@@ -20,11 +20,12 @@ public:
   // void criarInimigosMedios();
   // void criarObstMedios();
 
-  void carregarMapa(const char *);
-  std::map<const char, std::function<Entidades::Entidade *()>> mapaEntidades;
-
 protected:
   std::list<Entidades::Entidade *> listaEntidades;
+  std::map<const char, std::function<Entidades::Entidade *()>> mapaEntidades;
+
+  void carregarMapa(const char *);
+  void adicionarEntidadesDefault();
 
 private:
   void carregarBackground();
