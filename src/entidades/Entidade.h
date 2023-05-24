@@ -6,7 +6,7 @@ namespace Jogo::Entidades {
 class Entidade : public Ente {
 public:
   Entidade() = default;
-  ~Entidade() = default;
+  virtual ~Entidade() = default;
 
   void setPosicao(const int x, const int y);
   void setPosicao(const sf::Vector2<int> &);
