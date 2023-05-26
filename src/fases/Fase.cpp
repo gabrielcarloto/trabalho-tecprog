@@ -43,7 +43,7 @@ void Fase::carregarMapa(const char *path) {
     unsigned int indiceColuna = 0;
 
     for (const char caractere : linha) {
-      if (caractere == '\r' || caractere == '\n') {
+      if (caractere == '.' || caractere == '\r' || caractere == '\n') {
         indiceColuna++;
         continue;
       }
