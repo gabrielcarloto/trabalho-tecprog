@@ -17,7 +17,7 @@ public:
   const sf::Sprite &getFigura() const;
   int getId() const { return id; }
 
-  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE, CHAO };
+  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE };
 
 protected:
   ID id; // TODO: trocar para const

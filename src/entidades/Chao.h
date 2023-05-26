@@ -1,11 +1,11 @@
-#include "Entidade.h"
+#include "Obstaculo.h"
 
-namespace Jogo::Entidades {
-class Chao : public Entidade {
+namespace Jogo::Entidades::Obstaculos {
+class Chao : public Obstaculo {
 public:
   Chao(const char *, sf::Vector2f = {0, 0});
-  ~Chao() = default;
+  ~Chao() override = default;
 
   void executar() override;
 };
-} // namespace Jogo::Entidades
+} // namespace Jogo::Entidades::Obstaculos

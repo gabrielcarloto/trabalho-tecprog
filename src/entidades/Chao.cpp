@@ -1,13 +1,11 @@
 #include "Chao.h"
 
-namespace Jogo::Entidades {
-Chao::Chao(const char *path, sf::Vector2f pos) {
+namespace Jogo::Entidades::Obstaculos {
+Chao::Chao(const char *path, sf::Vector2f pos) : Obstaculo(false) {
   inicializaSprite(path, pos);
   x = pos.x;
   y = pos.y;
-
-  id = Ente::CHAO;
 }
 
 void Chao::executar() {} // TODO: fazer o método executar
-} // namespace Jogo::Entidades
+} // namespace Jogo::Entidades::Obstaculos

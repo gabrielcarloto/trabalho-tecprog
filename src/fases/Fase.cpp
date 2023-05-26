@@ -79,7 +79,7 @@ void Fase::adicionarEntidadesDefault() {
   };
 
   mapaEntidades['C'] = []() -> Entidades::Entidade * {
-    return new Entidades::Chao(CAMINHO_IMAGENS "/floor.png");
+    return new Entidades::Obstaculos::Chao(CAMINHO_IMAGENS "/floor.png");
   };
 }
 } // namespace Jogo::Fases
