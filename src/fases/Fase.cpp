@@ -26,6 +26,10 @@ void Fase::carregarBackground() {
 
 void Fase::executar() {
   for (auto entidade : listaEntidades) {
+    entidade->executar();
+    // TODO: mover o desenho de entidades para outro lugar. Talvez devamos ter
+    // uma lista de entidades na principal ou outra classe que desenha as
+    // entidades.
     pGG->desenharEnte(entidade);
   }
 }

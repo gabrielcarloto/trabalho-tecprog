@@ -21,7 +21,6 @@ void Gerenciador_Grafico::renderizar() { janela.display(); }
 void Gerenciador_Grafico::fecharJanela() { janela.close(); }
 
 void Gerenciador_Grafico::desenharEnte(Ente *pE) {
-  // pE->executar(); // TODO: remover a execução daqui
   janela.draw(pE->getFigura());
 }
 
