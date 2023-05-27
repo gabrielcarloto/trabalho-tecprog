@@ -20,10 +20,10 @@ public:
 
   void executar() override;
   void mover() override;
-  void colidir(int, sf::Vector2f, sf::Vector2f);
+  void colidir(Entidade *, sf::Vector2f);
 
 private:
-  void colidirObstaculo(sf::Vector2f, sf::Vector2f);
+  void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);
 
   const float TAMANHO_PULO = static_cast<float>(TAMANHO_TILE) * 3.5f;
   bool podePular = true;

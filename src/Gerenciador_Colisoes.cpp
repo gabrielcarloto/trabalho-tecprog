@@ -22,8 +22,7 @@ void Gerenciador_Colisoes::gerenciar() {
       sf::Vector2f colisao = calculaColisao(jogador, obst);
 
       if (checaColisao(colisao)) {
-        jogador->colidir(obst->getId(), obst->getFigura().getPosition(),
-                         colisao);
+        jogador->colidir(obst, colisao);
       }
     }
   }
