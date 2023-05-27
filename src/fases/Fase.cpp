@@ -32,9 +32,6 @@ void Fase::executar() {
   gerenciar_colisoes();
 
   for (auto entidade : listaEntidades) {
-    // TODO: mover o desenho de entidades para outro lugar. Talvez devamos ter
-    // uma lista de entidades na principal ou outra classe que desenha as
-    // entidades.
     pGG->desenharEnte(entidade);
   }
 }
@@ -58,7 +55,6 @@ void Fase::carregarMapa(const char *path) {
       if (it != mapaEntidades.end()) {
         Entidades::Entidade *entidade = it->second();
 
-        // TODO: adicionar ao gerenciador de colisões também
         listaEntidades.push_back(entidade);
 
         switch (entidade->getId()) {
@@ -97,7 +93,7 @@ void Fase::carregarMapa(const char *path) {
 void Fase::adicionarEntidadesDefault() {
   mapaEntidades['J'] = []() -> Entidades::Entidade * {
     return new Entidades::Personagens::Jogador(
-        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32), {0, 0},
+        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(6, 10, 18, 22), {0, 0},
         130);
   };
 
