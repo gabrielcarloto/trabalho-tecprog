@@ -78,9 +78,13 @@ void Fase::carregarMapa(const char *path) {
         // também provavelmente precisamos arrumar o posicionamento da entidade
         // criada.
         entidade->setEscalaFigura(2, 2);
+
+        auto iCol = static_cast<float>(indiceColuna),
+             iLin = static_cast<float>(indiceLinha),
+             tamTile = static_cast<float>(TAMANHO_TILE);
+
         entidade->setPosicao(
-            {static_cast<int>(indiceColuna * TAMANHO_TILE - TAMANHO_TILE / 2),
-             static_cast<int>(indiceLinha * TAMANHO_TILE - TAMANHO_TILE / 2)});
+            {iCol * tamTile - tamTile / 2, iLin * tamTile - tamTile / 2});
       }
 
       indiceColuna++;
