@@ -1,4 +1,6 @@
+#pragma once
 #include "../Ente.h"
+#include "../Gerenciador_Colisoes.h"
 #include "../entidades/Entidade.h"
 #include "../uteis.h"
 #include <functional>
@@ -30,5 +32,7 @@ protected:
 
 private:
   void carregarBackground();
+
+  Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
 };
 } // namespace Jogo::Fases

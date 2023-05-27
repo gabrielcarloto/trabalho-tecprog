@@ -56,6 +56,15 @@ void Fase::carregarMapa(const char *path) {
         // TODO: adicionar ao gerenciador de colisões também
         listaEntidades.push_back(entidade);
 
+        switch (entidade->getId()) {
+        case OBSTACULO:
+          gerenciadorCol.incluirObstaculo(
+              static_cast<Entidades::Obstaculos::Obstaculo *>(entidade));
+          break;
+        default:
+          break;
+        }
+
         // TODO: mover isso para o ente se possível
         // também provavelmente precisamos arrumar o posicionamento da entidade
         // criada.

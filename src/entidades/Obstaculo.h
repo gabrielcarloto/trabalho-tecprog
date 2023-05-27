@@ -1,4 +1,6 @@
+#pragma once
 #include "Entidade.h"
+
 namespace Jogo::Entidades::Obstaculos {
 class Obstaculo : public Entidade {
 public:
