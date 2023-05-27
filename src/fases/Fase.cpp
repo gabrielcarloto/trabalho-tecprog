@@ -93,7 +93,8 @@ void Fase::carregarMapa(const char *path) {
 void Fase::adicionarEntidadesDefault() {
   mapaEntidades['J'] = []() -> Entidades::Entidade * {
     return new Entidades::Personagens::Jogador(
-        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32));
+        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(0, 0, 32, 32), {0, 0},
+        130);
   };
 
   mapaEntidades['C'] = []() -> Entidades::Entidade * {

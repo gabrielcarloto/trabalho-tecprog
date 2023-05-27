@@ -4,18 +4,33 @@
 #include <stdexcept>
 #include <string>
 
+constexpr float GRAVIDADE = 981;
+
 namespace Jogo::Entidades::Personagens {
 void Jogador::mover() {
+  float dt = pGG->getDeltaTempo();
+
   auto isKeyPressed = sf::Keyboard::isKeyPressed;
 
-  if (isKeyPressed(sf::Keyboard::W))
-    y -= vel.y;
+  // suavidade do movimento
+  vel.x *= 0.65f;
+
   if (isKeyPressed(sf::Keyboard::A))
-    x -= vel.x;
-  if (isKeyPressed(sf::Keyboard::S))
-    y += vel.y;
+    vel.x -= velocidade;
   if (isKeyPressed(sf::Keyboard::D))
-    x += vel.x;
+    vel.x += velocidade;
+
+  // TODO: quem sabe adicionar tamanho do pulo em função do tempo que o espaço
+  // ficou pressionado
+  if (podePular && isKeyPressed(sf::Keyboard::Space)) {
+    podePular = false;
+    vel.y -= std::sqrt(2.0f * GRAVIDADE * TAMANHO_PULO);
+  }
+
+  vel.y += GRAVIDADE * dt;
+
+  x += vel.x * dt;
+  y += vel.y * dt;
 
   if (x < 0)
     x = 0;
@@ -50,8 +65,15 @@ void Jogador::colidir(int idOutro, sf::Vector2f posOutro,
 void Jogador::colidirObstaculo(sf::Vector2f posObst, sf::Vector2f intersecao) {
   if (intersecao.x > intersecao.y) {
     x += intersecao.x * (posObst.x < x ? -1.f : 1.f);
+    vel.x = 0;
   } else {
-    y += intersecao.y * (posObst.y < y ? -1.f : 1.f);
+    vel.y = 0;
+    if (posObst.y < y) {
+      y -= intersecao.y;
+    } else {
+      y += intersecao.y;
+      podePular = true;
+    }
   }
 
   pFig->setPosition(x, y);
