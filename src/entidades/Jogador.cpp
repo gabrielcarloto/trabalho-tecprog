@@ -1,5 +1,8 @@
 #include "Jogador.h"
 #include <SFML/Graphics.hpp>
+#include <cmath>
+#include <stdexcept>
+#include <string>
 
 namespace Jogo::Entidades::Personagens {
 void Jogador::mover() {
@@ -32,4 +35,25 @@ void Jogador::mover() {
 }
 
 void Jogador::executar() { mover(); }
+
+void Jogador::colidir(int idOutro, sf::Vector2f posOutro,
+                      sf::Vector2f intersecao) {
+  switch (idOutro) {
+  case Ente::OBSTACULO:
+    return colidirObstaculo(posOutro, intersecao);
+  default:
+    throw std::runtime_error("Jogador::colidir -> ID " + std::to_string(id) +
+                             " nao colidindo");
+  }
+}
+
+void Jogador::colidirObstaculo(sf::Vector2f posObst, sf::Vector2f intersecao) {
+  if (intersecao.x > intersecao.y) {
+    x += intersecao.x * (posObst.x < x ? -1.f : 1.f);
+  } else {
+    y += intersecao.y * (posObst.y < y ? -1.f : 1.f);
+  }
+
+  pFig->setPosition(x, y);
+}
 } // namespace Jogo::Entidades::Personagens

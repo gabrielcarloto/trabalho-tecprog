@@ -27,6 +27,11 @@ void Fase::carregarBackground() {
 void Fase::executar() {
   for (auto entidade : listaEntidades) {
     entidade->executar();
+  }
+
+  gerenciar_colisoes();
+
+  for (auto entidade : listaEntidades) {
     // TODO: mover o desenho de entidades para outro lugar. Talvez devamos ter
     // uma lista de entidades na principal ou outra classe que desenha as
     // entidades.
@@ -60,6 +65,10 @@ void Fase::carregarMapa(const char *path) {
         case OBSTACULO:
           gerenciadorCol.incluirObstaculo(
               static_cast<Entidades::Obstaculos::Obstaculo *>(entidade));
+          break;
+        case JOGADOR:
+          gerenciadorCol.addJogador(
+              static_cast<Entidades::Personagens::Jogador *>(entidade));
           break;
         default:
           break;

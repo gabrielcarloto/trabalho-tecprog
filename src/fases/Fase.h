@@ -19,7 +19,7 @@ public:
   ~Fase(); // TODO: liberar memória no listaEntidades
 
   void executar() override;
-  // void gerenciar_colisoes();
+  void gerenciar_colisoes() { gerenciadorCol.gerenciar(); };
   // void criarInimigosMedios();
   // void criarObstMedios();
 
