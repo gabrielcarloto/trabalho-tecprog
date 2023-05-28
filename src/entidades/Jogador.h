@@ -6,17 +6,8 @@
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
-  Jogador(const char *caminhoTextura, const sf::Vector2f pos = {0, 0},
-          float velo = 0)
-      : Personagem(caminhoTextura, pos, velo) {
-    id = Ente::JOGADOR;
-  }
-
-  Jogador(const char *caminhoTextura, sf::IntRect lim,
-          sf::Vector2f pos = {0, 0}, float velo = 0)
-      : Personagem(caminhoTextura, lim, pos, velo) {
-    id = Ente::JOGADOR;
-  }
+  Jogador(const char *, const sf::Vector2f = {0, 0}, float = 0);
+  Jogador(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0);
 
   void executar() override;
   void mover() override;

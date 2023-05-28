@@ -7,6 +7,17 @@
 constexpr float GRAVIDADE = 981;
 
 namespace Jogo::Entidades::Personagens {
+Jogador::Jogador(const char *caminhoTextura, const sf::Vector2f pos, float velo)
+    : Personagem(caminhoTextura, pos, velo) {
+  id = Ente::JOGADOR;
+}
+
+Jogador::Jogador(const char *caminhoTextura, sf::IntRect lim, sf::Vector2f pos,
+                 float velo)
+    : Personagem(caminhoTextura, lim, pos, velo) {
+  id = Ente::JOGADOR;
+}
+
 void Jogador::mover() {
   float dt = pGG->getDeltaTempo();
 
