@@ -1,7 +1,7 @@
 #include "Ente.h"
 
 namespace Jogo {
-Ente::Ente() : pFig(nullptr) {
+Ente::Ente(ID idEnte) : id(idEnte), pFig(nullptr) {
   if (!pGG)
     pGG = Gerenciadores::Gerenciador_Grafico::getInstancia();
 }

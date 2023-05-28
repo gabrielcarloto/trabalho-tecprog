@@ -4,7 +4,7 @@
 namespace Jogo::Entidades::Obstaculos {
 class Obstaculo : public Entidade {
 public:
-  Obstaculo(bool dano) : danoso(dano) { id = Ente::OBSTACULO; }
+  Obstaculo(bool dano) : Entidade(Ente::ID::OBSTACULO), danoso(dano) {}
   virtual ~Obstaculo() = default;
 
 protected:

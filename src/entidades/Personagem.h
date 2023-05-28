@@ -6,8 +6,8 @@
 namespace Jogo::Entidades::Personagens {
 class Personagem : public Entidade {
 public:
-  Personagem(const char *, sf::Vector2f, float velo);
-  Personagem(const char *, sf::IntRect, sf::Vector2f, float velo);
+  Personagem(ID, const char *, sf::Vector2f, float velo);
+  Personagem(ID, const char *, sf::IntRect, sf::Vector2f, float velo);
 
   virtual void mover() = 0;
 

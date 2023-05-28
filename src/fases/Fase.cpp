@@ -8,10 +8,7 @@
 #include <utility>
 
 namespace Jogo::Fases {
-Fase::Fase() {
-  id = FASE;
-  carregarBackground();
-}
+Fase::Fase() : Ente(Ente::ID::FASE) { carregarBackground(); }
 
 Fase::~Fase() {
   for (auto entidade : listaEntidades) {

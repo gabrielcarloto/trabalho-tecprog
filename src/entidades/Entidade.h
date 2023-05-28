@@ -5,7 +5,7 @@
 namespace Jogo::Entidades {
 class Entidade : public Ente {
 public:
-  Entidade() = default;
+  Entidade(ID idEntidade) : Ente(idEntidade) {}
   virtual ~Entidade() = default;
 
   void setPosicao(const float x, const float y);

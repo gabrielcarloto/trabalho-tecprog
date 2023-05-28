@@ -7,7 +7,9 @@
 namespace Jogo {
 class Ente {
 public:
-  Ente();
+  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE };
+
+  Ente(ID);
   virtual ~Ente();
 
   virtual void executar() = 0;
@@ -15,12 +17,11 @@ public:
   void desenhar();
   void setEscalaFigura(float, float);
   const sf::Sprite &getFigura() const;
-  int getId() const { return id; }
 
-  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE };
+  ID getId() const { return id; }
 
 protected:
-  ID id; // TODO: trocar para const
+  const ID id;
   sf::Sprite *pFig = nullptr;
   static Gerenciadores::Gerenciador_Grafico *pGG;
 
