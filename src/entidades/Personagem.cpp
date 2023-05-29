@@ -4,7 +4,7 @@
 namespace Jogo::Entidades::Personagens {
 Personagem::Personagem(ID idPersonagem, const char *caminhoTextura,
                        sf::Vector2f pos, float velo)
-    : Entidade(idPersonagem), velocidade(velo) {
+    : Entidade(idPersonagem, velo) {
   x = pos.x;
   y = pos.y;
 
@@ -13,7 +13,7 @@ Personagem::Personagem(ID idPersonagem, const char *caminhoTextura,
 
 Personagem::Personagem(ID idPersonagem, const char *caminhoTextura,
                        sf::IntRect limite, sf::Vector2f pos, float velo)
-    : Entidade(idPersonagem), velocidade(velo) {
+    : Entidade(idPersonagem, velo) {
   x = pos.x;
   y = pos.y;
 

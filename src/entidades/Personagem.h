@@ -9,10 +9,7 @@ public:
   Personagem(ID, const char *, sf::Vector2f, float velo);
   Personagem(ID, const char *, sf::IntRect, sf::Vector2f, float velo);
 
-  virtual void mover() = 0;
-
 protected:
   int num_vidas = 1;
-  float velocidade = 0;
 };
 } // namespace Jogo::Entidades::Personagens
