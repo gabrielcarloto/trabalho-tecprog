@@ -12,7 +12,7 @@ public:
   virtual void mover() = 0;
 
 protected:
-  int num_vidas;
+  int num_vidas = 1;
   float velocidade = 0;
 };
 } // namespace Jogo::Entidades::Personagens

@@ -1,4 +1,5 @@
 #pragma once
+#include "entidades/Inimigo.h"
 #include "entidades/Jogador.h"
 #include "entidades/Obstaculo.h"
 #include <array>
@@ -13,11 +14,13 @@ public:
   void gerenciar();
 
   void incluirObstaculo(Entidades::Obstaculos::Obstaculo *);
-  // void incluirInimigo(Inimigo *);
+  void removerObstaculo(Entidades::Obstaculos::Obstaculo *);
+  void incluirInimigo(Entidades::Personagens::Inimigo *);
+  void removerInimigo(Entidades::Personagens::Inimigo *);
   void addJogador(Entidades::Personagens::Jogador *);
 
 private:
-  // std::vector<Inimigo *> LIs;
+  std::vector<Entidades::Personagens::Inimigo *> LIs;
   std::list<Entidades::Obstaculos::Obstaculo *> LOs;
   std::array<Entidades::Personagens::Jogador *, 2> LJs;
 

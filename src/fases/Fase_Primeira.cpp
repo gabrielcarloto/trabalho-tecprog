@@ -1,4 +1,5 @@
 #include "Fase_Primeira.h"
+#include "../entidades/Inim_Facil.h"
 #include "../entidades/Obst_Facil.h"
 
 namespace Jogo::Fases {
@@ -10,6 +11,11 @@ void Fase_Primeira::inicializaMapa() {
   mapaEntidades['1'] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Obst_Facil(CAMINHO_IMAGENS
                                                  "/big-crate.png");
+  };
+
+  mapaEntidades[CHAR_INIM_FACIL] = []() -> Entidades::Entidade * {
+    return new Entidades::Personagens::Inim_Facil(CAMINHO_IMAGENS "/oposum.png",
+                                                  sf::IntRect(0, 2, 32, 25));
   };
 
   carregarMapa(CAMINHO_FASE_PRIMEIRA "/tilemap.txt");

@@ -1,6 +1,7 @@
 #pragma once
 #include "../Ente.h"
 #include "../Gerenciador_Colisoes.h"
+#include "../Observer.h"
 #include "../entidades/Entidade.h"
 #include "../uteis.h"
 #include <functional>
@@ -13,15 +14,18 @@
 #define CAMINHO_FASE_SEGUNDA CAMINHO_FASES "/segunda"
 
 namespace Jogo::Fases {
-class Fase : public Ente {
+class Fase : public Ente, public Observer {
 public:
   Fase();
-  ~Fase(); // TODO: liberar memória no listaEntidades
+  ~Fase();
 
   void executar() override;
   void gerenciar_colisoes() { gerenciadorCol.gerenciar(); };
   // void criarInimigosMedios();
   // void criarObstMedios();
+  void atualizar(int, Entidades::Entidade *) override;
+
+  void removerEntidade(Entidades::Entidade *);
 
 protected:
   std::list<Entidades::Entidade *> listaEntidades;

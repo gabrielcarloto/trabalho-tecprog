@@ -1,4 +1,5 @@
 #include "Gerenciador_Colisoes.h"
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -25,12 +26,34 @@ void Gerenciador_Colisoes::gerenciar() {
         jogador->colidir(obst, colisao);
       }
     }
+
+    for (auto inim : LIs) {
+      sf::Vector2f colisao = calculaColisao(jogador, inim);
+
+      if (checaColisao(colisao)) {
+        jogador->colidir(inim, colisao);
+      }
+    }
   }
 }
 
 void Gerenciador_Colisoes::incluirObstaculo(
     Entidades::Obstaculos::Obstaculo *po) {
   LOs.push_back(po);
+}
+
+void Gerenciador_Colisoes::incluirInimigo(Entidades::Personagens::Inimigo *pi) {
+  LIs.push_back(pi);
+}
+
+void Gerenciador_Colisoes::removerInimigo(Entidades::Personagens::Inimigo *pi) {
+  auto it = std::remove(LIs.begin(), LIs.end(), pi);
+  LIs.erase(it);
+}
+
+void Gerenciador_Colisoes::removerObstaculo(
+    Entidades::Obstaculos::Obstaculo *po) {
+  LOs.remove(po);
 }
 
 void Gerenciador_Colisoes::addJogador(Entidades::Personagens::Jogador *pj) {

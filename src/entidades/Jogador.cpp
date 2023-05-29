@@ -60,9 +60,11 @@ void Jogador::executar() { mover(); }
 
 void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
   switch (outra->getId()) {
-  case Ente::OBSTACULO:
+  case Ente::ID::OBSTACULO:
     return colidirObstaculo(static_cast<Obstaculos::Obstaculo *>(outra),
                             intersecao);
+  case Ente::ID::INIMIGO:
+    return colidirInimigo(static_cast<Inimigo *>(outra), intersecao);
   default:
     throw std::runtime_error("Jogador::colidir -> ID " + std::to_string(id) +
                              " nao colidindo");
@@ -84,6 +86,25 @@ void Jogador::colidirObstaculo(Obstaculos::Obstaculo *obst,
     } else {
       y += intersecao.y;
       podePular = true;
+    }
+  }
+
+  pFig->setPosition(x, y);
+}
+
+void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
+  auto posInim = inim->getFigura().getPosition();
+
+  if (intersecao.x > intersecao.y) {
+    x += intersecao.x * (posInim.x < x ? -1.f : 1.f);
+    vel.x = 0;
+  } else {
+    vel.y = 0;
+    if (posInim.y < y) {
+      y -= intersecao.y;
+    } else {
+      y += intersecao.y;
+      inim->tomarDano();
     }
   }
 

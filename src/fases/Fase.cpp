@@ -4,6 +4,9 @@
 #include "../entidades/Entidade.h"
 #include "../entidades/Jogador.h"
 #include "SFML/Graphics/Rect.hpp"
+#include <cctype>
+#include <stdexcept>
+#include <string>
 #include <type_traits>
 #include <utility>
 
@@ -63,6 +66,13 @@ void Fase::carregarMapa(const char *path) {
           gerenciadorCol.addJogador(
               static_cast<Entidades::Personagens::Jogador *>(entidade));
           break;
+        case Ente::ID::INIMIGO: {
+          auto inim = static_cast<Entidades::Personagens::Inimigo *>(entidade);
+
+          gerenciadorCol.incluirInimigo(inim);
+          inim->adicionarObserver(this);
+          break;
+        }
         default:
           break;
         }
@@ -74,10 +84,11 @@ void Fase::carregarMapa(const char *path) {
 
         auto iCol = static_cast<float>(indiceColuna),
              iLin = static_cast<float>(indiceLinha),
-             tamTile = static_cast<float>(TAMANHO_TILE);
+             tamTile = static_cast<float>(TAMANHO_TILE),
+             alturaFig = entidade->getFigura().getGlobalBounds().height;
 
         entidade->setPosicao(
-            {iCol * tamTile - tamTile / 2, iLin * tamTile - tamTile / 2});
+            {iCol * tamTile - tamTile / 2, iLin * tamTile - alturaFig});
       }
 
       indiceColuna++;
@@ -97,5 +108,25 @@ void Fase::adicionarEntidadesDefault() {
   mapaEntidades['C'] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Chao(CAMINHO_IMAGENS "/floor.png");
   };
+}
+
+void Fase::atualizar(int evento, Entidades::Entidade *pEntidade) {
+  switch (evento) {
+  case INIMIGO_MORTE: {
+    removerEntidade(static_cast<Entidades::Entidade *>(pEntidade));
+    gerenciadorCol.removerInimigo(
+        static_cast<Entidades::Personagens::Inimigo *>(pEntidade));
+
+    break;
+  }
+  default:
+    throw std::runtime_error("Fase::atualizar -> Evento de id " +
+                             std::to_string(id) + " foi ignorado.");
+    break;
+  }
+}
+
+void Fase::removerEntidade(Entidades::Entidade *pEnt) {
+  listaEntidades.remove(pEnt);
 }
 } // namespace Jogo::Fases

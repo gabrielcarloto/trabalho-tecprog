@@ -4,11 +4,12 @@
 #include <SFML/System/Clock.hpp>
 #include <map>
 
-constexpr const char *TITULO_PADRAO = "Jogo++";
-constexpr const unsigned int LARGURA_JANELA = 1178, ALTURA_JANELA = 736,
-                             FRAMERATE_PADRAO = 60;
-
 constexpr const unsigned int TAMANHO_TILE = 64;
+
+constexpr const char *TITULO_PADRAO = "Jogo++";
+constexpr const unsigned int NUM_TILES_Y = 12, LARGURA_JANELA = 1178,
+                             ALTURA_JANELA = TAMANHO_TILE * (NUM_TILES_Y - 1),
+                             FRAMERATE_PADRAO = 60;
 
 #define CAMINHO_ASSETS "./assets"
 #define CAMINHO_FONTES CAMINHO_ASSETS "/fonts"

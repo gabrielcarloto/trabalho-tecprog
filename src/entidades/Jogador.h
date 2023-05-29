@@ -1,5 +1,6 @@
 #pragma once
 #include "Entidade.h"
+#include "Inimigo.h"
 #include "Obstaculo.h"
 #include "Personagem.h"
 
@@ -15,6 +16,7 @@ public:
 
 private:
   void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);
+  void colidirInimigo(Inimigo *, sf::Vector2f);
 
   const float TAMANHO_PULO = static_cast<float>(TAMANHO_TILE) * 3.5f;
   bool podePular = true;
