@@ -30,8 +30,7 @@ void Jogador::mover() {
   // TODO: quem sabe adicionar tamanho do pulo em função do tempo que o espaço
   // ficou pressionado
   if (podePular && isKeyPressed(sf::Keyboard::Space)) {
-    podePular = false;
-    vel.y -= std::sqrt(2.0f * GRAVIDADE * TAMANHO_PULO);
+    pular();
   }
 
   vel.y += GRAVIDADE * dt;
@@ -104,10 +103,16 @@ void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
       y -= intersecao.y;
     } else {
       y += intersecao.y;
+      pular(static_cast<float>(TAMANHO_TILE) / 2);
       inim->tomarDano();
     }
   }
 
   pFig->setPosition(x, y);
+}
+
+void Jogador::pular(float altura) {
+  podePular = false;
+  vel.y -= std::sqrt(2.0f * GRAVIDADE * altura);
 }
 } // namespace Jogo::Entidades::Personagens
