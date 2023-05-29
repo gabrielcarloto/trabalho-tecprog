@@ -1,10 +1,12 @@
 #include "Gerenciador_Grafico.h"
 #include "entidades/Jogador.h"
 #include "fases/Fase_Primeira.h"
+#include "Menu.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
 int main() {
+  Jogo::Menu menu;
   auto pGerenciadorGrafico =
       Jogo::Gerenciadores::Gerenciador_Grafico::getInstancia();
   Jogo::Fases::Fase_Primeira plau;
@@ -17,6 +19,9 @@ int main() {
       if (event.type == sf::Event::KeyPressed)
         if (event.key.code == sf::Keyboard::Escape)
           pGerenciadorGrafico->fecharJanela();
+      if (event.type == sf::Event::KeyPressed)
+        if (event.key.code == sf::Keyboard::Return)
+          menu.execMenu();
     }
 
     pGerenciadorGrafico->limparJanela();
