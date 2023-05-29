@@ -7,7 +7,8 @@ constexpr float GRAVIDADE = 981;
 namespace Jogo::Entidades {
 class Entidade : public Ente {
 public:
-  Entidade(ID idEntidade, float velo) : Ente(idEntidade), velocidade(velo) {}
+  Entidade(ID idEntidade, float velo, float normal = 0)
+      : Ente(idEntidade), velocidade(velo), forcaNormal(normal) {}
   virtual ~Entidade() = default;
 
   void setPosicao(const float x, const float y);
@@ -18,6 +19,7 @@ public:
 protected:
   float x, y;
   float velocidade;
+  float forcaNormal;
   sf::Vector2f velFinal;
 
   virtual void mover() = 0;

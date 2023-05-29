@@ -1,4 +1,5 @@
 #include "Entidade.h"
+#include <iostream>
 
 namespace Jogo::Entidades {
 // Entidade::Entidade() ;
@@ -26,6 +27,7 @@ void Entidade::atualizarPosicao() {
   mover();
 
   velFinal.y += GRAVIDADE * dt;
+  velFinal.y -= forcaNormal * dt;
 
   x += velFinal.x * dt;
   y += velFinal.y * dt;
