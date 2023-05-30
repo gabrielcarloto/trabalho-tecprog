@@ -19,7 +19,15 @@ void Entidade::setPosicao(const sf::Vector2<float> &pos) {
 }
 
 void Entidade::atualizarPosicao() {
-  float dt = 0.016;
+#ifdef DEBUG
+  // dependendo da forma que o jogo está sendo debugado, pode levar muito tempo
+  // entre um frame e outro, fazendo com que a velocidade seja multiplicada por
+  // um valor grande, levando as entidades para fora da tela; isso mantém o
+  // cálculo da velocidade de forma que isso não aconteça
+  float dt = 1 / static_cast<float>(FRAMERATE_PADRAO);
+#else
+  float dt = pGG->getDeltaTempo();
+#endif // DEBUG
 
   // suavidade do movimento
   velFinal.x *= 0.65f;
