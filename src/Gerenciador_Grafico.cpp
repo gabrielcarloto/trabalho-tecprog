@@ -65,4 +65,6 @@ Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
   // TODO: ajeitar para as threads
   return instancia;
 }
+
+void Gerenciador_Grafico::deletarInstancia() { delete instancia; }
 } // namespace Jogo::Gerenciadores

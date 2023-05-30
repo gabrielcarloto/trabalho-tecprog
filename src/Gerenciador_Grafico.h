@@ -36,6 +36,7 @@ public:
   sf::Texture *carregarTextura(const char *);
 
   static Gerenciador_Grafico *getInstancia();
+  static void deletarInstancia();
 
 private:
   Gerenciador_Grafico();

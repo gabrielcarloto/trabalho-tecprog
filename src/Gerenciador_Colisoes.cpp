@@ -35,6 +35,24 @@ void Gerenciador_Colisoes::gerenciar() {
       }
     }
   }
+
+  for (auto inim : LIs) {
+    for (auto obst : LOs) {
+      sf::Vector2f colisao = calculaColisao(inim, obst);
+
+      if (checaColisao(colisao)) {
+        inim->colidir(obst, colisao);
+      }
+    }
+
+    // for (auto inim : LIs) {
+    //   sf::Vector2f colisao = calculaColisao(jogador, inim);
+    //
+    //   if (checaColisao(colisao)) {
+    //     jogador->colidir(inim, colisao);
+    //   }
+    // }
+  }
 }
 
 void Gerenciador_Colisoes::incluirObstaculo(
@@ -63,6 +81,11 @@ void Gerenciador_Colisoes::addJogador(Entidades::Personagens::Jogador *pj) {
 
   LJs[numJogadores] = pj;
   numJogadores++;
+
+  // TODO: verificar se aqui é um bom lugar para isso
+  for (auto inim : LIs) {
+    inim->incluirJogador(pj);
+  }
 }
 
 sf::Vector2f Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *ent1,

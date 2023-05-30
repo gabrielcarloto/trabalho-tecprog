@@ -117,6 +117,13 @@ void Fase::atualizar(int evento, Entidades::Entidade *pEntidade) {
     gerenciadorCol.removerInimigo(
         static_cast<Entidades::Personagens::Inimigo *>(pEntidade));
 
+    delete pEntidade; // BUG: possivelmente um problema. O ponteiro é deletado
+                      // enquanto a função Subject::notificar ainda está sendo
+                      // executada. No modo debug do GCC, isso para
+                      // completamente o programa, alertando sobre uma tentativa
+                      // de incrementar um iterador inválido. Ou isso pode estar
+                      // acontecendo com um iterator no
+                      // Gerenciador_Colisoes::gerenciar
     break;
   }
   default:

@@ -4,8 +4,6 @@
 #include "Obstaculo.h"
 #include "Personagem.h"
 
-constexpr float TAMANHO_PULO = static_cast<float>(TAMANHO_TILE) * 3.5f;
-
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
@@ -14,14 +12,10 @@ public:
 
   void executar() override;
   void mover() override;
-  void colidir(Entidade *, sf::Vector2f);
+  void colidir(Entidade *, sf::Vector2f) override;
 
 private:
   void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);
   void colidirInimigo(Inimigo *, sf::Vector2f);
-
-  void pular(float = TAMANHO_PULO);
-
-  bool podePular = true;
 };
 } // namespace Jogo::Entidades::Personagens

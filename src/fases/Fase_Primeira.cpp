@@ -14,8 +14,8 @@ void Fase_Primeira::inicializaMapa() {
   };
 
   mapaEntidades[CHAR_INIM_FACIL] = []() -> Entidades::Entidade * {
-    return new Entidades::Personagens::Inim_Facil(CAMINHO_IMAGENS "/oposum.png",
-                                                  sf::IntRect(0, 2, 32, 25));
+    return new Entidades::Personagens::Inim_Facil(
+        CAMINHO_IMAGENS "/oposum.png", sf::IntRect(0, 2, 32, 25), {0, 0}, 70);
   };
 
   carregarMapa(CAMINHO_FASE_PRIMEIRA "/tilemap.txt");

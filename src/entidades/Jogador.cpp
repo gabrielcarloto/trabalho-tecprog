@@ -83,8 +83,4 @@ void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
   pFig->setPosition(x, y);
 }
 
-void Jogador::pular(float altura) {
-  podePular = false;
-  velFinal.y -= std::sqrt(2.0f * GRAVIDADE * altura);
-}
 } // namespace Jogo::Entidades::Personagens

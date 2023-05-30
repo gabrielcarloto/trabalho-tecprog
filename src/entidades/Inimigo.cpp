@@ -1,17 +1,55 @@
 #include "Inimigo.h"
+#include "../Math.h"
+#include "Jogador.h"
 #include "Personagem.h"
+#include <stdexcept>
+#include <utility>
 
 namespace Jogo::Entidades::Personagens {
 Inimigo::Inimigo(const char *path, int maldade, sf::Vector2f pos, float velo)
-    : Personagem(Ente::ID::INIMIGO, path, pos, velo), nivelMaldade(maldade) {}
+    : Personagem(Ente::ID::INIMIGO, path, pos, velo), nivelMaldade(maldade) {
+  aterrarJogadores();
+}
 
 Inimigo::Inimigo(const char *path, sf::IntRect lim, int maldade,
                  sf::Vector2f pos, float velo)
     : Personagem(Ente::ID::INIMIGO, path, lim, pos, velo),
-      nivelMaldade(maldade) {}
+      nivelMaldade(maldade) {
+  aterrarJogadores();
+}
 
-void Inimigo::morrer() {
-  notificar(EVENTOS::INIMIGO_MORTE, this);
-  this->~Inimigo();
+Inimigo::~Inimigo() { aterrarJogadores(); }
+
+void Inimigo::morrer() { notificar(EVENTOS::INIMIGO_MORTE, this); }
+
+void Inimigo::aterrarJogadores() {
+  jogadores[0] = nullptr;
+  jogadores[1] = nullptr;
+}
+
+void Inimigo::incluirJogador(Jogador *pJogador) {
+  if (numJogadores >= 2)
+    throw std::runtime_error(
+        "Inimigo::incluirJogador -> Numero maximo de jogadores excedido");
+
+  jogadores[numJogadores] = pJogador;
+  numJogadores++;
+}
+
+std::pair<float, float> Inimigo::distanciaJogadores() {
+  float distanciaJogador1 = 0, distanciaJogador2 = 0;
+
+  if (!jogadores[0])
+    throw std::runtime_error(
+        "Inimigo::distanciaJogadores -> Nenhum jogador registrado");
+
+  distanciaJogador1 =
+      Math::distancia({x, y}, jogadores[0]->getFigura().getPosition());
+
+  if (jogadores[1])
+    distanciaJogador2 =
+        Math::distancia({x, y}, jogadores[1]->getFigura().getPosition());
+
+  return std::make_pair(distanciaJogador1, distanciaJogador2);
 }
 } // namespace Jogo::Entidades::Personagens

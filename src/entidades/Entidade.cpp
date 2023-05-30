@@ -19,7 +19,7 @@ void Entidade::setPosicao(const sf::Vector2<float> &pos) {
 }
 
 void Entidade::atualizarPosicao() {
-  float dt = pGG->getDeltaTempo();
+  float dt = 0.016;
 
   // suavidade do movimento
   velFinal.x *= 0.65f;
