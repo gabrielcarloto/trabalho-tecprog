@@ -23,7 +23,7 @@ void Inim_Facil::executar() { atualizarPosicao(); }
 
 void Inim_Facil::mover() {
   auto jogadorProximo = jogadorMaisProximo();
-  auto posJogadorProximo = jogadorProximo.first->getFigura().getPosition();
+  auto posJogadorProximo = jogadorProximo.first->getPosicao();
 
   if (std::abs(posJogadorProximo.y - y) <= DISTANCIA_Y_PERSEGUIR_JOGADOR &&
       jogadorProximo.second <= DISTANCIA_X_PERSEGUIR_JOGADOR) {
@@ -68,7 +68,7 @@ void Inim_Facil::tomarDano() {
 }
 
 void Inim_Facil::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
-  auto posObst = pEnt->getFigura().getPosition();
+  auto posObst = pEnt->getPosicao();
   // TODO: lidar com obstáculos danosos
 
   if (intersecao.x > intersecao.y) {

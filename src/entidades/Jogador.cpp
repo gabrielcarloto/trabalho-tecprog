@@ -44,7 +44,7 @@ void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
 
 void Jogador::colidirObstaculo(Obstaculos::Obstaculo *obst,
                                sf::Vector2f intersecao) {
-  auto posObst = obst->getFigura().getPosition();
+  auto posObst = obst->getPosicao();
   // TODO: lidar com obstáculos danosos
 
   if (intersecao.x > intersecao.y) {
@@ -64,7 +64,7 @@ void Jogador::colidirObstaculo(Obstaculos::Obstaculo *obst,
 }
 
 void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
-  auto posInim = inim->getFigura().getPosition();
+  auto posInim = inim->getPosicao();
 
   if (intersecao.x > intersecao.y) {
     x += intersecao.x * (posInim.x < x ? -1.f : 1.f);

@@ -48,4 +48,6 @@ void Entidade::atualizarPosicao() {
 
   pFig->setPosition(x, y);
 }
+
+sf::Vector2f Entidade::getPosicao() const { return {x, y}; }
 } // namespace Jogo::Entidades

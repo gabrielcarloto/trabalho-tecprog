@@ -13,6 +13,7 @@ public:
 
   void setPosicao(const float x, const float y);
   void setPosicao(const sf::Vector2<float> &);
+  sf::Vector2f getPosicao() const;
 
   void atualizarPosicao();
 

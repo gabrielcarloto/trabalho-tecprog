@@ -43,12 +43,10 @@ std::pair<float, float> Inimigo::distanciaJogadores() {
     throw std::runtime_error(
         "Inimigo::distanciaJogadores -> Nenhum jogador registrado");
 
-  distanciaJogador1 =
-      Math::distancia({x, y}, jogadores[0]->getFigura().getPosition());
+  distanciaJogador1 = Math::distancia({x, y}, jogadores[0]->getPosicao());
 
   if (jogadores[1])
-    distanciaJogador2 =
-        Math::distancia({x, y}, jogadores[1]->getFigura().getPosition());
+    distanciaJogador2 = Math::distancia({x, y}, jogadores[1]->getPosicao());
 
   return std::make_pair(distanciaJogador1, distanciaJogador2);
 }
