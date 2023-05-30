@@ -55,6 +55,6 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	fi
 
 clean:
-	@printf "$(COM_COLOR)Removing $(OBJ_COLOR)$(OUTDIR)$(NO_COLOR)\n"
-	@rm -rf $(OUTDIR)
+	@printf "$(COM_COLOR)Removing $(OBJ_COLOR)$(OBJDIR)$(NO_COLOR)\n"
+	@rm -rf $(OBJDIR)
 
