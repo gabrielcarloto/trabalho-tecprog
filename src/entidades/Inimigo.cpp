@@ -1,5 +1,6 @@
 #include "Inimigo.h"
 #include "../Math.h"
+#include "../fases/Fase.h"
 #include "Jogador.h"
 #include "Personagem.h"
 #include <stdexcept>
@@ -19,8 +20,12 @@ Inimigo::Inimigo(const char *path, sf::IntRect lim, int maldade,
 }
 
 Inimigo::~Inimigo() { aterrarJogadores(); }
+void Inimigo::morrer() {
+  fase->removerEntidade(this);
+  deveSerRemovido = true;
+}
 
-void Inimigo::morrer() { notificar(EVENTOS::INIMIGO_MORTE, this); }
+void Inimigo::setFase(Fases::Fase *pf) { fase = pf; }
 
 void Inimigo::aterrarJogadores() {
   jogadores[0] = nullptr;
@@ -50,4 +55,6 @@ std::pair<float, float> Inimigo::distanciaJogadores() {
 
   return std::make_pair(distanciaJogador1, distanciaJogador2);
 }
+
+bool Inimigo::getDeveSerRemovido() const { return deveSerRemovido; }
 } // namespace Jogo::Entidades::Personagens

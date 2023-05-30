@@ -70,7 +70,7 @@ void Fase::carregarMapa(const char *path) {
           auto inim = static_cast<Entidades::Personagens::Inimigo *>(entidade);
 
           gerenciadorCol.incluirInimigo(inim);
-          inim->adicionarObserver(this);
+          inim->setFase(this);
           break;
         }
         default:
@@ -108,29 +108,6 @@ void Fase::adicionarEntidadesDefault() {
   mapaEntidades['C'] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Chao(CAMINHO_IMAGENS "/floor.png");
   };
-}
-
-void Fase::atualizar(int evento, Entidades::Entidade *pEntidade) {
-  switch (evento) {
-  case INIMIGO_MORTE: {
-    removerEntidade(static_cast<Entidades::Entidade *>(pEntidade));
-    gerenciadorCol.removerInimigo(
-        static_cast<Entidades::Personagens::Inimigo *>(pEntidade));
-
-    delete pEntidade; // BUG: possivelmente um problema. O ponteiro é deletado
-                      // enquanto a função Subject::notificar ainda está sendo
-                      // executada. No modo debug do GCC, isso para
-                      // completamente o programa, alertando sobre uma tentativa
-                      // de incrementar um iterador inválido. Ou isso pode estar
-                      // acontecendo com um iterator no
-                      // Gerenciador_Colisoes::gerenciar
-    break;
-  }
-  default:
-    throw std::runtime_error("Fase::atualizar -> Evento de id " +
-                             std::to_string(id) + " foi ignorado.");
-    break;
-  }
 }
 
 void Fase::removerEntidade(Entidades::Entidade *pEnt) {

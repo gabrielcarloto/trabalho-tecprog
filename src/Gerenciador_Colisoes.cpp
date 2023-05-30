@@ -53,6 +53,12 @@ void Gerenciador_Colisoes::gerenciar() {
     //   }
     // }
   }
+
+  // NOTE: (gabrielcarloto) eu não gosto dessa solução, mas é o que consegui
+  // pensar em um primeiro momento. Quando o inimigo morria, ele era deletado e
+  // removido das listas, invalidando os iteradores e levando a segfaults. Isso
+  // deve resolver o problema por enquanto
+  removerEntidades();
 }
 
 void Gerenciador_Colisoes::incluirObstaculo(
@@ -109,5 +115,17 @@ sf::Vector2f Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *ent1,
 
 bool Gerenciador_Colisoes::checaColisao(sf::Vector2f col) {
   return col.x < 0 && col.y < 0;
+}
+
+void Gerenciador_Colisoes::removerEntidades() {
+  // por enquanto isso é necessário apenas com o inimigo
+  for (auto it = LIs.begin(); it != LIs.end();) {
+    if ((*it)->getDeveSerRemovido()) {
+      delete *it;
+      it = LIs.erase(it);
+    } else {
+      it++;
+    }
+  }
 }
 } // namespace Jogo::Gerenciadores

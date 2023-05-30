@@ -4,6 +4,7 @@
 #include "entidades/Obstaculo.h"
 #include <array>
 #include <list>
+#include <vector>
 
 namespace Jogo::Gerenciadores {
 class Gerenciador_Colisoes {
@@ -20,13 +21,15 @@ public:
   void addJogador(Entidades::Personagens::Jogador *);
 
 private:
+  std::array<Entidades::Personagens::Jogador *, 2> LJs;
   std::vector<Entidades::Personagens::Inimigo *> LIs;
   std::list<Entidades::Obstaculos::Obstaculo *> LOs;
-  std::array<Entidades::Personagens::Jogador *, 2> LJs;
 
   unsigned int numJogadores = 0;
 
   sf::Vector2f calculaColisao(Entidades::Entidade *, Entidades::Entidade *);
   bool checaColisao(sf::Vector2f);
+
+  void removerEntidades();
 };
 } // namespace Jogo::Gerenciadores
