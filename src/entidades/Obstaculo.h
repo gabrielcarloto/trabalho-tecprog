@@ -5,7 +5,7 @@ namespace Jogo::Entidades::Obstaculos {
 class Obstaculo : public Entidade {
 public:
   Obstaculo(bool dano, float velo, bool flut = false)
-      : Entidade(Ente::ID::OBSTACULO, velo), danoso(dano), flutuante(flut) {}
+      : Entidade(Ente::ID::OBSTACULO, velo), danoso(dano), flutua(flut) {}
 
   virtual ~Obstaculo() = default;
 
@@ -13,6 +13,6 @@ public:
 
 protected:
   const bool danoso;
-  const bool flutuante;
+  bool flutua;
 };
 } // namespace Jogo::Entidades::Obstaculos

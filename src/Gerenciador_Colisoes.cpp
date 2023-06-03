@@ -1,7 +1,9 @@
 #include "Gerenciador_Colisoes.h"
+#include "entidades/Obst_Facil.h"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <iterator>
 #include <stdexcept>
 
 namespace Jogo::Gerenciadores {
@@ -15,6 +17,10 @@ void Gerenciador_Colisoes::gerenciar() {
     throw std::runtime_error("Gerenciador_Colisoes::gerenciar -> Pelo menos um "
                              "jogador deve ser adicionado");
 
+  for (IteratorObstaculos it = LOs.begin(); it != LOs.end(); it++) {
+    colidirLimitesMapa(static_cast<Entidades::Entidade *>(*it));
+  }
+
   for (unsigned int i = 0; i < numJogadores; i++) {
     auto jogador = LJs[i];
     auto fig = jogador->getFigura();
@@ -27,6 +33,12 @@ void Gerenciador_Colisoes::gerenciar() {
 
       if (checaColisao(colisao)) {
         jogador->colidir(*itObst, colisao);
+
+        Entidades::Obstaculos::Obst_Facil *pObstFacil =
+            dynamic_cast<Entidades::Obstaculos::Obst_Facil *>(*itObst);
+
+        if (pObstFacil)
+          pObstFacil->colidir(jogador);
       }
     }
 
@@ -50,10 +62,6 @@ void Gerenciador_Colisoes::gerenciar() {
         (*itInim)->colidir(*itObst, colisao);
       }
     }
-  }
-
-  for (IteratorObstaculos it = LOs.begin(); it != LOs.end(); it++) {
-    colidirLimitesMapa(static_cast<Entidades::Entidade *>(*it));
   }
 
   // NOTE: (gabrielcarloto) quando o inimigo morria e era deletado, ocorria uma

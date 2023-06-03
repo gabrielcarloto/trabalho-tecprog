@@ -9,8 +9,14 @@ void Fase_Primeira::inicializaMapa() {
   adicionarEntidadesDefault();
 
   mapaEntidades['1'] = []() -> Entidades::Entidade * {
-    return new Entidades::Obstaculos::Obst_Facil(CAMINHO_IMAGENS
-                                                 "/big-crate.png");
+    return new Entidades::Obstaculos::Obst_Facil(
+        CAMINHO_IMAGENS "/big-crate.png", {}, true);
+  };
+
+  mapaEntidades['P'] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Obst_Facil(
+        // TODO: Uteis::chance
+        CAMINHO_IMAGENS "/big-crate.png", {}, true, std::rand() % 100 < 10);
   };
 
   mapaEntidades[CHAR_INIM_FACIL] = []() -> Entidades::Entidade * {

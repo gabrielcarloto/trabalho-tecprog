@@ -101,7 +101,7 @@ void Fase::carregarMapa(const char *path) {
 
   gerenciadorCol.setLimitesMapa(
       static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
-      static_cast<float>(indiceLinha * TAMANHO_TILE));
+      static_cast<float>((indiceLinha - 1) * TAMANHO_TILE));
 }
 
 void Fase::adicionarEntidadesDefault() {

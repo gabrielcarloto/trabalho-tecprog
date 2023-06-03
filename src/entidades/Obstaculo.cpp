@@ -2,7 +2,7 @@
 
 namespace Jogo::Entidades::Obstaculos {
 void Obstaculo::mover() {
-  if (flutuante) {
+  if (flutua) {
     float dt = pGG->getDeltaTempo();
     velFinal.y -= GRAVIDADE * dt;
   }
