@@ -38,7 +38,7 @@ void Gerenciador_Colisoes::gerenciar() {
             dynamic_cast<Entidades::Obstaculos::Obst_Facil *>(*itObst);
 
         if (pObstFacil)
-          pObstFacil->colidir(jogador);
+          pObstFacil->colidirComJogador();
       }
     }
 

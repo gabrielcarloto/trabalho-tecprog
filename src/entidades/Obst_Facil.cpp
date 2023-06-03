@@ -10,7 +10,7 @@ Obst_Facil::Obst_Facil(const char *path, sf::Vector2f pos, bool flut,
 
 void Obst_Facil::executar() { mover(); }
 
-void Obst_Facil::colidir(Personagens::Jogador *) {
+void Obst_Facil::colidirComJogador() {
   if (caiQuandoJogadorPisa)
     flutua = false;
 }

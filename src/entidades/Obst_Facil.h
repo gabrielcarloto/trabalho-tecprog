@@ -9,7 +9,7 @@ public:
   ~Obst_Facil() override = default;
 
   void executar() override;
-  void colidir(Personagens::Jogador *);
+  void colidirComJogador();
 
 private:
   const bool caiQuandoJogadorPisa = false;
