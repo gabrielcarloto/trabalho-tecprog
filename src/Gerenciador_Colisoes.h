@@ -28,8 +28,15 @@ private:
   unsigned int numJogadores = 0;
 
   sf::Vector2f calculaColisao(Entidades::Entidade *, Entidades::Entidade *);
+  void colidirLimitesMapa(Entidades::Entidade *);
   bool checaColisao(sf::Vector2f);
 
   void removerEntidades();
+
+  using IteratorObjetos =
+      std::list<Entidades::Obstaculos::Obstaculo *>::iterator;
+
+  using IteratorInimigos =
+      std::vector<Entidades::Personagens::Inimigo *>::iterator;
 };
 } // namespace Jogo::Gerenciadores

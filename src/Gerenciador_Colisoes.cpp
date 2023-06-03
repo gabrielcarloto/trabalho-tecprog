@@ -19,45 +19,64 @@ void Gerenciador_Colisoes::gerenciar() {
     auto jogador = LJs[i];
     auto fig = jogador->getFigura();
 
-    for (auto obst : LOs) {
-      sf::Vector2f colisao = calculaColisao(jogador, obst);
+    colidirLimitesMapa(static_cast<Entidades::Entidade *>(jogador));
+
+    for (IteratorObjetos itObst = LOs.begin(); itObst != LOs.end(); itObst++) {
+      sf::Vector2f colisao = calculaColisao(jogador, *itObst);
 
       if (checaColisao(colisao)) {
-        jogador->colidir(obst, colisao);
+        jogador->colidir(*itObst, colisao);
       }
     }
 
-    for (auto inim : LIs) {
-      sf::Vector2f colisao = calculaColisao(jogador, inim);
+    for (IteratorInimigos itInim = LIs.begin(); itInim != LIs.end(); itInim++) {
+      sf::Vector2f colisao = calculaColisao(jogador, *itInim);
 
       if (checaColisao(colisao)) {
-        jogador->colidir(inim, colisao);
+        jogador->colidir(*itInim, colisao);
       }
     }
   }
 
-  for (auto inim : LIs) {
-    for (auto obst : LOs) {
-      sf::Vector2f colisao = calculaColisao(inim, obst);
+  for (IteratorInimigos itInim = LIs.begin(); itInim != LIs.end(); itInim++) {
+    colidirLimitesMapa(static_cast<Entidades::Entidade *>(*itInim));
+
+    for (IteratorObjetos itObst = LOs.begin(); itObst != LOs.end(); itObst++) {
+      sf::Vector2f colisao = calculaColisao(*itInim, *itObst);
 
       if (checaColisao(colisao)) {
-        inim->colidir(obst, colisao);
+        (*itInim)->colidir(*itObst, colisao);
       }
     }
+  }
 
-    // for (auto inim : LIs) {
-    //   sf::Vector2f colisao = calculaColisao(jogador, inim);
-    //
-    //   if (checaColisao(colisao)) {
-    //     jogador->colidir(inim, colisao);
-    //   }
-    // }
+  for (IteratorObjetos it = LOs.begin(); it != LOs.end(); it++) {
+    colidirLimitesMapa(static_cast<Entidades::Entidade *>(*it));
   }
 
   // NOTE: (gabrielcarloto) quando o inimigo morria e era deletado, ocorria uma
   // invalidação de iteradores, crashando o programa. Agora ele é marcado para
   // ser removido após os loops.
   removerEntidades();
+}
+
+void Gerenciador_Colisoes::colidirLimitesMapa(Entidades::Entidade *pEnt) {
+  sf::FloatRect globalBounds = pEnt->getFigura().getGlobalBounds();
+  sf::Vector2f pos = pEnt->getPosicao();
+
+  if (pos.x < 0)
+    pos.x = 0;
+
+  if (pos.x > LARGURA_JANELA - globalBounds.width)
+    pos.x = LARGURA_JANELA - globalBounds.width;
+
+  if (pos.y < 0)
+    pos.y = 0;
+
+  if (pos.y > ALTURA_JANELA - globalBounds.height)
+    pos.y = ALTURA_JANELA - globalBounds.height;
+
+  pEnt->setPosicao(pos);
 }
 
 void Gerenciador_Colisoes::incluirObstaculo(
