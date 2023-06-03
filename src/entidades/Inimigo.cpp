@@ -20,6 +20,8 @@ Inimigo::Inimigo(const char *path, sf::IntRect lim, int maldade,
 }
 
 Inimigo::~Inimigo() { aterrarJogadores(); }
+void Inimigo::operator--() { tomarDano(); }
+
 void Inimigo::neutralizarse() {
   fase->removerEntidade(this);
   deveSerRemovido = true;

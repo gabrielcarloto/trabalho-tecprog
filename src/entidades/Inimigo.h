@@ -19,6 +19,9 @@ public:
   void incluirJogador(Jogador *);
   void setFase(Fases::Fase *);
 
+  // toma dano
+  void operator--();
+
   bool getDeveSerRemovido() const;
 
 protected:

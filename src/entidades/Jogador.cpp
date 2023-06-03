@@ -76,7 +76,7 @@ void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
     } else {
       y += intersecao.y;
       pular(static_cast<float>(TAMANHO_TILE) / 2);
-      inim->tomarDano();
+      inim->operator--();
     }
   }
 
