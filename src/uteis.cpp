@@ -18,4 +18,7 @@ void lerArquivo(const char *path,
   file.close();
 }
 
+bool chance(unsigned int chance, unsigned int max) {
+  return std::rand() % max < chance;
+}
 } // namespace Jogo::Uteis

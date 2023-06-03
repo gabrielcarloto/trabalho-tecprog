@@ -15,8 +15,7 @@ void Fase_Primeira::inicializaMapa() {
 
   mapaEntidades['P'] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Obst_Facil(
-        // TODO: Uteis::chance
-        CAMINHO_IMAGENS "/big-crate.png", {}, true, std::rand() % 100 < 10);
+        CAMINHO_IMAGENS "/big-crate.png", {}, true, Uteis::chance(10));
   };
 
   mapaEntidades[CHAR_INIM_FACIL] = []() -> Entidades::Entidade * {

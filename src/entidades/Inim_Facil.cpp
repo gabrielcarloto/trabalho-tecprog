@@ -1,4 +1,5 @@
 #include "Inim_Facil.h"
+#include "../uteis.h"
 #include "Jogador.h"
 #include <algorithm>
 #include <cmath>
@@ -38,16 +39,16 @@ void Inim_Facil::perseguirJogador(sf::Vector2f posJogador) {
   velFinal.x += velocidade * direcao;
 
   // TODO: talvez muito viajado isso mas eh engraçado
-  if (podePular && std::rand() % 100 == 1)
+  if (podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
 }
 
 void Inim_Facil::moverAleatoriamente() {
-  float direcaoAleatoria = std::rand() % 100 <= 5 ? 1 : -1;
+  float direcaoAleatoria = Uteis::chance(5) ? 1 : -1;
   float direcao = direcaoAleatoria * (velFinal.x < 0 ? 1.f : -1.f);
   velFinal.x += velocidade / 2 * direcao;
 
-  if (podePular && std::rand() % 100 == 1)
+  if (podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
 }
 
