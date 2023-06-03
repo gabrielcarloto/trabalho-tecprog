@@ -19,6 +19,7 @@ public:
   void incluirInimigo(Entidades::Personagens::Inimigo *);
   void removerInimigo(Entidades::Personagens::Inimigo *);
   void addJogador(Entidades::Personagens::Jogador *);
+  void setLimitesMapa(float, float);
 
 private:
   std::array<Entidades::Personagens::Jogador *, 2> LJs;
@@ -26,6 +27,7 @@ private:
   std::list<Entidades::Obstaculos::Obstaculo *> LOs;
 
   unsigned int numJogadores = 0;
+  float limiteMapaX = 0, limiteMapaY = 0;
 
   sf::Vector2f calculaColisao(Entidades::Entidade *, Entidades::Entidade *);
   void colidirLimitesMapa(Entidades::Entidade *);

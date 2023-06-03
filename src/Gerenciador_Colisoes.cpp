@@ -67,14 +67,14 @@ void Gerenciador_Colisoes::colidirLimitesMapa(Entidades::Entidade *pEnt) {
   if (pos.x < 0)
     pos.x = 0;
 
-  if (pos.x > LARGURA_JANELA - globalBounds.width)
-    pos.x = LARGURA_JANELA - globalBounds.width;
+  if (pos.x > limiteMapaX - globalBounds.width)
+    pos.x = limiteMapaX - globalBounds.width;
 
   if (pos.y < 0)
     pos.y = 0;
 
-  if (pos.y > ALTURA_JANELA - globalBounds.height)
-    pos.y = ALTURA_JANELA - globalBounds.height;
+  if (pos.y > limiteMapaY - globalBounds.height)
+    pos.y = limiteMapaY - globalBounds.height;
 
   pEnt->setPosicao(pos);
 }
@@ -145,5 +145,10 @@ void Gerenciador_Colisoes::removerEntidades() {
       it++;
     }
   }
+}
+
+void Gerenciador_Colisoes::setLimitesMapa(float limX, float limY) {
+  limiteMapaX = limX;
+  limiteMapaY = limY;
 }
 } // namespace Jogo::Gerenciadores

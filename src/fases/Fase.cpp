@@ -40,9 +40,10 @@ void Fase::carregarMapa(const char *path) {
   if (!path)
     throw std::runtime_error("Fase::carregarMapa -> `path` não pode ser nulo");
 
-  unsigned int indiceLinha = 0;
-  Uteis::lerArquivo(path, [&indiceLinha, this](std::string &linha) {
-    unsigned int indiceColuna = 0;
+  unsigned int indiceLinha = 0, indiceColuna = 0;
+  Uteis::lerArquivo(path, [&indiceLinha, &indiceColuna,
+                           this](std::string &linha) {
+    indiceColuna = 0;
 
     for (const char caractere : linha) {
       if (caractere == '.' || caractere == '\r' || caractere == '\n') {
@@ -82,13 +83,14 @@ void Fase::carregarMapa(const char *path) {
         // criada.
         entidade->setEscalaFigura(2, 2);
 
-        auto iCol = static_cast<float>(indiceColuna),
-             iLin = static_cast<float>(indiceLinha),
-             tamTile = static_cast<float>(TAMANHO_TILE),
-             alturaFig = entidade->getFigura().getGlobalBounds().height;
+        float iCol = static_cast<float>(indiceColuna),
+              iLin = static_cast<float>(indiceLinha),
+              tamTile = static_cast<float>(TAMANHO_TILE),
+              alturaFig = entidade->getFigura().getGlobalBounds().height,
+              larguraFig = entidade->getFigura().getGlobalBounds().width;
 
         entidade->setPosicao(
-            {iCol * tamTile - tamTile / 2, iLin * tamTile - alturaFig});
+            {iCol * tamTile - larguraFig, iLin * tamTile - alturaFig});
       }
 
       indiceColuna++;
@@ -96,6 +98,10 @@ void Fase::carregarMapa(const char *path) {
 
     indiceLinha++;
   });
+
+  gerenciadorCol.setLimitesMapa(
+      static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
+      static_cast<float>(indiceLinha * TAMANHO_TILE));
 }
 
 void Fase::adicionarEntidadesDefault() {
