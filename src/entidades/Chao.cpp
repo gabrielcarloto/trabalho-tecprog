@@ -8,5 +8,5 @@ Chao::Chao(const char *path, sf::Vector2f pos)
   y = pos.y;
 }
 
-void Chao::executar() { atualizarPosicao(); }
+void Chao::executar() { mover(); }
 } // namespace Jogo::Entidades::Obstaculos

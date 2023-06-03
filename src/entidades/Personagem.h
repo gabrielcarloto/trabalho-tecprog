@@ -13,10 +13,13 @@ public:
 
   virtual void colidir(Entidade *, sf::Vector2f) = 0;
 
+  void mover() override;
+
 protected:
   int num_vidas = 1;
   bool podePular = true;
 
   void pular(float = TAMANHO_PULO);
+  virtual void movimentar() = 0;
 };
 } // namespace Jogo::Entidades::Personagens

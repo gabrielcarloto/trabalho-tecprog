@@ -7,22 +7,18 @@ constexpr float GRAVIDADE = 981;
 namespace Jogo::Entidades {
 class Entidade : public Ente {
 public:
-  Entidade(ID idEntidade, float velo, float normal = 0)
-      : Ente(idEntidade), velocidade(velo), forcaNormal(normal) {}
+  Entidade(ID idEntidade, float velo) : Ente(idEntidade), velocidade(velo) {}
   virtual ~Entidade() = default;
 
   void setPosicao(const float x, const float y);
   void setPosicao(const sf::Vector2<float> &);
   sf::Vector2f getPosicao() const;
 
-  void atualizarPosicao();
+  virtual void mover();
 
 protected:
   float x, y;
   float velocidade;
-  float forcaNormal;
   sf::Vector2f velFinal;
-
-  virtual void mover() = 0;
 };
 } // namespace Jogo::Entidades

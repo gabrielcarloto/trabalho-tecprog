@@ -19,9 +19,9 @@ Inim_Facil::Inim_Facil(const char *path, sf::IntRect lim, sf::Vector2f pos,
                        float velo)
     : Inimigo(path, lim, MALDADE_PADRAO_FACIL, pos, velo) {}
 
-void Inim_Facil::executar() { atualizarPosicao(); }
+void Inim_Facil::executar() { mover(); }
 
-void Inim_Facil::mover() {
+void Inim_Facil::movimentar() {
   auto jogadorProximo = jogadorMaisProximo();
   auto posJogadorProximo = jogadorProximo.first->getPosicao();
 

@@ -11,8 +11,10 @@ public:
   Jogador(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0);
 
   void executar() override;
-  void mover() override;
   void colidir(Entidade *, sf::Vector2f) override;
+
+protected:
+  void movimentar() override;
 
 private:
   void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);

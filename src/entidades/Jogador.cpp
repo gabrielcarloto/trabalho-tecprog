@@ -12,7 +12,7 @@ Jogador::Jogador(const char *caminhoTextura, sf::IntRect lim, sf::Vector2f pos,
                  float velo)
     : Personagem(Ente::ID::JOGADOR, caminhoTextura, lim, pos, velo) {}
 
-void Jogador::mover() {
+void Jogador::movimentar() {
   auto isKeyPressed = sf::Keyboard::isKeyPressed;
 
   if (isKeyPressed(sf::Keyboard::A))
@@ -27,7 +27,7 @@ void Jogador::mover() {
   }
 }
 
-void Jogador::executar() { atualizarPosicao(); }
+void Jogador::executar() { mover(); }
 
 void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
   switch (outra->getId()) {

@@ -4,11 +4,15 @@
 namespace Jogo::Entidades::Obstaculos {
 class Obstaculo : public Entidade {
 public:
-  Obstaculo(bool dano, float velo, float normal)
-      : Entidade(Ente::ID::OBSTACULO, velo, normal), danoso(dano) {}
+  Obstaculo(bool dano, float velo, bool flut = false)
+      : Entidade(Ente::ID::OBSTACULO, velo), danoso(dano), flutuante(flut) {}
+
   virtual ~Obstaculo() = default;
+
+  void mover() override;
 
 protected:
   const bool danoso;
+  const bool flutuante;
 };
 } // namespace Jogo::Entidades::Obstaculos

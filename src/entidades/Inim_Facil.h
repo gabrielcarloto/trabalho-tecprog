@@ -10,10 +10,12 @@ public:
   Inim_Facil(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0);
 
   void executar() override;
-  void mover() override;
   void tomarDano() override;
 
   void colidir(Entidade *, sf::Vector2f) override;
+
+protected:
+  void movimentar() override;
 
 private:
   std::pair<Jogador *, float> jogadorMaisProximo();

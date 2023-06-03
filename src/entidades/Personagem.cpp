@@ -25,4 +25,12 @@ void Personagem::pular(float altura) {
   podePular = false;
   velFinal.y -= std::sqrt(2.0f * GRAVIDADE * altura);
 }
+
+void Personagem::mover() {
+  // suavidade do movimento
+  velFinal.x *= 0.65f;
+
+  movimentar();
+  Entidade::mover();
+}
 } // namespace Jogo::Entidades::Personagens

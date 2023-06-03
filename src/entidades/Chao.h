@@ -7,6 +7,5 @@ public:
   ~Chao() override = default;
 
   void executar() override;
-  void mover() override{};
 };
 } // namespace Jogo::Entidades::Obstaculos

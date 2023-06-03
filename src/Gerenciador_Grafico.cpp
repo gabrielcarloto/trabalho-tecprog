@@ -33,7 +33,17 @@ bool Gerenciador_Grafico::verificarEvento(sf::Event &e) {
 }
 
 void Gerenciador_Grafico::limparJanela() { janela.clear(); }
-float Gerenciador_Grafico::getDeltaTempo() const { return deltaTempo; }
+float Gerenciador_Grafico::getDeltaTempo() const {
+#ifdef DEBUG
+  // dependendo da forma que o jogo está sendo debugado, pode levar muito tempo
+  // entre um frame e outro, fazendo com que a velocidade seja multiplicada por
+  // um valor grande, levando as entidades para fora da tela; isso mantém o
+  // cálculo da velocidade de forma que isso não aconteça
+  return 1 / static_cast<float>(FRAMERATE_PADRAO);
+#else
+  return deltaTempo;
+#endif // DEBUG
+}
 
 void Gerenciador_Grafico::atualizaDeltaTempo() {
   deltaTempo = relogio.getElapsedTime().asSeconds();
