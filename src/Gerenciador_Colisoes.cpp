@@ -54,10 +54,9 @@ void Gerenciador_Colisoes::gerenciar() {
     // }
   }
 
-  // NOTE: (gabrielcarloto) eu não gosto dessa solução, mas é o que consegui
-  // pensar em um primeiro momento. Quando o inimigo morria, ele era deletado e
-  // removido das listas, invalidando os iteradores e levando a segfaults. Isso
-  // deve resolver o problema por enquanto
+  // NOTE: (gabrielcarloto) quando o inimigo morria e era deletado, ocorria uma
+  // invalidação de iteradores, crashando o programa. Agora ele é marcado para
+  // ser removido após os loops.
   removerEntidades();
 }
 
