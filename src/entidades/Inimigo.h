@@ -28,7 +28,7 @@ protected:
   bool deveSerRemovido = false;
   std::array<Jogador *, 2> jogadores;
 
-  virtual void morrer();
+  virtual void neutralizarse();
   std::pair<float, float> distanciaJogadores();
 
 private:

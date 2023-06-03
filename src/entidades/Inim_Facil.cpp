@@ -65,7 +65,7 @@ void Inim_Facil::tomarDano() {
   num_vidas--;
 
   if (num_vidas <= 0)
-    morrer();
+    neutralizarse();
 }
 
 void Inim_Facil::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
