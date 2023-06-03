@@ -1,8 +1,8 @@
 #include "Fase.h"
 #include "../Gerenciador_Grafico.h"
-#include "../entidades/Chao.h"
 #include "../entidades/Entidade.h"
 #include "../entidades/Jogador.h"
+#include "../entidades/Obst_Facil.h"
 #include "SFML/Graphics/Rect.hpp"
 #include <cctype>
 #include <stdexcept>
@@ -106,7 +106,7 @@ void Fase::adicionarEntidadesDefault() {
   };
 
   mapaEntidades['C'] = []() -> Entidades::Entidade * {
-    return new Entidades::Obstaculos::Chao(CAMINHO_IMAGENS "/floor.png");
+    return new Entidades::Obstaculos::Obst_Facil(CAMINHO_IMAGENS "/floor.png");
   };
 }
 
