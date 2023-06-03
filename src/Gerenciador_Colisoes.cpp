@@ -21,7 +21,8 @@ void Gerenciador_Colisoes::gerenciar() {
 
     colidirLimitesMapa(static_cast<Entidades::Entidade *>(jogador));
 
-    for (IteratorObjetos itObst = LOs.begin(); itObst != LOs.end(); itObst++) {
+    for (IteratorObstaculos itObst = LOs.begin(); itObst != LOs.end();
+         itObst++) {
       sf::Vector2f colisao = calculaColisao(jogador, *itObst);
 
       if (checaColisao(colisao)) {
@@ -41,7 +42,8 @@ void Gerenciador_Colisoes::gerenciar() {
   for (IteratorInimigos itInim = LIs.begin(); itInim != LIs.end(); itInim++) {
     colidirLimitesMapa(static_cast<Entidades::Entidade *>(*itInim));
 
-    for (IteratorObjetos itObst = LOs.begin(); itObst != LOs.end(); itObst++) {
+    for (IteratorObstaculos itObst = LOs.begin(); itObst != LOs.end();
+         itObst++) {
       sf::Vector2f colisao = calculaColisao(*itInim, *itObst);
 
       if (checaColisao(colisao)) {
@@ -50,7 +52,7 @@ void Gerenciador_Colisoes::gerenciar() {
     }
   }
 
-  for (IteratorObjetos it = LOs.begin(); it != LOs.end(); it++) {
+  for (IteratorObstaculos it = LOs.begin(); it != LOs.end(); it++) {
     colidirLimitesMapa(static_cast<Entidades::Entidade *>(*it));
   }
 

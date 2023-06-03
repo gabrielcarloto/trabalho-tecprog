@@ -35,7 +35,7 @@ private:
 
   void removerEntidades();
 
-  using IteratorObjetos =
+  using IteratorObstaculos =
       std::list<Entidades::Obstaculos::Obstaculo *>::iterator;
 
   using IteratorInimigos =
