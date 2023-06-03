@@ -7,7 +7,7 @@
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
-  Jogador(const char *, const sf::Vector2f = {0, 0}, float = 0);
+  Jogador(const char *, sf::Vector2f = {0, 0}, float = 0);
   Jogador(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0);
 
   void executar() override;
