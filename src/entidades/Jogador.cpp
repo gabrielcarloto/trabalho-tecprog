@@ -1,4 +1,6 @@
 #include "Jogador.h"
+#include "SFML/System/Sleep.hpp"
+#include "SFML/System/Time.hpp"
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <stdexcept>
@@ -69,10 +71,12 @@ void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
   if (intersecao.x > intersecao.y) {
     x += intersecao.x * (posInim.x < x ? -1.f : 1.f);
     velFinal.x = 0;
+    neutralizarse();
   } else {
     velFinal.y = 0;
     if (posInim.y < y) {
       y -= intersecao.y;
+      neutralizarse();
     } else {
       y += intersecao.y;
       pular(static_cast<float>(TAMANHO_TILE) / 2);
@@ -89,5 +93,14 @@ void Jogador::operator++() {
 
   if (pontos % 100)
     num_vidas++;
+}
+
+void Jogador::neutralizarse() {
+  num_vidas--;
+
+  // if (num_vidas <= 0)
+  //   gameOver();
+
+  setPosicao(posInicial);
 }
 } // namespace Jogo::Entidades::Personagens

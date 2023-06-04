@@ -20,5 +20,6 @@ protected:
   float x, y;
   float velocidade;
   sf::Vector2f velFinal;
+  sf::Vector2f posInicial;
 };
 } // namespace Jogo::Entidades

@@ -5,17 +5,17 @@ namespace Jogo::Entidades {
 // Entidade::Entidade() ;
 // Entidade::~Entidade() = default;
 void Entidade::setPosicao(const float posX, const float posY) {
-  x = posX;
-  y = posY;
-
-  pFig->setPosition(x, y);
+  setPosicao({posX, posY});
 }
 
 void Entidade::setPosicao(const sf::Vector2<float> &pos) {
   x = pos.x;
   y = pos.y;
 
-  pFig->setPosition(x, y);
+  if (posInicial.x == 0 && posInicial.y == 0)
+    posInicial = pos;
+
+  pFig->setPosition(pos);
 }
 
 void Entidade::mover() {
