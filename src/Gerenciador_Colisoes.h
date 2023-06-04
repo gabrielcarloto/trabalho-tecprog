@@ -37,7 +37,7 @@ private:
   void colidirLimitesMapa(Entidades::Entidade *);
   bool checaColisao(sf::Vector2f);
 
-  void removerEntidades();
+  void removerEntidadesPendentes();
 
   using IteratorObstaculos =
       std::list<Entidades::Obstaculos::Obstaculo *>::iterator;

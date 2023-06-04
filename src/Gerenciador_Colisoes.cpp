@@ -87,7 +87,7 @@ void Gerenciador_Colisoes::gerenciar() {
   // NOTE: (gabrielcarloto) quando o inimigo morria e era deletado, ocorria uma
   // invalidação de iteradores, crashando o programa. Agora ele é marcado para
   // ser removido após os loops.
-  removerEntidades();
+  removerEntidadesPendentes();
 }
 
 void Gerenciador_Colisoes::colidirLimitesMapa(Entidades::Entidade *pEnt) {
@@ -165,7 +165,7 @@ bool Gerenciador_Colisoes::checaColisao(sf::Vector2f col) {
   return col.x < 0 && col.y < 0;
 }
 
-void Gerenciador_Colisoes::removerEntidades() {
+void Gerenciador_Colisoes::removerEntidadesPendentes() {
   for (auto itInimigos = LIs.begin(); itInimigos != LIs.end();) {
     if ((*itInimigos)->getDeveSerRemovido()) {
       delete *itInimigos;
