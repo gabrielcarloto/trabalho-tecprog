@@ -2,6 +2,7 @@
 #include "SFML/System/Sleep.hpp"
 #include "SFML/System/Time.hpp"
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 #include <cmath>
 #include <stdexcept>
 #include <string>
@@ -79,21 +80,29 @@ void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
       neutralizarse();
     } else {
       y += intersecao.y;
-      pular(static_cast<float>(TAMANHO_TILE) / 2);
+      pular(static_cast<float>(TAMANHO_TILE) *
+            static_cast<float>(std::fmax(
+                static_cast<float>(inim->getNivelMaldade()) / 10, 1)) /
+            2);
       inim->operator--();
-      operator++();
+
+      if (inim->getDeveSerRemovido()) {
+        operator*(inim->getNivelMaldade());
+      }
     }
   }
 
   pFig->setPosition(x, y);
 }
 
-void Jogador::operator++() {
-  pontos += 10;
+void Jogador::operator*(int fator) {
+  pontos += 10 * fator;
 
   if (pontos % 100)
     num_vidas++;
 }
+
+void Jogador::operator++() { operator*(1); }
 
 void Jogador::neutralizarse() {
   num_vidas--;

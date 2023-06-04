@@ -24,5 +24,6 @@ private:
   void colidirInimigo(Inimigo *, sf::Vector2f);
 
   void operator++();
+  void operator*(int);
 };
 } // namespace Jogo::Entidades::Personagens

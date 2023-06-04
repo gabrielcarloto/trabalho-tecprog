@@ -10,6 +10,7 @@ namespace Jogo::Entidades::Personagens {
 Inimigo::Inimigo(const char *path, int maldade, sf::Vector2f pos, float velo)
     : Personagem(Ente::ID::INIMIGO, path, pos, velo), nivelMaldade(maldade) {
   aterrarJogadores();
+  num_vidas = maldade / 10;
 }
 
 Inimigo::Inimigo(const char *path, sf::IntRect lim, int maldade,
@@ -17,6 +18,7 @@ Inimigo::Inimigo(const char *path, sf::IntRect lim, int maldade,
     : Personagem(Ente::ID::INIMIGO, path, lim, pos, velo),
       nivelMaldade(maldade) {
   aterrarJogadores();
+  num_vidas = maldade / 10;
 }
 
 Inimigo::~Inimigo() { aterrarJogadores(); }
@@ -117,4 +119,6 @@ void Inimigo::movimentar() {
 
   moverAleatoriamente();
 }
+
+int Inimigo::getNivelMaldade() const { return nivelMaldade; }
 } // namespace Jogo::Entidades::Personagens

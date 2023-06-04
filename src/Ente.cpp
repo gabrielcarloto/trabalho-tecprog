@@ -35,6 +35,7 @@ void Ente::inicializaSprite(const char *caminhoTextura,
                             const sf::Vector2f &pos) {
   criaSprite(caminhoTextura);
   pFig->setPosition(pos);
+  pFig->setScale(2, 2);
 }
 
 void Ente::setEscalaFigura(float fatorX, float fatorY) {
@@ -46,5 +47,6 @@ void Ente::inicializaSprite(const char *caminhoTextura,
                             const sf::Vector2f &pos) {
   criaSprite(caminhoTextura, &limite);
   pFig->setPosition(pos);
+  pFig->setScale(2, 2);
 }
 } // namespace Jogo

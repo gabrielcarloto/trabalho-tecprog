@@ -78,11 +78,6 @@ void Fase::carregarMapa(const char *path) {
           break;
         }
 
-        // TODO: mover isso para o ente se possível
-        // também provavelmente precisamos arrumar o posicionamento da entidade
-        // criada.
-        entidade->setEscalaFigura(2, 2);
-
         float iCol = static_cast<float>(indiceColuna),
               iLin = static_cast<float>(indiceLinha),
               tamTile = static_cast<float>(TAMANHO_TILE),

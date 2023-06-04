@@ -24,6 +24,7 @@ public:
   void operator--();
 
   bool getDeveSerRemovido() const;
+  int getNivelMaldade() const;
 
 protected:
   int numJogadores = 0;

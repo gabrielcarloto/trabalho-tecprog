@@ -1,23 +1,37 @@
 #include "Inim_Dificil.h"
 #include "../fases/Fase.h"
 
-constexpr int MALDADE_PADRAO_DIFICIL = 10;
+constexpr int MALDADE_PADRAO_DIFICIL = 10, MALDADE_PADRAO_DIFICIL_BOSS = 30;
 constexpr float DISTANCIA_X_PERSEGUIR_JOGADOR = TAMANHO_TILE * 5,
                 DISTANCIA_Y_PERSEGUIR_JOGADOR =
                     static_cast<float>(TAMANHO_TILE) * 1.5f;
 
 namespace Jogo::Entidades::Personagens {
-Inim_Dificil::Inim_Dificil(const char *path, sf::Vector2f pos, float velo)
-    : Inimigo(path, MALDADE_PADRAO_DIFICIL, pos, velo) {
-  distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
-  distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
+Inim_Dificil::Inim_Dificil(const char *path, bool boss, sf::Vector2f pos,
+                           float velo)
+    : Inimigo(path, boss ? MALDADE_PADRAO_DIFICIL_BOSS : MALDADE_PADRAO_DIFICIL,
+              pos, velo) {
+  construtora(boss);
 }
 
-Inim_Dificil::Inim_Dificil(const char *path, sf::IntRect lim, sf::Vector2f pos,
-                           float velo)
-    : Inimigo(path, lim, MALDADE_PADRAO_DIFICIL, pos, velo) {
+Inim_Dificil::Inim_Dificil(const char *path, sf::IntRect lim, bool boss,
+                           sf::Vector2f pos, float velo)
+    : Inimigo(path, lim,
+              boss ? MALDADE_PADRAO_DIFICIL_BOSS : MALDADE_PADRAO_DIFICIL, pos,
+              velo) {
+  construtora(boss);
+}
+
+void Inim_Dificil::construtora(bool boss) {
   distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
   distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
+
+  if (boss) {
+    setEscalaFigura(4, 4);
+
+    distanciaPerseguirJogadorX *= 2;
+    distanciaPerseguirJogadorY *= 2;
+  }
 }
 
 Inim_Dificil::~Inim_Dificil() {
