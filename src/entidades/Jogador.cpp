@@ -77,10 +77,17 @@ void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
       y += intersecao.y;
       pular(static_cast<float>(TAMANHO_TILE) / 2);
       inim->operator--();
+      operator++();
     }
   }
 
   pFig->setPosition(x, y);
 }
 
+void Jogador::operator++() {
+  pontos += 10;
+
+  if (pontos % 100)
+    num_vidas++;
+}
 } // namespace Jogo::Entidades::Personagens

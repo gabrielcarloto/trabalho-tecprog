@@ -17,7 +17,11 @@ protected:
   void movimentar() override;
 
 private:
+  unsigned int pontos = 0;
+
   void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);
   void colidirInimigo(Inimigo *, sf::Vector2f);
+
+  void operator++();
 };
 } // namespace Jogo::Entidades::Personagens
