@@ -11,9 +11,16 @@
 #include <utility>
 
 namespace Jogo::Fases {
-Fase::Fase() : Ente(Ente::ID::FASE) { carregarBackground(); }
+Fase::Fase() : Ente(Ente::ID::FASE) {
+  carregarBackground();
+  listaJogadores.reserve(2);
+}
 
 Fase::~Fase() {
+  for (size_t i = 0; i < listaJogadores.size(); i++) {
+    listaEntidades.remove(listaJogadores[i]);
+  }
+
   for (auto entidade : listaEntidades) {
     delete entidade;
     entidade = nullptr;
@@ -41,58 +48,33 @@ void Fase::carregarMapa(const char *path) {
     throw std::runtime_error("Fase::carregarMapa -> `path` não pode ser nulo");
 
   unsigned int indiceLinha = 0, indiceColuna = 0;
-  Uteis::lerArquivo(path, [&indiceLinha, &indiceColuna,
-                           this](std::string &linha) {
-    indiceColuna = 0;
+  Uteis::lerArquivo(
+      path, [&indiceLinha, &indiceColuna, this](std::string &linha) {
+        indiceColuna = 0;
 
-    for (const char caractere : linha) {
-      if (caractere == '.' || caractere == '\r' || caractere == '\n') {
-        indiceColuna++;
-        continue;
-      }
+        for (const char caractere : linha) {
+          if (caractere == '.' || caractere == '\r' || caractere == '\n') {
+            indiceColuna++;
+            continue;
+          }
 
-      auto it = mapaEntidades.find(caractere);
+          if (caractere == CHAR_JOGADOR) {
+            posicionarJogadores(indiceColuna, indiceLinha);
+            indiceColuna++;
+            continue;
+          }
 
-      if (it != mapaEntidades.end()) {
-        Entidades::Entidade *entidade = it->second();
+          auto it = mapaEntidades.find(caractere);
 
-        listaEntidades.push_back(entidade);
+          if (it != mapaEntidades.end()) {
+            posicionarEntidade(indiceColuna, indiceLinha, (*it).second());
+          }
 
-        switch (entidade->getId()) {
-        case OBSTACULO:
-          gerenciadorCol.incluirObstaculo(
-              static_cast<Entidades::Obstaculos::Obstaculo *>(entidade));
-          break;
-        case JOGADOR:
-          gerenciadorCol.addJogador(
-              static_cast<Entidades::Personagens::Jogador *>(entidade));
-          break;
-        case Ente::ID::INIMIGO: {
-          auto inim = static_cast<Entidades::Personagens::Inimigo *>(entidade);
-
-          gerenciadorCol.incluirInimigo(inim);
-          inim->setFase(this);
-          break;
-        }
-        default:
-          break;
+          indiceColuna++;
         }
 
-        float iCol = static_cast<float>(indiceColuna),
-              iLin = static_cast<float>(indiceLinha),
-              tamTile = static_cast<float>(TAMANHO_TILE),
-              alturaFig = entidade->getFigura().getGlobalBounds().height,
-              larguraFig = entidade->getFigura().getGlobalBounds().width;
-
-        entidade->setPosicao(
-            {iCol * tamTile - larguraFig, iLin * tamTile - alturaFig});
-      }
-
-      indiceColuna++;
-    }
-
-    indiceLinha++;
-  });
+        indiceLinha++;
+      });
 
   gerenciadorCol.setLimitesMapa(
       static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
@@ -100,12 +82,6 @@ void Fase::carregarMapa(const char *path) {
 }
 
 void Fase::adicionarEntidadesDefault() {
-  mapaEntidades['J'] = []() -> Entidades::Entidade * {
-    return new Entidades::Personagens::Jogador(
-        CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(6, 10, 18, 22), {0, 0},
-        130);
-  };
-
   mapaEntidades['C'] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Obst_Facil(CAMINHO_IMAGENS "/floor.png");
   };
@@ -118,5 +94,71 @@ void Fase::removerEntidade(Entidades::Entidade *pEnt) {
 void Fase::adicionarEntidade(Entidades::Projetil *pProjetil) {
   listaEntidades.push_back(static_cast<Entidades::Entidade *>(pProjetil));
   gerenciadorCol.incluirProjetil(pProjetil);
+}
+
+void Fase::adicionarJogador(Entidades::Personagens::Jogador *pJogador) {
+  if (listaJogadores.size() >= 2)
+    throw std::runtime_error(
+        "Fase::adicionarJogador -> Numero maximo de jogadores atingido");
+
+  listaJogadores.push_back(pJogador);
+  listaEntidades.push_back(pJogador);
+}
+
+void Fase::posicionarJogadores(unsigned int indiceColuna,
+                               unsigned int indiceLinha) {
+  if (listaJogadores.size() == 0)
+    throw std::runtime_error(
+        "Fase::posicionarJogadores -> Nenhum jogador adicionado");
+
+  Entidades::Personagens::Jogador *jogador1 = listaJogadores[0];
+
+  sf::FloatRect globalBounds = jogador1->getFigura().getGlobalBounds();
+
+  float iCol = static_cast<float>(indiceColuna),
+        iLin = static_cast<float>(indiceLinha),
+        tamTile = static_cast<float>(TAMANHO_TILE),
+        alturaFig = globalBounds.height, larguraFig = globalBounds.width,
+        posX = iCol * tamTile - larguraFig, posY = iLin * tamTile - alturaFig;
+
+  jogador1->setPosicao({posX, posY});
+  gerenciadorCol.addJogador(jogador1);
+
+  if (listaJogadores.size() == 2) {
+    listaJogadores[1]->setPosicao({posX + TAMANHO_TILE, posY});
+    gerenciadorCol.addJogador(listaJogadores[1]);
+  }
+}
+
+void Fase::posicionarEntidade(unsigned int indiceColuna,
+                              unsigned int indiceLinha,
+                              Entidades::Entidade *entidade) {
+  listaEntidades.push_back(entidade);
+
+  switch (entidade->getId()) {
+  case OBSTACULO:
+    gerenciadorCol.incluirObstaculo(
+        static_cast<Entidades::Obstaculos::Obstaculo *>(entidade));
+    break;
+  case Ente::ID::INIMIGO: {
+    auto inim = static_cast<Entidades::Personagens::Inimigo *>(entidade);
+
+    gerenciadorCol.incluirInimigo(inim);
+    inim->setFase(this);
+    break;
+  }
+  default:
+    break;
+  }
+
+  sf::FloatRect globalBounds = entidade->getFigura().getGlobalBounds();
+
+  float iCol = static_cast<float>(indiceColuna),
+        iLin = static_cast<float>(indiceLinha),
+        tamTile = static_cast<float>(TAMANHO_TILE),
+        alturaFig = globalBounds.height, larguraFig = globalBounds.width;
+
+  entidade->setPosicao(
+      {iCol * tamTile - larguraFig, iLin * tamTile - alturaFig});
 }
 } // namespace Jogo::Fases

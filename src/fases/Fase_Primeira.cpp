@@ -4,9 +4,9 @@
 #include "../entidades/Obst_Facil.h"
 
 namespace Jogo::Fases {
-Fase_Primeira::Fase_Primeira() { inicializaMapa(); }
+Fase_Primeira::Fase_Primeira() = default;
 
-void Fase_Primeira::inicializaMapa() {
+void Fase_Primeira::inicializarMapa() {
   adicionarEntidadesDefault();
 
   mapaEntidades['1'] = []() -> Entidades::Entidade * {

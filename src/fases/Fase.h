@@ -7,6 +7,7 @@
 #include <functional>
 #include <list>
 #include <map>
+#include <vector>
 
 #define CAMINHO_DATA "./data"
 #define CAMINHO_FASES CAMINHO_DATA "/fases"
@@ -26,16 +27,21 @@ public:
 
   void removerEntidade(Entidades::Entidade *);
   void adicionarEntidade(Entidades::Projetil *);
+  void adicionarJogador(Entidades::Personagens::Jogador *);
+  virtual void inicializarMapa() = 0;
 
 protected:
   std::list<Entidades::Entidade *> listaEntidades;
   std::map<const char, std::function<Entidades::Entidade *()>> mapaEntidades;
+  std::vector<Entidades::Personagens::Jogador *> listaJogadores;
 
   void carregarMapa(const char *);
   void adicionarEntidadesDefault();
 
 private:
   void carregarBackground();
+  void posicionarJogadores(unsigned int, unsigned int);
+  void posicionarEntidade(unsigned int, unsigned int, Entidades::Entidade *);
 
   Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
 };

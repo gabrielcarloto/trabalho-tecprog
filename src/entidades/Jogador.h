@@ -4,6 +4,8 @@
 #include "Obstaculo.h"
 #include "Personagem.h"
 
+constexpr char CHAR_JOGADOR = 'J';
+
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
@@ -12,12 +14,14 @@ public:
 
   void executar() override;
   void colidir(Entidade *, sf::Vector2f) override;
+  void setNome(const std::string &);
   void neutralizarse();
 
 protected:
   void movimentar() override;
 
 private:
+  std::string nome;
   unsigned int pontos = 0;
 
   void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);

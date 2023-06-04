@@ -7,7 +7,6 @@ public:
   Fase_Primeira();
   ~Fase_Primeira() = default;
 
-private:
-  void inicializaMapa();
+  void inicializarMapa() override;
 };
 } // namespace Jogo::Fases

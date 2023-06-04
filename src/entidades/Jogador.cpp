@@ -112,4 +112,6 @@ void Jogador::neutralizarse() {
 
   setPosicao(posInicial);
 }
+
+void Jogador::setNome(const std::string &n) { nome = std::move(n); }
 } // namespace Jogo::Entidades::Personagens

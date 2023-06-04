@@ -1,3 +1,9 @@
 .cache/
 build/
 compile_commands.json
+.vs/
+Debug/
+x64/
+*.pdb
+*vcxproj*
+*.sln
