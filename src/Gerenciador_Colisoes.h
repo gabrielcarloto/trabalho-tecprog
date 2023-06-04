@@ -2,6 +2,7 @@
 #include "entidades/Inimigo.h"
 #include "entidades/Jogador.h"
 #include "entidades/Obstaculo.h"
+#include "entidades/Projetil.h"
 #include <array>
 #include <list>
 #include <vector>
@@ -19,12 +20,15 @@ public:
   void incluirInimigo(Entidades::Personagens::Inimigo *);
   void removerInimigo(Entidades::Personagens::Inimigo *);
   void addJogador(Entidades::Personagens::Jogador *);
+  void incluirProjetil(Entidades::Projetil *);
+  void removerProjetil(Entidades::Projetil *);
   void setLimitesMapa(float, float);
 
 private:
   std::array<Entidades::Personagens::Jogador *, 2> LJs;
   std::vector<Entidades::Personagens::Inimigo *> LIs;
   std::list<Entidades::Obstaculos::Obstaculo *> LOs;
+  std::vector<Entidades::Projetil *> LPs;
 
   unsigned int numJogadores = 0;
   float limiteMapaX = 0, limiteMapaY = 0;
@@ -40,5 +44,7 @@ private:
 
   using IteratorInimigos =
       std::vector<Entidades::Personagens::Inimigo *>::iterator;
+
+  using IteratorProjeteis = std::vector<Entidades::Projetil *>::iterator;
 };
 } // namespace Jogo::Gerenciadores

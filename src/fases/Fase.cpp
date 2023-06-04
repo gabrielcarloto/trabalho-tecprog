@@ -119,4 +119,9 @@ void Fase::adicionarEntidadesDefault() {
 void Fase::removerEntidade(Entidades::Entidade *pEnt) {
   listaEntidades.remove(pEnt);
 }
+
+void Fase::adicionarEntidade(Entidades::Projetil *pProjetil) {
+  listaEntidades.push_back(static_cast<Entidades::Entidade *>(pProjetil));
+  gerenciadorCol.incluirProjetil(pProjetil);
+}
 } // namespace Jogo::Fases

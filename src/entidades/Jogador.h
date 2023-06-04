@@ -12,6 +12,7 @@ public:
 
   void executar() override;
   void colidir(Entidade *, sf::Vector2f) override;
+  void neutralizarse();
 
 protected:
   void movimentar() override;
@@ -23,6 +24,5 @@ private:
   void colidirInimigo(Inimigo *, sf::Vector2f);
 
   void operator++();
-  void neutralizarse();
 };
 } // namespace Jogo::Entidades::Personagens

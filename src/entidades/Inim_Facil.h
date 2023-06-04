@@ -10,16 +10,9 @@ public:
   Inim_Facil(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0);
 
   void executar() override;
-  void tomarDano() override;
-
-  void colidir(Entidade *, sf::Vector2f) override;
 
 protected:
-  void movimentar() override;
-
-private:
-  std::pair<Jogador *, float> jogadorMaisProximo();
-  void moverAleatoriamente();
-  void perseguirJogador(sf::Vector2f);
+  void moverAleatoriamente() override;
+  void perseguirJogador(sf::Vector2f) override;
 };
 } // namespace Jogo::Entidades::Personagens

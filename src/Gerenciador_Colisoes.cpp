@@ -49,6 +49,15 @@ void Gerenciador_Colisoes::gerenciar() {
         jogador->colidir(*itInim, colisao);
       }
     }
+
+    for (IteratorProjeteis itProj = LPs.begin(); itProj != LPs.end();
+         itProj++) {
+      sf::Vector2f colisao = calculaColisao(jogador, *itProj);
+
+      if (checaColisao(colisao)) {
+        (*itProj)->colidir(jogador);
+      }
+    }
   }
 
   for (IteratorInimigos itInim = LIs.begin(); itInim != LIs.end(); itInim++) {
@@ -60,6 +69,17 @@ void Gerenciador_Colisoes::gerenciar() {
 
       if (checaColisao(colisao)) {
         (*itInim)->colidir(*itObst, colisao);
+      }
+    }
+  }
+
+  for (IteratorProjeteis itProj = LPs.begin(); itProj != LPs.end(); itProj++) {
+    for (IteratorObstaculos itObst = LOs.begin(); itObst != LOs.end();
+         itObst++) {
+      sf::Vector2f colisao = calculaColisao(*itProj, *itObst);
+
+      if (checaColisao(colisao)) {
+        (*itProj)->colidir(*itObst);
       }
     }
   }
@@ -146,13 +166,21 @@ bool Gerenciador_Colisoes::checaColisao(sf::Vector2f col) {
 }
 
 void Gerenciador_Colisoes::removerEntidades() {
-  // por enquanto isso é necessário apenas com o inimigo
-  for (auto it = LIs.begin(); it != LIs.end();) {
-    if ((*it)->getDeveSerRemovido()) {
-      delete *it;
-      it = LIs.erase(it);
+  for (auto itInimigos = LIs.begin(); itInimigos != LIs.end();) {
+    if ((*itInimigos)->getDeveSerRemovido()) {
+      delete *itInimigos;
+      itInimigos = LIs.erase(itInimigos);
     } else {
-      it++;
+      itInimigos++;
+    }
+  }
+
+  for (auto itProjeteis = LPs.begin(); itProjeteis != LPs.end();) {
+    if ((*itProjeteis)->getDeveSerRemovido()) {
+      delete *itProjeteis;
+      itProjeteis = LPs.erase(itProjeteis);
+    } else {
+      itProjeteis++;
     }
   }
 }
@@ -160,5 +188,9 @@ void Gerenciador_Colisoes::removerEntidades() {
 void Gerenciador_Colisoes::setLimitesMapa(float limX, float limY) {
   limiteMapaX = limX;
   limiteMapaY = limY;
+}
+
+void Gerenciador_Colisoes::incluirProjetil(Entidades::Projetil *pProjetil) {
+  LPs.push_back(pProjetil);
 }
 } // namespace Jogo::Gerenciadores

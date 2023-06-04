@@ -14,77 +14,33 @@ constexpr float DISTANCIA_X_PERSEGUIR_JOGADOR = TAMANHO_TILE * 3,
 
 namespace Jogo::Entidades::Personagens {
 Inim_Facil::Inim_Facil(const char *path, sf::Vector2f pos, float velo)
-    : Inimigo(path, MALDADE_PADRAO_FACIL, pos, velo) {}
+    : Inimigo(path, MALDADE_PADRAO_FACIL, pos, velo) {
+  distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
+  distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
+}
 
 Inim_Facil::Inim_Facil(const char *path, sf::IntRect lim, sf::Vector2f pos,
                        float velo)
-    : Inimigo(path, lim, MALDADE_PADRAO_FACIL, pos, velo) {}
+    : Inimigo(path, lim, MALDADE_PADRAO_FACIL, pos, velo) {
+  distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
+  distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
+}
 
 void Inim_Facil::executar() { mover(); }
 
-void Inim_Facil::movimentar() {
-  auto jogadorProximo = jogadorMaisProximo();
-  auto posJogadorProximo = jogadorProximo.first->getPosicao();
-
-  if (std::abs(posJogadorProximo.y - y) <= DISTANCIA_Y_PERSEGUIR_JOGADOR &&
-      jogadorProximo.second <= DISTANCIA_X_PERSEGUIR_JOGADOR) {
-    return perseguirJogador(posJogadorProximo);
-  }
-
-  moverAleatoriamente();
-}
-
 void Inim_Facil::perseguirJogador(sf::Vector2f posJogador) {
-  float direcao = posJogador.x > x ? 1 : -1;
-  velFinal.x += velocidade * direcao;
+  Inimigo::perseguirJogador(posJogador);
 
-  // TODO: talvez muito viajado isso mas eh engraçado
+  // NOTE: talvez muito viajado isso mas eh engraçado
   if (podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
 }
 
 void Inim_Facil::moverAleatoriamente() {
-  float direcaoAleatoria = Uteis::chance(5) ? 1 : -1;
-  float direcao = direcaoAleatoria * (velFinal.x < 0 ? 1.f : -1.f);
-  velFinal.x += velocidade / 2 * direcao;
+  Inimigo::moverAleatoriamente();
 
   if (podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
 }
 
-std::pair<Jogador *, float> Inim_Facil::jogadorMaisProximo() {
-  auto distJogadores = distanciaJogadores();
-
-  if (!jogadores[1] || distJogadores.first < distJogadores.second)
-    return std::make_pair(jogadores[0], distJogadores.first);
-
-  return std::make_pair(jogadores[1], distJogadores.second);
-}
-
-void Inim_Facil::tomarDano() {
-  num_vidas--;
-
-  if (num_vidas <= 0)
-    neutralizarse();
-}
-
-void Inim_Facil::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
-  auto posObst = pEnt->getPosicao();
-  // TODO: lidar com obstáculos danosos
-
-  if (intersecao.x > intersecao.y) {
-    x += intersecao.x * (posObst.x < x ? -1.f : 1.f);
-    velFinal.x = 0;
-  } else {
-    velFinal.y = 0;
-    if (posObst.y < y) {
-      y -= intersecao.y;
-    } else {
-      y += intersecao.y;
-      podePular = true;
-    }
-  }
-
-  pFig->setPosition(x, y);
-}
 } // namespace Jogo::Entidades::Personagens

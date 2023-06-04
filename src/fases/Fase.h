@@ -2,6 +2,7 @@
 #include "../Ente.h"
 #include "../Gerenciador_Colisoes.h"
 #include "../entidades/Entidade.h"
+#include "../entidades/Projetil.h"
 #include "../uteis.h"
 #include <functional>
 #include <list>
@@ -24,6 +25,7 @@ public:
   // void criarObstMedios();
 
   void removerEntidade(Entidades::Entidade *);
+  void adicionarEntidade(Entidades::Projetil *);
 
 protected:
   std::list<Entidades::Entidade *> listaEntidades;

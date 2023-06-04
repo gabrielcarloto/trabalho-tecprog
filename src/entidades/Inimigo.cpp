@@ -59,4 +59,62 @@ std::pair<float, float> Inimigo::distanciaJogadores() {
 }
 
 bool Inimigo::getDeveSerRemovido() const { return deveSerRemovido; }
+
+void Inimigo::tomarDano() {
+  num_vidas--;
+
+  if (num_vidas <= 0)
+    neutralizarse();
+}
+
+void Inimigo::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
+  auto posObst = pEnt->getPosicao();
+
+  if (intersecao.x > intersecao.y) {
+    x += intersecao.x * (posObst.x < x ? -1.f : 1.f);
+    velFinal.x = 0;
+  } else {
+    velFinal.y = 0;
+    if (posObst.y < y) {
+      y -= intersecao.y;
+    } else {
+      y += intersecao.y;
+      podePular = true;
+    }
+  }
+
+  pFig->setPosition(x, y);
+}
+
+std::pair<Jogador *, float> Inimigo::jogadorMaisProximo() {
+  auto distJogadores = distanciaJogadores();
+
+  if (!jogadores[1] || distJogadores.first < distJogadores.second)
+    return std::make_pair(jogadores[0], distJogadores.first);
+
+  return std::make_pair(jogadores[1], distJogadores.second);
+}
+
+void Inimigo::perseguirJogador(sf::Vector2f posJogador) {
+  float direcao = posJogador.x > x ? 1 : -1;
+  velFinal.x += velocidade * direcao;
+}
+
+void Inimigo::moverAleatoriamente() {
+  float direcaoAleatoria = Uteis::chance(5) ? 1 : -1;
+  float direcao = direcaoAleatoria * (velFinal.x < 0 ? 1.f : -1.f);
+  velFinal.x += velocidade / 2 * direcao;
+}
+
+void Inimigo::movimentar() {
+  auto jogadorProximo = jogadorMaisProximo();
+  auto posJogadorProximo = jogadorProximo.first->getPosicao();
+
+  if (std::abs(posJogadorProximo.y - y) <= distanciaPerseguirJogadorY &&
+      jogadorProximo.second <= distanciaPerseguirJogadorX) {
+    return perseguirJogador(posJogadorProximo);
+  }
+
+  moverAleatoriamente();
+}
 } // namespace Jogo::Entidades::Personagens
