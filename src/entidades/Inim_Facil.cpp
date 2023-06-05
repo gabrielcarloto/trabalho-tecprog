@@ -13,15 +13,17 @@ constexpr float DISTANCIA_X_PERSEGUIR_JOGADOR = TAMANHO_TILE * 3,
                     static_cast<float>(TAMANHO_TILE) / 2;
 
 namespace Jogo::Entidades::Personagens {
-Inim_Facil::Inim_Facil(const char *path, sf::Vector2f pos, float velo)
-    : Inimigo(path, MALDADE_PADRAO_FACIL, pos, velo) {
+Inim_Facil::Inim_Facil(const char *path, sf::Vector2f pos, float velo,
+                       bool pula)
+    : Inimigo(path, MALDADE_PADRAO_FACIL, pos, velo), pulaAleatoriamente(pula) {
   distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
   distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
 }
 
 Inim_Facil::Inim_Facil(const char *path, sf::IntRect lim, sf::Vector2f pos,
-                       float velo)
-    : Inimigo(path, lim, MALDADE_PADRAO_FACIL, pos, velo) {
+                       float velo, bool pula)
+    : Inimigo(path, lim, MALDADE_PADRAO_FACIL, pos, velo),
+      pulaAleatoriamente(pula) {
   distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
   distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
 }
@@ -31,15 +33,14 @@ void Inim_Facil::executar() { mover(); }
 void Inim_Facil::perseguirJogador(sf::Vector2f posJogador) {
   Inimigo::perseguirJogador(posJogador);
 
-  // NOTE: talvez muito viajado isso mas eh engraçado
-  if (podePular && Uteis::chance(1))
+  if (pulaAleatoriamente && podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
 }
 
 void Inim_Facil::moverAleatoriamente() {
   Inimigo::moverAleatoriamente();
 
-  if (podePular && Uteis::chance(1))
+  if (pulaAleatoriamente && podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
 }
 
