@@ -1,7 +1,8 @@
 #include "Gamba.h"
 #include "../uteis.h"
 
-constexpr int MALDADE_PADRAO_MEDIO = 20, VELOCIDADE_BUFF = 50;
+constexpr int MALDADE_PADRAO_MEDIO = 20, BUFF_VELOCIDADE = 50,
+              VELOCIDADE_PADRAO = 70;
 constexpr float DISTANCIA_X_PERSEGUIR_JOGADOR = TAMANHO_TILE * 5,
                 DISTANCIA_Y_PERSEGUIR_JOGADOR =
                     static_cast<float>(TAMANHO_TILE) / 2;
@@ -36,7 +37,7 @@ float Gamba::perseguirJogador(sf::Vector2f posJogador) {
 void Gamba::ativarBuffVelocidade() {
   buffVelocidadeAtivo = true;
   velocidadeAntesDoBuff = velocidade;
-  velocidade += static_cast<float>(rand() % VELOCIDADE_BUFF);
+  velocidade += static_cast<float>(rand() % BUFF_VELOCIDADE);
 }
 
 void Gamba::atualizarBuffVelocidade() {
@@ -48,6 +49,7 @@ void Gamba::atualizarBuffVelocidade() {
 
 void Gamba::desativarBuffVelocidade() {
   buffVelocidadeAtivo = false;
-  velocidade = velocidadeAntesDoBuff;
+  velocidade =
+      velocidadeAntesDoBuff > 0 ? velocidadeAntesDoBuff : VELOCIDADE_PADRAO;
 }
 } // namespace Jogo::Entidades::Personagens
