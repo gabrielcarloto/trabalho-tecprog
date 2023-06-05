@@ -60,15 +60,25 @@ void Gerenciador_Colisoes::gerenciar() {
     }
   }
 
-  for (IteratorInimigos itInim = LIs.begin(); itInim != LIs.end(); itInim++) {
-    colidirLimitesMapa(static_cast<Entidades::Entidade *>(*itInim));
+  for (size_t i = 0; i < LIs.size(); i++) {
+    Entidades::Personagens::Inimigo *inim = LIs[i];
+    colidirLimitesMapa(static_cast<Entidades::Entidade *>(inim));
 
     for (IteratorObstaculos itObst = LOs.begin(); itObst != LOs.end();
          itObst++) {
-      sf::Vector2f colisao = calculaColisao(*itInim, *itObst);
+      sf::Vector2f colisao = calculaColisao(inim, *itObst);
 
       if (checaColisao(colisao)) {
-        (*itInim)->colidir(*itObst, colisao);
+        inim->colidir(*itObst, colisao);
+      }
+    }
+
+    for (size_t j = i + 1; i < LIs.size() - 1 && j < LIs.size(); j++) {
+      Entidades::Personagens::Inimigo *inimJ = LIs[j];
+      sf::Vector2f colisao = calculaColisao(inim, inimJ);
+
+      if (checaColisao(colisao)) {
+        inim->colidir(inimJ, colisao);
       }
     }
   }
