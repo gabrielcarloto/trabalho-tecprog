@@ -5,12 +5,12 @@ constexpr char CHAR_INIM_FACIL = 'F';
 constexpr float FATOR_PULO_PADRAO = 3;
 
 namespace Jogo::Entidades::Personagens {
-class Inim_Facil : public Inimigo {
+class Sapo : public Inimigo {
 public:
-  Inim_Facil(const char *, sf::Vector2f = {0, 0}, float = 0, bool = true,
-             float = FATOR_PULO_PADRAO);
-  Inim_Facil(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0,
-             bool = true, float = FATOR_PULO_PADRAO);
+  Sapo(const char *, sf::Vector2f = {0, 0}, float = 0, bool = true,
+       float = FATOR_PULO_PADRAO);
+  Sapo(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0, bool = true,
+       float = FATOR_PULO_PADRAO);
 
   void executar() override;
 
