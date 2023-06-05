@@ -79,6 +79,17 @@ void Fase::carregarMapa(const char *path) {
   gerenciadorCol.setLimitesMapa(
       static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
       static_cast<float>((indiceLinha - 1) * TAMANHO_TILE));
+
+  for (auto entidade : listaEntidades) {
+    if (entidade->getId() == Ente::ID::INIMIGO) {
+      Entidades::Personagens::Inimigo *inim =
+          static_cast<Entidades::Personagens::Inimigo *>(entidade);
+
+      for (auto jogador : listaJogadores) {
+        inim->incluirJogador(jogador);
+      }
+    }
+  }
 }
 
 void Fase::adicionarEntidadesDefault() {

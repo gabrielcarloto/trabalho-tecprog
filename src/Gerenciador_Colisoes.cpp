@@ -135,11 +135,6 @@ void Gerenciador_Colisoes::addJogador(Entidades::Personagens::Jogador *pj) {
 
   LJs[numJogadores] = pj;
   numJogadores++;
-
-  // TODO: verificar se aqui é um bom lugar para isso
-  for (auto inim : LIs) {
-    inim->incluirJogador(pj);
-  }
 }
 
 sf::Vector2f Gerenciador_Colisoes::calculaColisao(Entidades::Entidade *ent1,

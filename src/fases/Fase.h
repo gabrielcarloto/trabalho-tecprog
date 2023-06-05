@@ -39,10 +39,10 @@ protected:
   void adicionarEntidadesDefault();
 
 private:
+  Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
+
   void carregarBackground();
   void posicionarJogadores(unsigned int, unsigned int);
   void posicionarEntidade(unsigned int, unsigned int, Entidades::Entidade *);
-
-  Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
 };
 } // namespace Jogo::Fases

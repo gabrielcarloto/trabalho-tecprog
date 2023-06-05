@@ -18,7 +18,7 @@ public:
   void deletarProjetil();
 
 protected:
-  void perseguirJogador(sf::Vector2f) override;
+  float perseguirJogador(sf::Vector2f) override;
 
 private:
   Projetil *projetil = nullptr;

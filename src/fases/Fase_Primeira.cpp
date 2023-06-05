@@ -1,4 +1,5 @@
 #include "Fase_Primeira.h"
+#include "../entidades/Gamba.h"
 #include "../entidades/Inim_Dificil.h"
 #include "../entidades/Inim_Facil.h"
 #include "../entidades/Obst_Facil.h"
@@ -17,6 +18,11 @@ void Fase_Primeira::inicializarMapa() {
   mapaEntidades['P'] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Obst_Facil(
         CAMINHO_IMAGENS "/big-crate.png", {}, true, Uteis::chance(10));
+  };
+
+  mapaEntidades[CHAR_GAMBA] = []() -> Entidades::Entidade * {
+    return new Entidades::Personagens::Gamba(
+        CAMINHO_IMAGENS "/oposum.png", sf::IntRect(0, 2, 32, 25), {0, 0}, 70);
   };
 
   mapaEntidades[CHAR_INIM_FACIL] = []() -> Entidades::Entidade * {

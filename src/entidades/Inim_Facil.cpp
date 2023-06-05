@@ -30,11 +30,13 @@ Inim_Facil::Inim_Facil(const char *path, sf::IntRect lim, sf::Vector2f pos,
 
 void Inim_Facil::executar() { mover(); }
 
-void Inim_Facil::perseguirJogador(sf::Vector2f posJogador) {
-  Inimigo::perseguirJogador(posJogador);
+float Inim_Facil::perseguirJogador(sf::Vector2f posJogador) {
+  float direcao = Inimigo::perseguirJogador(posJogador);
 
   if (pulaAleatoriamente && podePular && Uteis::chance(1))
     pular(TAMANHO_TILE * 1.2);
+
+  return direcao;
 }
 
 void Inim_Facil::moverAleatoriamente() {

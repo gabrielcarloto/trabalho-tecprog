@@ -97,9 +97,11 @@ std::pair<Jogador *, float> Inimigo::jogadorMaisProximo() {
   return std::make_pair(jogadores[1], distJogadores.second);
 }
 
-void Inimigo::perseguirJogador(sf::Vector2f posJogador) {
+float Inimigo::perseguirJogador(sf::Vector2f posJogador) {
   float direcao = posJogador.x > x ? 1 : -1;
   velFinal.x += velocidade * direcao;
+
+  return direcao;
 }
 
 void Inimigo::moverAleatoriamente() {
@@ -114,7 +116,8 @@ void Inimigo::movimentar() {
 
   if (std::abs(posJogadorProximo.y - y) <= distanciaPerseguirJogadorY &&
       jogadorProximo.second <= distanciaPerseguirJogadorX) {
-    return perseguirJogador(posJogadorProximo);
+    perseguirJogador(posJogadorProximo);
+    return;
   }
 
   moverAleatoriamente();

@@ -48,16 +48,16 @@ void Inim_Dificil::mover() {
   Personagem::mover();
 }
 
-void Inim_Dificil::perseguirJogador(sf::Vector2f posJogador) {
-  Inimigo::perseguirJogador(posJogador);
-
+float Inim_Dificil::perseguirJogador(sf::Vector2f posJogador) {
+  float direcaoX = Inimigo::perseguirJogador(posJogador);
   float direcaoY = posJogador.y > y ? 1 : -1;
-  float direcaoX = posJogador.x > x ? 1 : -1;
 
   velFinal.y += velocidade / 10 * direcaoY;
 
   if (!projetil)
     arremessar({direcaoX, direcaoY});
+
+  return direcaoX;
 }
 
 void Inim_Dificil::arremessar(sf::Vector2f direcao) {

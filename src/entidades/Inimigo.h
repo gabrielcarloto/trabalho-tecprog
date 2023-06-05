@@ -37,8 +37,10 @@ protected:
   virtual void neutralizarse();
   std::pair<float, float> distanciaJogadores();
   std::pair<Jogador *, float> jogadorMaisProximo();
+
+  // retorna a direção X
+  virtual float perseguirJogador(sf::Vector2f);
   virtual void moverAleatoriamente();
-  virtual void perseguirJogador(sf::Vector2f);
   virtual void movimentar();
 
 private:

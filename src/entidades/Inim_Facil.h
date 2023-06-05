@@ -16,6 +16,6 @@ protected:
   bool pulaAleatoriamente;
 
   void moverAleatoriamente() override;
-  void perseguirJogador(sf::Vector2f) override;
+  float perseguirJogador(sf::Vector2f) override;
 };
 } // namespace Jogo::Entidades::Personagens
