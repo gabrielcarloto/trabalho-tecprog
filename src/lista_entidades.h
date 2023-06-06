@@ -5,7 +5,8 @@
 #include "listas.h"
 #include "Entidade.h"
 using namespace std;
-
+namespace Jogo{
+namespace Listas{
 class lista_entidades {
     private:
         listas<Entidade>* lista_ente;
@@ -32,4 +33,6 @@ void lista_entidades::lista() {
         //DO SOMETHING
         it = it->p_next;
     }
+}
+}
 }
