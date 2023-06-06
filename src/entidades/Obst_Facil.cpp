@@ -23,6 +23,9 @@ void Bloco::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
   case Ente::ID::OBSTACULO: {
     Bloco *pBloco = dynamic_cast<Bloco *>(pEnt);
 
+    // BUG: por algum raio de motivo algumas caixas passam pelo chão como se não
+    // fosse nada e o chão do canto inferior esquedo do tilemap precisou ser
+    // removido porque era teleportado para a posição do jogador
     if (!pBloco || !pBloco->arrastavel)
       Entidade::colidir(pEnt, intersecao);
     break;

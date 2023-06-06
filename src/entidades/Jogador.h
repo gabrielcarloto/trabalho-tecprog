@@ -9,8 +9,9 @@ constexpr char CHAR_JOGADOR = 'J';
 namespace Jogo::Entidades::Personagens {
 class Jogador : public Personagem {
 public:
-  Jogador(const char *, sf::Vector2f = {0, 0}, float = 0);
-  Jogador(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0);
+  Jogador(const char *, sf::Vector2f = {0, 0}, float = 0, unsigned int n = 1);
+  Jogador(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0,
+          unsigned int n = 1);
 
   void executar() override;
   void colidir(Entidade *, sf::Vector2f) override;
@@ -23,6 +24,7 @@ protected:
 private:
   std::string nome;
   unsigned int pontos = 0;
+  unsigned int numeroJogador;
 
   void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);
   void colidirInimigo(Inimigo *, sf::Vector2f);

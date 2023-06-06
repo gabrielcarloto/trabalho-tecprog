@@ -8,25 +8,37 @@
 #include <string>
 
 namespace Jogo::Entidades::Personagens {
-Jogador::Jogador(const char *caminhoTextura, const sf::Vector2f pos, float velo)
-    : Personagem(Ente::ID::JOGADOR, caminhoTextura, pos, velo) {}
+Jogador::Jogador(const char *caminhoTextura, const sf::Vector2f pos, float velo,
+                 unsigned int n)
+    : Personagem(Ente::ID::JOGADOR, caminhoTextura, pos, velo),
+      numeroJogador(n) {}
 
 Jogador::Jogador(const char *caminhoTextura, sf::IntRect lim, sf::Vector2f pos,
-                 float velo)
-    : Personagem(Ente::ID::JOGADOR, caminhoTextura, lim, pos, velo) {}
+                 float velo, unsigned int n)
+    : Personagem(Ente::ID::JOGADOR, caminhoTextura, lim, pos, velo),
+      numeroJogador(n) {}
 
 void Jogador::movimentar() {
   auto isKeyPressed = sf::Keyboard::isKeyPressed;
 
-  if (isKeyPressed(sf::Keyboard::A))
-    velFinal.x -= velocidade;
-  if (isKeyPressed(sf::Keyboard::D))
-    velFinal.x += velocidade;
+  if (numeroJogador == 1) {
+    if (isKeyPressed(sf::Keyboard::A))
+      velFinal.x -= velocidade;
+    if (isKeyPressed(sf::Keyboard::D))
+      velFinal.x += velocidade;
 
-  // TODO: quem sabe adicionar tamanho do pulo em função do tempo que o espaço
-  // ficou pressionado
-  if (podePular && isKeyPressed(sf::Keyboard::Space)) {
-    pular();
+    if (podePular && isKeyPressed(sf::Keyboard::Space)) {
+      pular();
+    }
+  } else {
+    if (isKeyPressed(sf::Keyboard::Left))
+      velFinal.x -= velocidade;
+    if (isKeyPressed(sf::Keyboard::Right))
+      velFinal.x += velocidade;
+
+    if (podePular && isKeyPressed(sf::Keyboard::Up)) {
+      pular();
+    }
   }
 }
 
