@@ -5,13 +5,13 @@
 
 namespace Jogo::Entidades {
 namespace Personagens {
-class Inim_Dificil;
+class Passaro;
 }
 
 class Projetil : public Entidade {
 public:
   Projetil(sf::Vector2f pos, sf::Vector2f direcao, float velo,
-           Personagens::Inim_Dificil *);
+           Personagens::Passaro *);
   ~Projetil() override;
 
   void executar() override { mover(); }
@@ -26,7 +26,7 @@ private:
   sf::Vector2f direcao;
   const static float distanciaMaxima;
 
-  Personagens::Inim_Dificil *inim = nullptr;
+  Personagens::Passaro *inim = nullptr;
 
   void mover() override;
 };

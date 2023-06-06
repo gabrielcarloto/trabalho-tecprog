@@ -5,7 +5,7 @@
 
 namespace Jogo::Entidades {
 Projetil::Projetil(sf::Vector2f pos, sf::Vector2f dir, float velo,
-                   Personagens::Inim_Dificil *pInim)
+                   Personagens::Passaro *pInim)
     : Entidade(Ente::ID::PROJETIL, velo), penetra(Uteis::chance(30)),
       direcao(dir), inim(pInim) {
   inicializaSprite(CAMINHO_IMAGENS "/projetil.png", pos);

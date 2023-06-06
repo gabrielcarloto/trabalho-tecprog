@@ -39,7 +39,7 @@ void Fase_Primeira::inicializarMapa() {
 
   // TODO: mover para a fase 2
   mapaEntidades[CHAR_INIM_DIFICIL] = []() -> Entidades::Entidade * {
-    return new Entidades::Personagens::Inim_Dificil(
+    return new Entidades::Personagens::Passaro(
         CAMINHO_IMAGENS "/eagle-attack.png", sf::IntRect(122, 2, 32, 38), false,
         {0, 0}, 70);
   };

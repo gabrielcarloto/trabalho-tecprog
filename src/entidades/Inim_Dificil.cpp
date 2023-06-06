@@ -7,22 +7,21 @@ constexpr float DISTANCIA_X_PERSEGUIR_JOGADOR = TAMANHO_TILE * 5,
                     static_cast<float>(TAMANHO_TILE) * 1.5f;
 
 namespace Jogo::Entidades::Personagens {
-Inim_Dificil::Inim_Dificil(const char *path, bool boss, sf::Vector2f pos,
-                           float velo)
+Passaro::Passaro(const char *path, bool boss, sf::Vector2f pos, float velo)
     : Inimigo(path, boss ? MALDADE_PADRAO_DIFICIL_BOSS : MALDADE_PADRAO_DIFICIL,
               pos, velo) {
   construtora(boss);
 }
 
-Inim_Dificil::Inim_Dificil(const char *path, sf::IntRect lim, bool boss,
-                           sf::Vector2f pos, float velo)
+Passaro::Passaro(const char *path, sf::IntRect lim, bool boss, sf::Vector2f pos,
+                 float velo)
     : Inimigo(path, lim,
               boss ? MALDADE_PADRAO_DIFICIL_BOSS : MALDADE_PADRAO_DIFICIL, pos,
               velo) {
   construtora(boss);
 }
 
-void Inim_Dificil::construtora(bool boss) {
+void Passaro::construtora(bool boss) {
   distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
   distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
 
@@ -34,21 +33,21 @@ void Inim_Dificil::construtora(bool boss) {
   }
 }
 
-Inim_Dificil::~Inim_Dificil() {
+Passaro::~Passaro() {
   if (projetil)
     projetil->setDeveSerRemovido();
 
   deletarProjetil();
 }
 
-void Inim_Dificil::executar() { mover(); }
+void Passaro::executar() { mover(); }
 
-void Inim_Dificil::mover() {
+void Passaro::mover() {
   velFinal.y -= GRAVIDADE * pGG->getDeltaTempo();
   Personagem::mover();
 }
 
-float Inim_Dificil::perseguirJogador(sf::Vector2f posJogador) {
+float Passaro::perseguirJogador(sf::Vector2f posJogador) {
   float direcaoX = Inimigo::perseguirJogador(posJogador);
   float direcaoY = posJogador.y > y ? 1 : -1;
 
@@ -60,12 +59,12 @@ float Inim_Dificil::perseguirJogador(sf::Vector2f posJogador) {
   return direcaoX;
 }
 
-void Inim_Dificil::arremessar(sf::Vector2f direcao) {
+void Passaro::arremessar(sf::Vector2f direcao) {
   projetil = new Projetil({x, y}, direcao, velocidade * 2, this);
   fase->adicionarEntidade(projetil);
 }
 
-void Inim_Dificil::deletarProjetil() {
+void Passaro::deletarProjetil() {
   fase->removerEntidade(projetil);
   projetil = nullptr;
 }

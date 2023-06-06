@@ -6,12 +6,11 @@
 constexpr char CHAR_INIM_DIFICIL = 'D';
 
 namespace Jogo::Entidades::Personagens {
-class Inim_Dificil : public Inimigo {
+class Passaro : public Inimigo {
 public:
-  Inim_Dificil(const char *, bool, sf::Vector2f = {0, 0}, float = 0);
-  Inim_Dificil(const char *, sf::IntRect, bool, sf::Vector2f = {0, 0},
-               float = 0);
-  ~Inim_Dificil();
+  Passaro(const char *, bool, sf::Vector2f = {0, 0}, float = 0);
+  Passaro(const char *, sf::IntRect, bool, sf::Vector2f = {0, 0}, float = 0);
+  ~Passaro();
 
   void executar() override;
   void mover() override;
