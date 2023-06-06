@@ -16,7 +16,7 @@ public:
 
   void executar() override { mover(); }
 
-  void colidir(Entidade *);
+  void colidir(Entidade *, sf::Vector2f) override;
   bool getDeveSerRemovido() const;
   void setDeveSerRemovido();
 

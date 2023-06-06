@@ -33,4 +33,12 @@ void Personagem::mover() {
   movimentar();
   Entidade::mover();
 }
+
+void Personagem::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
+  Entidade::colidir(pEnt, intersecao);
+  InfoColisao info = getInfoColisao(pEnt, intersecao);
+
+  if (info.baixo)
+    podePular = true;
+}
 } // namespace Jogo::Entidades::Personagens

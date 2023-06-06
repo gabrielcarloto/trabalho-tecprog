@@ -11,9 +11,8 @@ public:
   Personagem(ID, const char *, sf::Vector2f, float velo);
   Personagem(ID, const char *, sf::IntRect, sf::Vector2f, float velo);
 
-  virtual void colidir(Entidade *, sf::Vector2f) = 0;
-
   void mover() override;
+  void colidir(Entidade *, sf::Vector2f) override;
 
 protected:
   int num_vidas = 1;

@@ -69,25 +69,6 @@ void Inimigo::tomarDano() {
     neutralizarse();
 }
 
-void Inimigo::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
-  auto posObst = pEnt->getPosicao();
-
-  if (intersecao.x > intersecao.y) {
-    x += intersecao.x * (posObst.x < x ? -1.f : 1.f);
-    velFinal.x = 0;
-  } else {
-    velFinal.y = 0;
-    if (posObst.y < y) {
-      y -= intersecao.y;
-    } else {
-      y += intersecao.y;
-      podePular = true;
-    }
-  }
-
-  pFig->setPosition(x, y);
-}
-
 std::pair<Jogador *, float> Inimigo::jogadorMaisProximo() {
   auto distJogadores = distanciaJogadores();
 

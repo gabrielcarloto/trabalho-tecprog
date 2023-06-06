@@ -18,7 +18,6 @@ public:
   virtual void tomarDano();
   void incluirJogador(Jogador *);
   void setFase(Fases::Fase *);
-  virtual void colidir(Entidade *, sf::Vector2f);
 
   // toma dano
   void operator--();

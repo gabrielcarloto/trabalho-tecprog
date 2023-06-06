@@ -1,5 +1,6 @@
 #include "Gerenciador_Colisoes.h"
 #include "entidades/Obst_Facil.h"
+#include "uteis.h"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -17,9 +18,22 @@ void Gerenciador_Colisoes::gerenciar() {
     throw std::runtime_error("Gerenciador_Colisoes::gerenciar -> Pelo menos um "
                              "jogador deve ser adicionado");
 
-  for (IteratorObstaculos it = LOs.begin(); it != LOs.end(); it++) {
+  for (IteratorObstaculos it = LOs.begin(); it != Uteis::prev(LOs.end());
+       it++) {
     colidirLimitesMapa(static_cast<Entidades::Entidade *>(*it));
+
+    for (IteratorObstaculos it2 = Uteis::next(it); it2 != LOs.end(); it2++) {
+      sf::Vector2f colisao = calculaColisao(*it, *it2);
+
+      if (checaColisao(colisao)) {
+        (*it)->colidir(*it2, colisao);
+        (*it2)->colidir(*it, colisao);
+      }
+    }
   }
+
+  colidirLimitesMapa(
+      static_cast<Entidades::Entidade *>(*Uteis::prev(LOs.end())));
 
   for (unsigned int i = 0; i < numJogadores; i++) {
     auto jogador = LJs[i];
@@ -33,12 +47,7 @@ void Gerenciador_Colisoes::gerenciar() {
 
       if (checaColisao(colisao)) {
         jogador->colidir(*itObst, colisao);
-
-        Entidades::Obstaculos::Obst_Facil *pObstFacil =
-            dynamic_cast<Entidades::Obstaculos::Obst_Facil *>(*itObst);
-
-        if (pObstFacil)
-          pObstFacil->colidirComJogador();
+        (*itObst)->colidir(jogador, colisao);
       }
     }
 
@@ -55,7 +64,7 @@ void Gerenciador_Colisoes::gerenciar() {
       sf::Vector2f colisao = calculaColisao(jogador, *itProj);
 
       if (checaColisao(colisao)) {
-        (*itProj)->colidir(jogador);
+        (*itProj)->colidir(jogador, colisao);
       }
     }
   }
@@ -89,7 +98,7 @@ void Gerenciador_Colisoes::gerenciar() {
       sf::Vector2f colisao = calculaColisao(*itProj, *itObst);
 
       if (checaColisao(colisao)) {
-        (*itProj)->colidir(*itObst);
+        (*itProj)->colidir(*itObst, colisao);
       }
     }
   }

@@ -30,7 +30,7 @@ void Projetil::mover() {
 
 bool Projetil::getDeveSerRemovido() const { return deveSerRemovido; }
 
-void Projetil::colidir(Entidade *pEnt) {
+void Projetil::colidir(Entidade *pEnt, sf::Vector2f) {
   switch (pEnt->getId()) {
   case Ente::JOGADOR: {
     Personagens::Jogador *pJog = static_cast<Personagens::Jogador *>(pEnt);

@@ -33,15 +33,26 @@ void Jogador::movimentar() {
 void Jogador::executar() { mover(); }
 
 void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
-  switch (outra->getId()) {
-  case Ente::ID::OBSTACULO:
-    return colidirObstaculo(static_cast<Obstaculos::Obstaculo *>(outra),
-                            intersecao);
-  case Ente::ID::INIMIGO:
-    return colidirInimigo(static_cast<Inimigo *>(outra), intersecao);
-  default:
-    throw std::runtime_error("Jogador::colidir -> ID " + std::to_string(id) +
-                             " nao colidindo");
+  Personagem::colidir(outra, intersecao);
+  InfoColisao info = getInfoColisao(outra, intersecao);
+
+  if (outra->getId() == Ente::ID::INIMIGO) {
+    if (info.baixo) {
+      Inimigo *inim = static_cast<Inimigo *>(outra);
+
+      pular(static_cast<float>(TAMANHO_TILE) *
+            static_cast<float>(std::fmax(
+                static_cast<float>(inim->getNivelMaldade()) / 10, 1)) /
+            2);
+
+      inim->operator--();
+
+      if (inim->getDeveSerRemovido()) {
+        operator*(inim->getNivelMaldade());
+      }
+    } else {
+      neutralizarse();
+    }
   }
 }
 
