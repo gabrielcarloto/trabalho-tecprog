@@ -2,16 +2,33 @@
 #include <cstdlib>
 
 namespace Jogo::Entidades::Obstaculos {
-Obst_Facil::Obst_Facil(const char *path, sf::Vector2f pos, bool flut,
-                       bool podeCairQuandoPisa)
-    : Obstaculo(false, 0, flut), caiQuandoJogadorPisa(podeCairQuandoPisa) {
+Bloco::Bloco(const char *path, sf::Vector2f pos, bool flut, bool arrasta)
+    : Obstaculo(false, 0, flut), arrastavel(arrasta) {
   inicializaSprite(path, pos);
 }
 
-void Obst_Facil::executar() { mover(); }
+void Bloco::executar() { mover(); }
 
-void Obst_Facil::colidirComJogador() {
-  if (caiQuandoJogadorPisa)
-    flutua = false;
+void Bloco::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
+  switch (pEnt->getId()) {
+  case Ente::ID::JOGADOR: {
+    if (arrastavel) {
+      InfoColisao info = getInfoColisao(pEnt, intersecao);
+      if (info.esquerda || info.direita)
+        x += intersecao.x * (info.esquerda ? -1.f : 1.f);
+    }
+
+    break;
+  }
+  case Ente::ID::OBSTACULO: {
+    Bloco *pBloco = dynamic_cast<Bloco *>(pEnt);
+
+    if (!pBloco || !pBloco->arrastavel)
+      Entidade::colidir(pEnt, intersecao);
+    break;
+  }
+  default:
+    break;
+  }
 }
 } // namespace Jogo::Entidades::Obstaculos

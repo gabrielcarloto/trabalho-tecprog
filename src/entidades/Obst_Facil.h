@@ -1,17 +1,19 @@
 #include "Jogador.h"
 #include "Obstaculo.h"
 
+constexpr char CHAR_BLOCO = 'B', CHAR_BLOCO_ARRASTAVEL = 'A';
+
 namespace Jogo::Entidades::Obstaculos {
-class Obst_Facil : public Obstaculo {
+class Bloco : public Obstaculo {
 public:
-  Obst_Facil(const char *, sf::Vector2f = {0, 0}, bool flut = false,
-             bool podeCairQuandoPisa = false);
-  ~Obst_Facil() override = default;
+  Bloco(const char *, sf::Vector2f = {0, 0}, bool flut = false,
+        bool arrastavel = false);
+  ~Bloco() override = default;
 
   void executar() override;
-  void colidirComJogador();
+  void colidir(Entidade *, sf::Vector2f) override;
 
 private:
-  const bool caiQuandoJogadorPisa = false;
+  const bool arrastavel = false;
 };
 } // namespace Jogo::Entidades::Obstaculos

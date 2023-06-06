@@ -94,7 +94,7 @@ void Fase::carregarMapa(const char *path) {
 
 void Fase::adicionarEntidadesDefault() {
   mapaEntidades['C'] = []() -> Entidades::Entidade * {
-    return new Entidades::Obstaculos::Obst_Facil(CAMINHO_IMAGENS "/floor.png");
+    return new Entidades::Obstaculos::Bloco(CAMINHO_IMAGENS "/floor.png");
   };
 }
 

@@ -3,6 +3,7 @@
 #include "../entidades/Inim_Dificil.h"
 #include "../entidades/Inim_Facil.h"
 #include "../entidades/Obst_Facil.h"
+#include "../entidades/Plataforma.h"
 
 namespace Jogo::Fases {
 Fase_Primeira::Fase_Primeira() = default;
@@ -10,14 +11,19 @@ Fase_Primeira::Fase_Primeira() = default;
 void Fase_Primeira::inicializarMapa() {
   adicionarEntidadesDefault();
 
-  mapaEntidades['1'] = []() -> Entidades::Entidade * {
-    return new Entidades::Obstaculos::Obst_Facil(
-        CAMINHO_IMAGENS "/big-crate.png", {}, true);
+  mapaEntidades[CHAR_BLOCO] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Bloco(CAMINHO_IMAGENS "/big-crate.png",
+                                            {}, false);
   };
 
-  mapaEntidades['P'] = []() -> Entidades::Entidade * {
-    return new Entidades::Obstaculos::Obst_Facil(
-        CAMINHO_IMAGENS "/big-crate.png", {}, true, Uteis::chance(10));
+  mapaEntidades[CHAR_BLOCO_ARRASTAVEL] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Bloco(CAMINHO_IMAGENS "/big-crate.png",
+                                            {}, false, true);
+  };
+
+  mapaEntidades[CHAR_PLATAFORMA] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Plataforma(
+        CAMINHO_IMAGENS "/big-crate.png", {}, Uteis::chance(10));
   };
 
   mapaEntidades[CHAR_GAMBA] = []() -> Entidades::Entidade * {
