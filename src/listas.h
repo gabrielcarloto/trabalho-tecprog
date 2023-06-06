@@ -3,6 +3,9 @@
 #include<bits/stdc++.h>
 #include "elemento.h"
 using namespace std;
+namespace Jogo {
+namespace Listas{
+class elemento;
 template<class T>
 class listas{
     private:
@@ -48,3 +51,5 @@ void listas<T>::limpa() {
 /*void listas::seta_afiliate(elemento<T>* p){
     partner = p;
 }*/
+}
+}
