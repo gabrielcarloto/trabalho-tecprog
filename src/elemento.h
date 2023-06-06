@@ -2,6 +2,7 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
+namespace listas{
 template<class T>
 class elemento{
     private:
@@ -41,4 +42,5 @@ void elemento<T>::set_previous(elemento<T>* pp) {
 template<class T>
 void elemento<T>::set_next(elemento<T>* pn) {
     p_next = pn;
+}
 }
