@@ -68,56 +68,6 @@ void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
   }
 }
 
-void Jogador::colidirObstaculo(Obstaculos::Obstaculo *obst,
-                               sf::Vector2f intersecao) {
-  auto posObst = obst->getPosicao();
-  // TODO: lidar com obstáculos danosos
-
-  if (intersecao.x > intersecao.y) {
-    x += intersecao.x * (posObst.x < x ? -1.f : 1.f);
-    velFinal.x = 0;
-  } else {
-    velFinal.y = 0;
-    if (posObst.y < y) {
-      y -= intersecao.y;
-    } else {
-      y += intersecao.y;
-      podePular = true;
-    }
-  }
-
-  pFig->setPosition(x, y);
-}
-
-void Jogador::colidirInimigo(Inimigo *inim, sf::Vector2f intersecao) {
-  auto posInim = inim->getPosicao();
-
-  if (intersecao.x > intersecao.y) {
-    x += intersecao.x * (posInim.x < x ? -1.f : 1.f);
-    velFinal.x = 0;
-    neutralizarse();
-  } else {
-    velFinal.y = 0;
-    if (posInim.y < y) {
-      y -= intersecao.y;
-      neutralizarse();
-    } else {
-      y += intersecao.y;
-      pular(static_cast<float>(TAMANHO_TILE) *
-            static_cast<float>(std::fmax(
-                static_cast<float>(inim->getNivelMaldade()) / 10, 1)) /
-            2);
-      inim->operator--();
-
-      if (inim->getDeveSerRemovido()) {
-        operator*(inim->getNivelMaldade());
-      }
-    }
-  }
-
-  pFig->setPosition(x, y);
-}
-
 void Jogador::operator*(int fator) {
   pontos += 10 * fator;
 

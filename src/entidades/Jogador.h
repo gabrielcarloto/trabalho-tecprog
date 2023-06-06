@@ -26,9 +26,6 @@ private:
   unsigned int pontos = 0;
   unsigned int numeroJogador;
 
-  void colidirObstaculo(Obstaculos::Obstaculo *, sf::Vector2f);
-  void colidirInimigo(Inimigo *, sf::Vector2f);
-
   void operator++();
   void operator*(int);
 };
