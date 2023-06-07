@@ -1,15 +1,15 @@
 #pragma once
 #include<iostream>
 #include<bits/stdc++.h>
-#include "elemento.h"
-#include "listas.h"
+#include "Elemento.h"
+#include "Lista.h"
 #include "Entidade.h"
 using namespace std;
 namespace Jogo{
 namespace Listas{
 class lista_entidades {
     private:
-        listas<Entidade>* lista_ente;
+        Lista<Entidade>* lista_ente;
     public:
         void lista_entidades();
         void ~lista_entidades();
