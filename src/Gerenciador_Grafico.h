@@ -10,7 +10,7 @@ constexpr unsigned int NUM_TILES_Y = 12, LARGURA_JANELA = 1178,
                        ALTURA_JANELA = TAMANHO_TILE * (NUM_TILES_Y - 1),
                        FRAMERATE_PADRAO = 60;
 
-constexpr const char *TITULO_PADRAO = "Jogo++";
+constexpr const char *TITULO_PADRAO = "SunnyLand++";
 
 #define CAMINHO_ASSETS "./assets"
 #define CAMINHO_FONTES CAMINHO_ASSETS "/fonts"
