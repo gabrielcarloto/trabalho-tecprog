@@ -1,38 +1,35 @@
 #pragma once
 #include<iostream>
 #include<bits/stdc++.h>
-#include "elemento.h"
+#include "Elemento.h"
 #include "Lista.h"
 #include "Entidade.h"
 using namespace std;
 namespace Jogo{
 namespace Listas{
-class lista_entidades {
+class ListaEntidades{
     private:
         Lista<Entidade>* lista_ente;
     public:
-        void lista_entidades();
-        void ~lista_entidades();
+        void ListaEntidades();
+        void ~ListaEntidades();
         void incluir(Entidade *pE);
-        void lista();
+        void percorre();
 };
-void lista_entidades::lista_entidades() {}
-void lista_entidades::~lista_entidades(){}
+void ListaEntidades::ListaEntidades() {}
+void ListaEntidades::~ListaEntidadess(){
+    lista_ente->limpa();
+}
 
-void lista_entidades::incluir(Entidade *pE){
+void ListaEntidades::incluir(Entidade *pE){
+    Lista<Entidade> p;
     if(pE != NULL) {
-       lista_ente->inclui(pE);
+       p->inclui(pE);
     }
 }
-void lista_entidades::lista() {
-    elemento<Entidade> *it = NULL;
-    Entidade aux = NULL;
-    it = lista_ente->first;
-
-    while (it != NULL){
-        //DO SOMETHING
-        it = it->p_next;
-    }
+void lista_entidades::percorre() {
+    Lista<Entidade> *it = NULL;
+    lista_ente->listar();
 }
 }
 }
