@@ -12,7 +12,10 @@ Projetil::Projetil(sf::Vector2f pos, sf::Vector2f dir, float velo,
   setPosicao(pos);
 }
 
-Projetil::~Projetil() { inim->deletarProjetil(); }
+Projetil::~Projetil() {
+  if (inim)
+    inim->deletarProjetil();
+}
 
 const float Projetil::distanciaMaxima(
     Math::distancia({0, 0}, {static_cast<float>(LARGURA_JANELA) / 2,
@@ -46,5 +49,10 @@ void Projetil::colidir(Entidade *pEnt, sf::Vector2f) {
   }
 }
 
-void Projetil::setDeveSerRemovido() { deveSerRemovido = true; }
+void Projetil::setDeveSerRemovido(bool aterrarInimigo) {
+  deveSerRemovido = true;
+
+  if (aterrarInimigo)
+    inim = nullptr;
+}
 } // namespace Jogo::Entidades

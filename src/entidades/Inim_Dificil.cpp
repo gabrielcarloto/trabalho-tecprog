@@ -34,10 +34,10 @@ void Passaro::construtora(bool boss) {
 }
 
 Passaro::~Passaro() {
-  if (projetil)
-    projetil->setDeveSerRemovido();
-
-  deletarProjetil();
+  if (projetil) {
+    projetil->setDeveSerRemovido(true);
+    deletarProjetil();
+  }
 }
 
 void Passaro::executar() { mover(); }

@@ -18,7 +18,7 @@ public:
 
   void colidir(Entidade *, sf::Vector2f) override;
   bool getDeveSerRemovido() const;
-  void setDeveSerRemovido();
+  void setDeveSerRemovido(bool = false);
 
 private:
   bool penetra = false;
