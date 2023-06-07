@@ -24,7 +24,7 @@ void ListaEntidades::~ListaEntidadess(){
 void ListaEntidades::incluir(Entidade *pE){
     Lista<Entidade> p;
     if(pE != NULL) {
-       p->inclui(pE);
+       p->inclui_Info(pE);
     }
 }
 void lista_entidades::percorre() {
