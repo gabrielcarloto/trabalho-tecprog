@@ -6,13 +6,14 @@ namespace Listas{
 template<class TL>
 class Elemento{
     private:
-        Elemento<TL>* pPrimeiro;
-        Elemento<TL>* pUltimo;
+        Elemento<TL>* pProx;
+        TL* pInfo;
     public:
         void Elemento<TL> get_previous();
         void Elemento<TL> get_next();
-        void Elemento<TL> set_previous(Elemento<TL>* pp);
         void Elemento<TL> set_next(Elemento<TL>* pn);
+        void Elemento<TL> set_info(TL* Info);
+        TL* get_Info();
         Elemento ( );
         ~Elemento ( );
 
@@ -20,27 +21,31 @@ class Elemento{
 template<class TL>
 Elemento<TL>::Elemento()
 {
-   pPrimeiro= NULL;  pUltimo= NULL;
+   pProx = NULL;
 }
 template<class TL>
 Elemento<TL>::~Elemento()
 {
-   pPrimeiro= NULL;  pUltimo= NULL;
+   pProx = NULL;
 }
 template<class TL>
-void Elemento<TL>::get_previous() {
-    return pPrimeiro;
+TL* Elemento<TL>::get_Info() {
+    return pInfo;
 }
 template<class TL>
-void Elemento<TL>::get_next(){
-    return pUltimo;
+void Elemento<TL>::set_info(TL* Info){
+    pInfo = Info;
 }
 template<class TL>
-void Elemento<TL>::set_previous(Elemento<TL>* pp) {
-    pUltimo = pp;
+Elemento<TL>*::get_next(){
+    return pProx;
 }
 template<class TL>
-void Elemento<TL>::set_next(Elemento<TL>* pn) {
-    pUltimo = pn;
+Elemento<TL>*::get_previous(){
+    return pProx;
+}
+template<class TL>
+void Elemento<TL>::set_next(Element<TL>* pn){
+    pProx = pn;
 }
 }
