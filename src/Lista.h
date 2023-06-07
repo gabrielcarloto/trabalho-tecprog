@@ -1,43 +1,50 @@
 #pragma once
 #include<iostream>
 #include<bits/stdc++.h>
-#include "elemento.h"
+#include "Elemento.h"
 using namespace std;
 namespace Jogo {
 namespace Listas{
-class elemento;
-template<class T>
-class listas{
+class Elemento;
+template<class TL>
+class Lista{
     private:
-        elemento<T>* first;
-        elemento<T>* second;
-        elemento<T>*partner;
+        Elemento<TL>* pPrimeiro;
+        Elemento<TL>* pUltimo;
     public:
-        void lista();
-        void ~lista();
-        void inclui(elemento<T>* current);
+        void Lista();
+        void ~Lista();
+        void inclui(elemento<T>* pE);
+        void listar();
         void limpa();
+        void inclui_Info(TL* pInfo);
         //void seta_afiliate();
 };
-template<class T>
-void listas<T>::inclui(elemento<T>* current) {
-    if (first == NULL) {
-            first = current;
-            second = current;
-            current->p_next = NULL;
-            current->p_previous = NULL;
+template<class TL>
+Lista<TL>::Lista(){
+    pPrimeiro = NULL;
+    pUltimo = NULL;
+}
+template<class TL>
+Lista<TL>::~Lista(){
+    limpa();
+}
+template<class TL>
+void Lista<TL>::inclui(Elemento<TL>* pE) {
+    if (pPrimeiro == NULL) {
+            pPrimeiro = pE;
+            pUltimo = pPrimeiro;
     }else {
-        second->p_next = current;
-        current->p_previous = second;
-        second = p;
-        second->p_next = NULL;
-        second->p_previous = NULL;
+        pE->set_previous(pUltimo);
+        pUltimo->set_next(pE);
+        pUltimo = pUltimo->get_next();
     }
 }
-void listas<T>::limpa() {
-    elemento<T>* temp;
-    elemento<T>* aux;
-    temp = first;
+template<class TL>
+void Lista<TL>::limpa() {
+    Elemento<TL>* temp;
+    Elemento<TL>* aux;
+    temp = pPrimeiro;
     aux = temp;
 
     while (temp != NULL){
@@ -45,11 +52,30 @@ void listas<T>::limpa() {
         delete*(temp);
         temp = aux;
     }
-    first = NULL;
-    second = NULL;
+    pProximo = NULL;
+    PUltimo = NULL;
 }
-/*void listas::seta_afiliate(elemento<T>* p){
-    partner = p;
-}*/
+template<class TL>
+void Lista<TL>::listar(){
+    Elemento<TL>* percorre;
+    percorre = pPrimeiro;
+    if(pPrimeiro != NULL) {
+        while(percorre != NULL) {
+            cout << "Elemento da lista" << percorre->get_Info <<endl;
+            percorre = percorre->get_next;
+        }
+    }
+}
+template<class TL>
+void Lista<TL>::inclui_Info(TL* pInfo){
+    if(pInfo == NULL) {
+    Elemento<TL>* pE = NULL;
+    pE = new Elemento<TL>();
+    pE->set_Info(pInfo);
+    inclui(pE);
+    }else{
+        cout << "ERROR" << endl;
+    }
+}
 }
 }
