@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 #include<bits/stdc++.h>
-#include "Elemento.h"
+#include "elemento.h"
 #include "Lista.h"
 #include "Entidade.h"
 using namespace std;
