@@ -2,45 +2,45 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
-namespace listas{
-template<class T>
-class elemento{
+namespace Listas{
+template<class TL>
+class Elemento{
     private:
-        elemento<T>* p_next;
-        elemento<T>* p_previous;
+        Elemento<TL>* pPrimeiro;
+        Elemento<TL>* pUltimo;
     public:
-        void elemento<T> get_previous();
-        void elemento<T> get_next();
-        void elemento<T> set_previous(elemento<T>* pp);
-        void elemento<T> set_next(elemento<T>* pn);
-        elemento ( );
-        ~elemento ( );
+        void Elemento<TL> get_previous();
+        void Elemento<TL> get_next();
+        void Elemento<TL> set_previous(Elemento<TL>* pp);
+        void Elemento<TL> set_next(Elemento<TL>* pn);
+        Elemento ( );
+        ~Elemento ( );
 
 };
-template<class T>
-elemento<T>::elemento()
+template<class TL>
+Elemento<TL>::Elemento()
 {
-   p_next= NULL;  p_previous= NULL;
+   pPrimeiro= NULL;  pUltimo= NULL;
 }
-template<class T>
-elemento<T>::~elemento()
+template<class TL>
+Elemento<TL>::~Elemento()
 {
-   p_next= NULL;  p_previous= NULL;
+   pPrimeiro= NULL;  pUltimo= NULL;
 }
-template<class T>
-void elemento<T>::get_previous() {
-    return p_previous;
+template<class TL>
+void Elemento<TL>::get_previous() {
+    return pPrimeiro;
 }
-template<class T>
-void elemento<T>::get_next(){
-    return p_next;
+template<class TL>
+void Elemento<TL>::get_next(){
+    return pUltimo;
 }
-template<class T>
-void elemento<T>::set_previous(elemento<T>* pp) {
-    p_previous = pp;
+template<class TL>
+void Elemento<TL>::set_previous(Elemento<TL>* pp) {
+    pUltimo = pp;
 }
-template<class T>
-void elemento<T>::set_next(elemento<T>* pn) {
-    p_next = pn;
+template<class TL>
+void Elemento<TL>::set_next(Elemento<TL>* pn) {
+    pUltimo = pn;
 }
 }
