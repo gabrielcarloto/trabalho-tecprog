@@ -12,9 +12,9 @@ public:
 
   struct InfoColisao;
 
-  void setPosicao(const float x, const float y);
-  void setPosicao(const sf::Vector2<float> &);
   sf::Vector2f getPosicao() const;
+  void setPosicao(const float x, const float y);
+  virtual void setPosicao(const sf::Vector2<float> &);
 
   virtual void mover();
   virtual void colidir(Entidade *, sf::Vector2f);

@@ -14,7 +14,7 @@ public:
 
   virtual void executar() = 0;
 
-  void desenhar();
+  virtual void desenhar();
   void setEscalaFigura(float, float);
   const sf::Sprite &getFigura() const;
 

@@ -77,4 +77,8 @@ Gerenciador_Grafico *Gerenciador_Grafico::getInstancia() {
 }
 
 void Gerenciador_Grafico::deletarInstancia() { delete instancia; }
+
+void Gerenciador_Grafico::desenharFigura(const sf::Shape &shape) {
+  janela.draw(shape);
+}
 } // namespace Jogo::Gerenciadores

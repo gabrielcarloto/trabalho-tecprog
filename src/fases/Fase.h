@@ -44,5 +44,6 @@ private:
   void carregarBackground();
   void posicionarJogadores(unsigned int, unsigned int);
   void posicionarEntidade(unsigned int, unsigned int, Entidades::Entidade *);
+  void adicionarJogadoresNasEntidades();
 };
 } // namespace Jogo::Fases

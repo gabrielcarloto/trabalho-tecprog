@@ -25,7 +25,7 @@ public:
   void setLimitesMapa(float, float);
 
 private:
-  std::array<Entidades::Personagens::Jogador *, 2> LJs;
+  std::array<Entidades::Personagens::Jogador *, MAX_JOGADORES> LJs;
   std::vector<Entidades::Personagens::Inimigo *> LIs;
   std::list<Entidades::Obstaculos::Obstaculo *> LOs;
   std::vector<Entidades::Projetil *> LPs;

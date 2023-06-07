@@ -1,10 +1,12 @@
 #include "Fase.h"
 #include "../Gerenciador_Grafico.h"
+#include "../entidades/CaixaVenenosa.h"
 #include "../entidades/Entidade.h"
 #include "../entidades/Jogador.h"
 #include "../entidades/Obst_Facil.h"
 #include "SFML/Graphics/Rect.hpp"
 #include <cctype>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <type_traits>
@@ -39,7 +41,7 @@ void Fase::executar() {
   gerenciar_colisoes();
 
   for (auto entidade : listaEntidades) {
-    pGG->desenharEnte(entidade);
+    entidade->desenhar();
   }
 }
 
@@ -80,16 +82,7 @@ void Fase::carregarMapa(const char *path) {
       static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
       static_cast<float>((indiceLinha - 1) * TAMANHO_TILE));
 
-  for (auto entidade : listaEntidades) {
-    if (entidade->getId() == Ente::ID::INIMIGO) {
-      Entidades::Personagens::Inimigo *inim =
-          static_cast<Entidades::Personagens::Inimigo *>(entidade);
-
-      for (auto jogador : listaJogadores) {
-        inim->incluirJogador(jogador);
-      }
-    }
-  }
+  adicionarJogadoresNasEntidades();
 }
 
 void Fase::adicionarEntidadesDefault() {
@@ -172,5 +165,36 @@ void Fase::posicionarEntidade(unsigned int indiceColuna,
 
   entidade->setPosicao(
       {iCol * tamTile - larguraFig, iLin * tamTile - alturaFig});
+}
+
+void Fase::adicionarJogadoresNasEntidades() {
+  for (auto entidade : listaEntidades) {
+    switch (entidade->getId()) {
+    case Ente::ID::INIMIGO: {
+      Entidades::Personagens::Inimigo *inim =
+          static_cast<Entidades::Personagens::Inimigo *>(entidade);
+
+      for (auto jogador : listaJogadores) {
+        inim->incluirJogador(jogador);
+      }
+
+      break;
+    }
+    case Ente::ID::OBSTACULO: {
+      Entidades::Obstaculos::CaixaVenenosa *caixa =
+          dynamic_cast<Entidades::Obstaculos::CaixaVenenosa *>(entidade);
+
+      if (caixa) {
+        for (auto jogador : listaJogadores) {
+          caixa->incluirJogador(jogador);
+        }
+      }
+
+      break;
+    }
+    default:
+      break;
+    }
+  }
 }
 } // namespace Jogo::Fases

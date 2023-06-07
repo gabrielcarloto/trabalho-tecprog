@@ -1,4 +1,5 @@
 #include "Fase_Primeira.h"
+#include "../entidades/CaixaVenenosa.h"
 #include "../entidades/Gamba.h"
 #include "../entidades/Inim_Dificil.h"
 #include "../entidades/Inim_Facil.h"
@@ -24,6 +25,11 @@ void Fase_Primeira::inicializarMapa() {
   mapaEntidades[CHAR_PLATAFORMA] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Plataforma(
         CAMINHO_IMAGENS "/big-crate.png", {}, Uteis::chance(10));
+  };
+
+  mapaEntidades[CHAR_CAIXA_VENENOSA] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::CaixaVenenosa(CAMINHO_IMAGENS
+                                                    "/big-crate.png");
   };
 
   mapaEntidades[CHAR_GAMBA] = []() -> Entidades::Entidade * {
