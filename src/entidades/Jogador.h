@@ -17,7 +17,7 @@ public:
   void executar() override;
   void colidir(Entidade *, sf::Vector2f) override;
   void setNome(const std::string &);
-  void neutralizarse();
+  void neutralizarse() override;
 
 protected:
   void movimentar() override;

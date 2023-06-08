@@ -60,4 +60,6 @@ Entidade::InfoColisao Entidade::getInfoColisao(Entidade *pEntidade,
 
   return info;
 }
+
+sf::Vector2f Entidade::getVelocidade() const { return velFinal; }
 } // namespace Jogo::Entidades

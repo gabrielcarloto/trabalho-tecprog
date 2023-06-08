@@ -18,7 +18,8 @@ protected:
   int num_vidas = 1;
   bool podePular = true;
 
-  void pular(float = TAMANHO_PULO);
   virtual void movimentar() = 0;
+  virtual void neutralizarse() = 0;
+  void pular(float = TAMANHO_PULO);
 };
 } // namespace Jogo::Entidades::Personagens

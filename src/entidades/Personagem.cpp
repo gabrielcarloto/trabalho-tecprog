@@ -2,6 +2,8 @@
 #include "SFML/Window/Keyboard.hpp"
 #include <cmath>
 
+constexpr float VELOCIDADE_QUEDA_OBSTACULO_NEUTRALIZA = 100;
+
 namespace Jogo::Entidades::Personagens {
 Personagem::Personagem(ID idPersonagem, const char *caminhoTextura,
                        sf::Vector2f pos, float velo)
@@ -37,6 +39,11 @@ void Personagem::mover() {
 void Personagem::colidir(Entidade *pEnt, sf::Vector2f intersecao) {
   Entidade::colidir(pEnt, intersecao);
   InfoColisao info = getInfoColisao(pEnt, intersecao);
+
+  if (pEnt->getId() == Ente::ID::OBSTACULO &&
+      pEnt->getVelocidade().y > VELOCIDADE_QUEDA_OBSTACULO_NEUTRALIZA) {
+    neutralizarse();
+  }
 
   if (info.baixo)
     podePular = true;

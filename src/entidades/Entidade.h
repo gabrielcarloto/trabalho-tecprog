@@ -13,6 +13,7 @@ public:
   struct InfoColisao;
 
   sf::Vector2f getPosicao() const;
+  sf::Vector2f getVelocidade() const;
   void setPosicao(const float x, const float y);
   virtual void setPosicao(const sf::Vector2<float> &);
 

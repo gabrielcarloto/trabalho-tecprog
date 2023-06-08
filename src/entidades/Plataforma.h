@@ -8,14 +8,13 @@ namespace Jogo::Entidades::Obstaculos {
 // obstáculo médio
 class Plataforma : public Obstaculo {
 public:
-  Plataforma(const char *, sf::Vector2f = {0, 0},
-             bool podeCairQuandoPisa = false);
+  Plataforma(const char *, sf::Vector2f = {0, 0}, bool cai = false);
   ~Plataforma() override = default;
 
   void executar() override;
   void colidir(Entidade *, sf::Vector2f) override;
 
 private:
-  const bool caiQuandoJogadorPisa = false;
+  const bool caiQuandoEncosta = false;
 };
 } // namespace Jogo::Entidades::Obstaculos

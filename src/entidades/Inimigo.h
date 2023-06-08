@@ -33,14 +33,14 @@ protected:
   std::array<Jogador *, 2> jogadores;
   float distanciaPerseguirJogadorX = 0, distanciaPerseguirJogadorY = 0;
 
-  virtual void neutralizarse();
   std::pair<float, float> distanciaJogadores();
   std::pair<Jogador *, float> jogadorMaisProximo();
 
   // retorna a direção X
   virtual float perseguirJogador(sf::Vector2f);
   virtual void moverAleatoriamente();
-  virtual void movimentar();
+  void neutralizarse() override;
+  void movimentar() override;
 
 private:
   void aterrarJogadores();
