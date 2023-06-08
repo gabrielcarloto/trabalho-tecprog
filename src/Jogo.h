@@ -16,7 +16,7 @@ public:
 private:
   Gerenciadores::Gerenciador_Grafico *pGerenciadorGrafico = nullptr;
   std::list<Entidades::Personagens::Jogador *> listaJogadores;
-  Fases::Fase_Segunda primeiraFase;
+  Fases::Fase_Primeira primeiraFase;
   sf::Event event;
 
   using IteratorJogadores =
