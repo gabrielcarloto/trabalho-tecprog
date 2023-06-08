@@ -5,6 +5,8 @@
 #include "../entidades/Inim_Facil.h"
 #include "../entidades/Obst_Facil.h"
 #include "../entidades/Plataforma.h"
+#include <array>
+#include <cstdlib>
 
 namespace Jogo::Fases {
 Fase_Primeira::Fase_Primeira() = default;
@@ -51,5 +53,55 @@ void Fase_Primeira::inicializarMapa() {
   };
 
   carregarMapa(CAMINHO_FASE_PRIMEIRA "/tilemap.txt");
+}
+
+void Fase_Primeira::criarSapo(unsigned int coluna, unsigned int linha) {
+  Entidades::Entidade *sapo = criarEntidadeComChance(CHAR_INIM_FACIL);
+
+  if (sapo) {
+    sapo->setPosicao(
+        indiceParaPosicao(sapo->getFigura().getGlobalBounds(), coluna, linha));
+
+    static_cast<Entidades::Personagens::Inimigo *>(sapo)->setFase(this);
+
+    listaEntidades.push_back(sapo);
+    gerenciadorCol.incluirInimigo(
+        static_cast<Entidades::Personagens::Inimigo *>(sapo));
+  }
+}
+
+void Fase_Primeira::criarCaixaVenenosa(unsigned int coluna,
+                                       unsigned int linha) {
+  Entidades::Entidade *caixa = criarEntidadeComChance(CHAR_CAIXA_VENENOSA);
+
+  if (caixa) {
+    caixa->setPosicao(
+        indiceParaPosicao(caixa->getFigura().getGlobalBounds(), coluna, linha));
+
+    listaEntidades.push_back(caixa);
+    gerenciadorCol.incluirObstaculo(
+        static_cast<Entidades::Obstaculos::Obstaculo *>(caixa));
+  }
+}
+
+void Fase_Primeira::criarEntidadeAleatoriamente(unsigned int coluna,
+                                                unsigned int linha) {
+  // facilitaria muito o professor permitir std::function aqui
+  switch (std::rand() % 5) {
+  case 1:
+    criarSapo(coluna, linha);
+    break;
+  case 2:
+    criarGamba(coluna, linha);
+    break;
+  case 3:
+    criarCaixaVenenosa(coluna, linha);
+    break;
+  case 4:
+    criarPlataforma(coluna, linha);
+    break;
+  default:
+    break;
+  }
 }
 } // namespace Jogo::Fases

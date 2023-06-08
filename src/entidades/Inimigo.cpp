@@ -25,6 +25,11 @@ Inimigo::~Inimigo() { aterrarJogadores(); }
 void Inimigo::operator--() { tomarDano(); }
 
 void Inimigo::neutralizarse() {
+  if (!fase) {
+    throw std::runtime_error(
+        "Inimigo::neutralizarse -> Nenhuma fase registrada");
+  }
+
   fase->removerEntidade(this);
   deveSerRemovido = true;
 }

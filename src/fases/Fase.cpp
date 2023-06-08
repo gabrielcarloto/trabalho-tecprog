@@ -56,6 +56,7 @@ void Fase::carregarMapa(const char *path) {
 
         for (const char caractere : linha) {
           if (caractere == '.' || caractere == '\r' || caractere == '\n') {
+            criarEntidadeAleatoriamente(indiceColuna, indiceLinha);
             indiceColuna++;
             continue;
           }
@@ -118,19 +119,17 @@ void Fase::posicionarJogadores(unsigned int indiceColuna,
 
   Entidades::Personagens::Jogador *jogador1 = listaJogadores[0];
 
-  sf::FloatRect globalBounds = jogador1->getFigura().getGlobalBounds();
+  sf::Vector2f pos = indiceParaPosicao(jogador1->getFigura().getGlobalBounds(),
+                                       indiceColuna, indiceLinha);
 
-  float iCol = static_cast<float>(indiceColuna),
-        iLin = static_cast<float>(indiceLinha),
-        tamTile = static_cast<float>(TAMANHO_TILE),
-        alturaFig = globalBounds.height, larguraFig = globalBounds.width,
-        posX = iCol * tamTile - larguraFig, posY = iLin * tamTile - alturaFig;
-
-  jogador1->setPosicao({posX, posY});
+  jogador1->setPosicao(pos);
   gerenciadorCol.addJogador(jogador1);
 
   if (listaJogadores.size() == 2) {
-    listaJogadores[1]->setPosicao({posX + TAMANHO_TILE, posY});
+    listaJogadores[1]->setPosicao(
+        {pos.x + TAMANHO_TILE + static_cast<float>(TAMANHO_TILE) * 1.5f,
+         pos.y});
+
     gerenciadorCol.addJogador(listaJogadores[1]);
   }
 }
@@ -156,15 +155,8 @@ void Fase::posicionarEntidade(unsigned int indiceColuna,
     break;
   }
 
-  sf::FloatRect globalBounds = entidade->getFigura().getGlobalBounds();
-
-  float iCol = static_cast<float>(indiceColuna),
-        iLin = static_cast<float>(indiceLinha),
-        tamTile = static_cast<float>(TAMANHO_TILE),
-        alturaFig = globalBounds.height, larguraFig = globalBounds.width;
-
-  entidade->setPosicao(
-      {iCol * tamTile - larguraFig, iLin * tamTile - alturaFig});
+  entidade->setPosicao(indiceParaPosicao(
+      entidade->getFigura().getGlobalBounds(), indiceColuna, indiceLinha));
 }
 
 void Fase::adicionarJogadoresNasEntidades() {
@@ -196,5 +188,62 @@ void Fase::adicionarJogadoresNasEntidades() {
       break;
     }
   }
+}
+
+void Fase::criarGamba(unsigned int coluna, unsigned int linha) {
+  Entidades::Entidade *gamba = criarEntidadeComChance(CHAR_GAMBA);
+
+  if (gamba) {
+    gamba->setPosicao(
+        indiceParaPosicao(gamba->getFigura().getGlobalBounds(), coluna, linha));
+
+    static_cast<Entidades::Personagens::Inimigo *>(gamba)->setFase(this);
+
+    listaEntidades.push_back(gamba);
+    gerenciadorCol.incluirInimigo(
+        static_cast<Entidades::Personagens::Inimigo *>(gamba));
+  }
+}
+
+void Fase::criarPlataforma(unsigned int coluna, unsigned int linha) {
+  Entidades::Entidade *plataforma = criarEntidadeComChance(CHAR_PLATAFORMA);
+
+  if (plataforma) {
+    plataforma->setPosicao(indiceParaPosicao(
+        plataforma->getFigura().getGlobalBounds(), coluna, linha));
+
+    listaEntidades.push_back(plataforma);
+    gerenciadorCol.incluirObstaculo(
+        static_cast<Entidades::Obstaculos::Obstaculo *>(plataforma));
+  }
+}
+
+Entidades::Entidade *Fase::criarEntidadeComChance(char caractere,
+                                                  unsigned int chance) {
+  if (!Uteis::chance(chance))
+    return nullptr;
+
+  auto it = mapaEntidades.find(caractere);
+
+  if (it == mapaEntidades.end()) {
+    throw std::runtime_error(std::string("Fase::criarEntidadeComChance -> "
+                                         "Nenhuma entidade com caractere `") +
+                             caractere + "` registrado no mapa de entidades");
+  }
+
+  Entidades::Entidade *entidade = it->second();
+
+  return entidade;
+}
+
+sf::Vector2f Fase::indiceParaPosicao(sf::FloatRect globalBounds,
+                                     unsigned int iColuna,
+                                     unsigned int iLinha) {
+  float iCol = static_cast<float>(iColuna), iLin = static_cast<float>(iLinha),
+        tamTile = static_cast<float>(TAMANHO_TILE),
+        alturaFig = globalBounds.height, larguraFig = globalBounds.width,
+        posX = iCol * tamTile - larguraFig, posY = iLin * tamTile - alturaFig;
+
+  return {posX, posY};
 }
 } // namespace Jogo::Fases

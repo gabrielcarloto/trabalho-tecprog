@@ -8,5 +8,10 @@ public:
   ~Fase_Primeira() = default;
 
   void inicializarMapa() override;
+
+protected:
+  void criarSapo(unsigned int, unsigned int);
+  void criarCaixaVenenosa(unsigned int, unsigned int);
+  void criarEntidadeAleatoriamente(unsigned int, unsigned int) override;
 };
 } // namespace Jogo::Fases
