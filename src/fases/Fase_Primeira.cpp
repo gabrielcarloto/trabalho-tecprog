@@ -5,9 +5,6 @@
 #include "../entidades/Inim_Facil.h"
 #include "../entidades/Obst_Facil.h"
 #include "../entidades/Plataforma.h"
-#include <array>
-#include <cstdlib>
-#include <functional>
 
 namespace Jogo::Fases {
 Fase_Primeira::Fase_Primeira() = default;

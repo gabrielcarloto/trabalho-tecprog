@@ -96,9 +96,19 @@ void Fase::carregarMapa(const char *path) {
 }
 
 void Fase::adicionarEntidadesDefault() {
-  mapaEntidades['C'] = []() -> Entidades::Entidade * {
+  mapaEntidades[CHAR_CHAO] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Bloco(CAMINHO_IMAGENS "/floor.png", {},
                                             true);
+  };
+
+  mapaEntidades[CHAR_PLATAFORMA] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Plataforma(
+        CAMINHO_IMAGENS "/big-crate.png", {}, Uteis::chance(10));
+  };
+
+  mapaEntidades[CHAR_GAMBA] = []() -> Entidades::Entidade * {
+    return new Entidades::Personagens::Gamba(
+        CAMINHO_IMAGENS "/oposum.png", sf::IntRect(0, 2, 32, 25), {0, 0}, 70);
   };
 }
 
