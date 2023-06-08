@@ -89,7 +89,7 @@ void Gerenciador_Grafico::atualizarView(sf::Vector2f pos) {
       static_cast<float>(LARGURA_JANELA) / 2;
 
   static const float metadeAlturaJanela = static_cast<float>(ALTURA_JANELA) / 2;
-  static const float velocidadeInterpolacao = 0.1f;
+  static const float velocidadeInterpolacao = 0.075f;
 
   sf::Vector2f centroAtual = view.getCenter();
   // clang-format off
