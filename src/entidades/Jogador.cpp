@@ -45,8 +45,10 @@ void Jogador::movimentar() {
 void Jogador::executar() {
   mover();
 
+  static const float SHIFT_Y = 100;
+
   if (numeroJogador == 1)
-    pGG->atualizarView({x, y});
+    pGG->atualizarView({x, y + SHIFT_Y});
 }
 
 void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
