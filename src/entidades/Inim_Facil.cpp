@@ -34,7 +34,7 @@ void Sapo::executar() { mover(); }
 float Sapo::perseguirJogador(sf::Vector2f posJogador) {
   float direcao = Inimigo::perseguirJogador(posJogador);
 
-  if (pulaAleatoriamente && podePular && Uteis::chance(1))
+  if (pulaAleatoriamente && podePular && Uteis::chance(10))
     pular(TAMANHO_TILE * fatorPulo);
 
   return direcao;
@@ -43,7 +43,7 @@ float Sapo::perseguirJogador(sf::Vector2f posJogador) {
 void Sapo::moverAleatoriamente() {
   Inimigo::moverAleatoriamente();
 
-  if (pulaAleatoriamente && podePular && Uteis::chance(1))
-    pular(TAMANHO_TILE * fatorPulo);
+  if (podePular && Uteis::chance(10))
+    pular(TAMANHO_TILE);
 }
 } // namespace Jogo::Entidades::Personagens
