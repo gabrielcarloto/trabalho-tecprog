@@ -12,6 +12,8 @@
 #include <type_traits>
 #include <utility>
 
+constexpr char CHAR_NADA = 'X';
+
 namespace Jogo::Fases {
 Fase::Fase() : Ente(Ente::ID::FASE) {
   carregarBackground();
@@ -57,6 +59,11 @@ void Fase::carregarMapa(const char *path) {
         for (const char caractere : linha) {
           if (caractere == '.' || caractere == '\r' || caractere == '\n') {
             criarEntidadeAleatoriamente(indiceColuna, indiceLinha);
+            indiceColuna++;
+            continue;
+          }
+
+          if (caractere == CHAR_NADA) {
             indiceColuna++;
             continue;
           }
