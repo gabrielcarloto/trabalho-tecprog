@@ -16,6 +16,8 @@
 #define CAMINHO_FASE_PRIMEIRA CAMINHO_FASES "/primeira"
 #define CAMINHO_FASE_SEGUNDA CAMINHO_FASES "/segunda"
 
+constexpr unsigned int LIMITE_ENTIDADE_ALEATORIA_POR_TIPO = 5;
+
 namespace Jogo::Fases {
 class Fase : public Ente {
 public:
@@ -35,12 +37,16 @@ protected:
   std::map<const char, std::function<Entidades::Entidade *()>> mapaEntidades;
   std::vector<Entidades::Personagens::Jogador *> listaJogadores;
   Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
+  unsigned int contagemPlataformas = 0;
+  unsigned int contagemGambas = 0;
 
   void carregarMapa(const char *);
   void adicionarEntidadesDefault();
 
   void criarGamba(unsigned int, unsigned int);
   void criarPlataforma(unsigned int, unsigned int);
+  Entidades::Entidade *criarInimigo(char, unsigned int, unsigned int);
+  Entidades::Entidade *criarObstaculo(char, unsigned int, unsigned int);
   Entidades::Entidade *criarEntidadeComChance(char, unsigned int = 1);
   virtual void criarEntidadeAleatoriamente(unsigned int, unsigned int) = 0;
 

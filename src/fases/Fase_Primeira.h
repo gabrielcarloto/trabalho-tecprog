@@ -13,5 +13,9 @@ protected:
   void criarSapo(unsigned int, unsigned int);
   void criarCaixaVenenosa(unsigned int, unsigned int);
   void criarEntidadeAleatoriamente(unsigned int, unsigned int) override;
+
+private:
+  unsigned int contagemSapos = 0;
+  unsigned int contagemCaixasVenenosas = 0;
 };
 } // namespace Jogo::Fases

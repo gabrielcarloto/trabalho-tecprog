@@ -190,31 +190,51 @@ void Fase::adicionarJogadoresNasEntidades() {
   }
 }
 
-void Fase::criarGamba(unsigned int coluna, unsigned int linha) {
-  Entidades::Entidade *gamba = criarEntidadeComChance(CHAR_GAMBA);
+Entidades::Entidade *Fase::criarInimigo(char caractere, unsigned int col,
+                                        unsigned int lin) {
+  Entidades::Entidade *inim = criarEntidadeComChance(caractere);
 
-  if (gamba) {
-    gamba->setPosicao(
-        indiceParaPosicao(gamba->getFigura().getGlobalBounds(), coluna, linha));
+  if (inim) {
+    inim->setPosicao(
+        indiceParaPosicao(inim->getFigura().getGlobalBounds(), col, lin));
 
-    static_cast<Entidades::Personagens::Inimigo *>(gamba)->setFase(this);
+    static_cast<Entidades::Personagens::Inimigo *>(inim)->setFase(this);
 
-    listaEntidades.push_back(gamba);
+    listaEntidades.push_back(inim);
     gerenciadorCol.incluirInimigo(
-        static_cast<Entidades::Personagens::Inimigo *>(gamba));
+        static_cast<Entidades::Personagens::Inimigo *>(inim));
+  }
+
+  return inim;
+}
+
+void Fase::criarGamba(unsigned int coluna, unsigned int linha) {
+  if (contagemGambas < LIMITE_ENTIDADE_ALEATORIA_POR_TIPO &&
+      criarInimigo(CHAR_GAMBA, coluna, linha)) {
+    contagemGambas++;
   }
 }
 
-void Fase::criarPlataforma(unsigned int coluna, unsigned int linha) {
-  Entidades::Entidade *plataforma = criarEntidadeComChance(CHAR_PLATAFORMA);
+Entidades::Entidade *Fase::criarObstaculo(char caractere, unsigned int col,
+                                          unsigned int lin) {
+  Entidades::Entidade *obst = criarEntidadeComChance(caractere);
 
-  if (plataforma) {
-    plataforma->setPosicao(indiceParaPosicao(
-        plataforma->getFigura().getGlobalBounds(), coluna, linha));
+  if (obst) {
+    obst->setPosicao(
+        indiceParaPosicao(obst->getFigura().getGlobalBounds(), col, lin));
 
-    listaEntidades.push_back(plataforma);
+    listaEntidades.push_back(obst);
     gerenciadorCol.incluirObstaculo(
-        static_cast<Entidades::Obstaculos::Obstaculo *>(plataforma));
+        static_cast<Entidades::Obstaculos::Obstaculo *>(obst));
+  }
+
+  return obst;
+}
+
+void Fase::criarPlataforma(unsigned int coluna, unsigned int linha) {
+  if (contagemPlataformas < LIMITE_ENTIDADE_ALEATORIA_POR_TIPO &&
+      criarObstaculo(CHAR_PLATAFORMA, coluna, linha)) {
+    contagemPlataformas++;
   }
 }
 
