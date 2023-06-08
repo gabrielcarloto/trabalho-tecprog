@@ -42,7 +42,12 @@ void Jogador::movimentar() {
   }
 }
 
-void Jogador::executar() { mover(); }
+void Jogador::executar() {
+  mover();
+
+  if (numeroJogador == 1)
+    pGG->atualizarView({x, y});
+}
 
 void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
   Personagem::colidir(outra, intersecao);

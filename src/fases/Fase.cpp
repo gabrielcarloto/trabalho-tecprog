@@ -79,9 +79,11 @@ void Fase::carregarMapa(const char *path) {
         indiceLinha++;
       });
 
-  gerenciadorCol.setLimitesMapa(
-      static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
-      static_cast<float>((indiceLinha - 1) * TAMANHO_TILE));
+  float limiteMapaX = static_cast<float>((indiceColuna - 1) * TAMANHO_TILE),
+        limiteMapaY = static_cast<float>((indiceLinha - 1) * TAMANHO_TILE);
+
+  gerenciadorCol.setLimitesMapa(limiteMapaX, limiteMapaY);
+  pGG->setLimitesMapa(limiteMapaX, limiteMapaY);
 
   adicionarJogadoresNasEntidades();
 }

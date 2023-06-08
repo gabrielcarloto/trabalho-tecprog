@@ -3,10 +3,12 @@
 #include "SFML/Graphics/Texture.hpp"
 #include <algorithm>
 #include <cstring>
+#include <iostream>
 
 namespace Jogo::Gerenciadores {
 Gerenciador_Grafico::Gerenciador_Grafico()
-    : janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), TITULO_PADRAO) {
+    : janela(sf::VideoMode(LARGURA_JANELA, ALTURA_JANELA), TITULO_PADRAO),
+      view(janela.getDefaultView()) {
   janela.setFramerateLimit(FRAMERATE_PADRAO);
 }
 
@@ -80,5 +82,35 @@ void Gerenciador_Grafico::deletarInstancia() { delete instancia; }
 
 void Gerenciador_Grafico::desenharFigura(const sf::Shape &shape) {
   janela.draw(shape);
+}
+
+void Gerenciador_Grafico::atualizarView(sf::Vector2f pos) {
+  static const float metadeLarguraJanela =
+      static_cast<float>(LARGURA_JANELA) / 2;
+
+  static const float metadeAlturaJanela = static_cast<float>(ALTURA_JANELA) / 2;
+
+  float velocidadeInterpolacao = 0.1f;
+
+  sf::Vector2f centroAtual = view.getCenter();
+  // clang-format off
+  sf::Vector2f novaPosicao = {
+      std::min(std::max(metadeLarguraJanela, pos.x), limiteMapaX - metadeLarguraJanela),
+      std::min(std::max(metadeAlturaJanela, pos.y), limiteMapaY - metadeAlturaJanela),
+  };
+  // clang-format on
+
+  sf::Vector2f deslocamento = novaPosicao - centroAtual;
+  // clang-format off
+  sf::Vector2f proximoCentro = centroAtual + (deslocamento * velocidadeInterpolacao);
+  // clang-format on
+
+  view.setCenter(proximoCentro);
+  janela.setView(view);
+}
+
+void Gerenciador_Grafico::setLimitesMapa(float limX, float limY) {
+  limiteMapaX = limX;
+  limiteMapaY = limY;
 }
 } // namespace Jogo::Gerenciadores

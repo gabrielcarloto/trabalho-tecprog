@@ -29,6 +29,8 @@ public:
   void fecharJanela();
   void atualizaDeltaTempo();
   void desenharEnte(Ente *);
+  void atualizarView(sf::Vector2f);
+  void setLimitesMapa(float, float);
   void desenharFigura(const sf::Shape &);
 
   bool verificaJanelaAberta() const;
@@ -42,13 +44,15 @@ public:
 
 private:
   Gerenciador_Grafico();
+
   sf::RenderWindow janela;
   sf::Clock relogio;
+  sf::View view;
+
   float deltaTempo = 0;
-
-  std::map<const char *, sf::Texture *> mapaTexturas;
-
   static Gerenciador_Grafico *instancia;
+  float limiteMapaX = 0, limiteMapaY = 0;
+  std::map<const char *, sf::Texture *> mapaTexturas;
 };
 } // namespace Gerenciadores
 } // namespace Jogo
