@@ -116,8 +116,13 @@ void Fase::adicionarJogador(Entidades::Personagens::Jogador *pJogador) {
     throw std::runtime_error(
         "Fase::adicionarJogador -> Numero maximo de jogadores atingido");
 
+  if (pJogador == nullptr)
+    throw std::runtime_error(
+        "Fase::adicionarJogador -> Tentativa de adicionar jogador nulo");
+
   listaJogadores.push_back(pJogador);
   listaEntidades.push_back(pJogador);
+  pJogador->adicionarObserver(this);
 }
 
 void Fase::posicionarJogadores(unsigned int indiceColuna,
@@ -274,5 +279,21 @@ sf::Vector2f Fase::indiceParaPosicao(sf::FloatRect globalBounds,
         posX = iCol * tamTile - larguraFig, posY = iLin * tamTile - alturaFig;
 
   return {posX, posY};
+}
+
+bool Fase::getExecutando() const { return executando; }
+
+void Fase::tratarEvento(EVENTOS evento, Entidades::Entidade *pEntidade) {
+  if (pEntidade == nullptr)
+    throw std::runtime_error(
+        "Fase::tratarEvento -> Ponteiro inválido para entidade");
+
+  switch (evento) {
+  case EVENTOS::JOGADOR_FINALIZAR_FASE:
+  case EVENTOS::JOGADOR_GAME_OVER:
+    executando = false;
+  default:
+    break;
+  }
 }
 } // namespace Jogo::Fases

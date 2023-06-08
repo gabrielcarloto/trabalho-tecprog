@@ -19,17 +19,20 @@
 constexpr unsigned int LIMITE_ENTIDADE_ALEATORIA_POR_TIPO = 5;
 
 namespace Jogo::Fases {
-class Fase : public Ente {
+class Fase : public Ente, public Observer {
 public:
   Fase();
   ~Fase();
 
   void executar() override;
+  bool getExecutando() const;
   void gerenciar_colisoes() { gerenciadorCol.gerenciar(); };
 
   void removerEntidade(Entidades::Entidade *);
   void adicionarEntidade(Entidades::Projetil *);
   void adicionarJogador(Entidades::Personagens::Jogador *);
+  void tratarEvento(EVENTOS, Entidades::Entidade *) override;
+
   virtual void inicializarMapa() = 0;
 
 protected:
@@ -39,6 +42,7 @@ protected:
   Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
   unsigned int contagemPlataformas = 0;
   unsigned int contagemGambas = 0;
+  bool executando = true;
 
   void carregarMapa(const char *);
   void adicionarEntidadesDefault();

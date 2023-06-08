@@ -4,15 +4,12 @@
 
 namespace Jogo {
 // cada evento deve ter o formato CLASSE_EVENTO
-enum EVENTOS {
-  INIMIGO_MORTE,
-};
+enum EVENTOS { JOGADOR_FINALIZAR_FASE, JOGADOR_GAME_OVER };
 
 class Observer {
 public:
   virtual ~Observer() = default;
-
-  virtual void atualizar(int, Entidades::Entidade *) = 0;
+  virtual void tratarEvento(EVENTOS, Entidades::Entidade *) = 0;
 };
 
 class Subject {
@@ -24,7 +21,7 @@ public:
   void removerObserver(Observer *po);
 
 protected:
-  void notificar(int, Entidades::Entidade *);
+  void notificar(EVENTOS, Entidades::Entidade *);
 
 private:
   std::list<Observer *> observers;

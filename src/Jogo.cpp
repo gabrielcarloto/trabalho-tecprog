@@ -37,7 +37,13 @@ void Jogo::executar() {
 
     pGerenciadorGrafico->limparJanela();
     pGerenciadorGrafico->desenharEnte(&primeiraFase);
-    primeiraFase.executar();
+
+    if (primeiraFase.getExecutando()) {
+      primeiraFase.executar();
+    } else {
+      // pGerenciadorGrafico->fecharJanela();
+    }
+
     pGerenciadorGrafico->atualizaDeltaTempo();
     pGerenciadorGrafico->renderizar();
   }

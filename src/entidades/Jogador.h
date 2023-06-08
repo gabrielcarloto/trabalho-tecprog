@@ -1,4 +1,5 @@
 #pragma once
+#include "../Observer.h"
 #include "Entidade.h"
 #include "Inimigo.h"
 #include "Obstaculo.h"
@@ -7,7 +8,7 @@
 constexpr char CHAR_JOGADOR = 'J';
 
 namespace Jogo::Entidades::Personagens {
-class Jogador : public Personagem {
+class Jogador : public Personagem, public Subject {
 public:
   Jogador(const char *, sf::Vector2f = {0, 0}, float = 0, unsigned int n = 1);
   Jogador(const char *, sf::IntRect, sf::Vector2f = {0, 0}, float = 0,

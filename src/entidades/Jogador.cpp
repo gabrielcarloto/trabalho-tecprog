@@ -11,12 +11,16 @@ namespace Jogo::Entidades::Personagens {
 Jogador::Jogador(const char *caminhoTextura, const sf::Vector2f pos, float velo,
                  unsigned int n)
     : Personagem(Ente::ID::JOGADOR, caminhoTextura, pos, velo),
-      numeroJogador(n) {}
+      numeroJogador(n) {
+  num_vidas = 3;
+}
 
 Jogador::Jogador(const char *caminhoTextura, sf::IntRect lim, sf::Vector2f pos,
                  float velo, unsigned int n)
     : Personagem(Ente::ID::JOGADOR, caminhoTextura, lim, pos, velo),
-      numeroJogador(n) {}
+      numeroJogador(n) {
+  num_vidas = 3;
+}
 
 void Jogador::movimentar() {
   auto isKeyPressed = sf::Keyboard::isKeyPressed;
@@ -87,8 +91,9 @@ void Jogador::operator++() { operator*(1); }
 void Jogador::neutralizarse() {
   num_vidas--;
 
-  // if (num_vidas <= 0)
-  //   gameOver();
+  if (num_vidas <= 0) {
+    return notificar(EVENTOS::JOGADOR_GAME_OVER, this);
+  }
 
   setPosicao(posInicial);
 }
