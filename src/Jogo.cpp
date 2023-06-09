@@ -45,6 +45,14 @@ void Jogo::inicializarMenuInicial() {
     faseAtual->inicializarMapa();
   });
 
+  menuInicial.addOpcao("Adicionar jogador", [this]() {
+    try {
+      criarJogador();
+    } catch (const std::exception &) {
+      std::cout << "[AVISO] Numero maximo de jogadores alcancado\n";
+    }
+  });
+
   menuInicial.addOpcao("Sair",
                        [this]() { pGerenciadorGrafico->fecharJanela(); });
 
@@ -58,7 +66,7 @@ void Jogo::criarJogador() {
 
   Entidades::Personagens::Jogador *pJog = new Entidades::Personagens::Jogador(
       CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(6, 10, 18, 22), {0, 0},
-      130);
+      130, listaJogadores.size() + 1);
 
   // TODO: adicionar nome pelo menu
 
