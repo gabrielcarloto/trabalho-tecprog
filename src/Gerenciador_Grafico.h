@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics/Shape.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
 #include <map>
