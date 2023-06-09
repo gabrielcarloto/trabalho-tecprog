@@ -30,8 +30,7 @@ void Jogo::executar() {
 void Jogo::inicializarMenuInicial() {
   menuInicial.addOpcao("Jogar primeira fase", [this]() {
     if (faseAtual)
-      throw std::runtime_error("Jogo::inicializarMenuInicial -> Tentativa de "
-                               "sobrescrever fase existente\n");
+      return;
 
     faseAtual = new Fases::Fase_Primeira;
 
