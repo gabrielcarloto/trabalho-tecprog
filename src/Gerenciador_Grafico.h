@@ -29,9 +29,11 @@ public:
   void fecharJanela();
   void atualizaDeltaTempo();
   void desenharEnte(Ente *);
+  void atualizarView();
   void atualizarView(sf::Vector2f);
   void setLimitesMapa(float, float);
   void desenharFigura(const sf::Shape &);
+  void desenharTexto(const sf::Text &);
 
   bool verificaJanelaAberta() const;
   bool verificarEvento(sf::Event &);

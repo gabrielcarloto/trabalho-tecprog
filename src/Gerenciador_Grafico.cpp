@@ -1,5 +1,6 @@
 #include "Gerenciador_Grafico.h"
 #include "Ente.h"
+#include "SFML/Graphics/Text.hpp"
 #include "SFML/Graphics/Texture.hpp"
 #include <algorithm>
 #include <cstring>
@@ -82,6 +83,14 @@ void Gerenciador_Grafico::deletarInstancia() { delete instancia; }
 
 void Gerenciador_Grafico::desenharFigura(const sf::Shape &shape) {
   janela.draw(shape);
+}
+
+void Gerenciador_Grafico::desenharTexto(const sf::Text &text) {
+  janela.draw(text);
+}
+
+void Gerenciador_Grafico::atualizarView() {
+  janela.setView(janela.getDefaultView());
 }
 
 void Gerenciador_Grafico::atualizarView(sf::Vector2f pos) {

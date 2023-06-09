@@ -7,7 +7,7 @@
 namespace Jogo {
 class Ente {
 public:
-  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE };
+  enum ID { JOGADOR, INIMIGO, OBSTACULO, PROJETIL, FASE, MENU };
 
   Ente(ID);
   virtual ~Ente();

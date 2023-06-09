@@ -1,4 +1,5 @@
 #include "Jogo.h"
+#include <iostream>
 
 namespace Jogo {
 Jogo::Jogo()
@@ -20,11 +21,26 @@ void Jogo::executar() {
       CAMINHO_IMAGENS "/player-idle.png", sf::IntRect(6, 10, 18, 22), {0, 0},
       130);
 
+  menuInicial.addOpcao("Jogar primeira fase", [this, pJog]() {
+    faseAtual = new Fases::Fase_Primeira;
+    faseAtual->adicionarJogador(pJog);
+    faseAtual->inicializarMapa();
+  });
+
+  menuInicial.addOpcao("Jogar segunda fase", [this, pJog]() {
+    faseAtual = new Fases::Fase_Segunda;
+    faseAtual->adicionarJogador(pJog);
+    faseAtual->inicializarMapa();
+  });
+
+  menuInicial.addOpcao("Sair",
+                       [this]() { pGerenciadorGrafico->fecharJanela(); });
+
+  menuInicial.posicionarBotoes();
+
   pJog->setNome("Gabriel"); // TODO: adicionar nome pelo menu
 
   listaJogadores.push_back(pJog);
-  primeiraFase.adicionarJogador(pJog);
-  primeiraFase.inicializarMapa();
 
   while (pGerenciadorGrafico->verificaJanelaAberta()) {
     while (pGerenciadorGrafico->verificarEvento(event)) {
@@ -36,12 +52,18 @@ void Jogo::executar() {
     }
 
     pGerenciadorGrafico->limparJanela();
-    pGerenciadorGrafico->desenharEnte(&primeiraFase);
+    pGerenciadorGrafico->desenharEnte(&menuInicial);
 
-    if (primeiraFase.getExecutando()) {
-      primeiraFase.executar();
-    } else {
-      // pGerenciadorGrafico->fecharJanela();
+    menuInicial.executar();
+    menuInicial.desenhar();
+
+    if (faseAtual && faseAtual->getExecutando()) {
+      pGerenciadorGrafico->desenharEnte(faseAtual);
+      faseAtual->executar();
+    } else if (faseAtual) {
+      delete faseAtual;
+      faseAtual = nullptr;
+      pGerenciadorGrafico->atualizarView();
     }
 
     pGerenciadorGrafico->atualizaDeltaTempo();

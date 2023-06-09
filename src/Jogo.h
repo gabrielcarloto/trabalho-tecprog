@@ -1,5 +1,6 @@
 #pragma once
 #include "Gerenciador_Grafico.h"
+#include "Menu.h"
 #include "SFML/Window/Event.hpp"
 #include "entidades/Inimigo.h"
 #include "fases/Fase_Primeira.h"
@@ -16,8 +17,9 @@ public:
 private:
   Gerenciadores::Gerenciador_Grafico *pGerenciadorGrafico = nullptr;
   std::list<Entidades::Personagens::Jogador *> listaJogadores;
-  Fases::Fase_Primeira primeiraFase;
+  Fases::Fase *faseAtual = nullptr;
   sf::Event event;
+  Menu menuInicial;
 
   using IteratorJogadores =
       std::list<Entidades::Personagens::Jogador *>::iterator;

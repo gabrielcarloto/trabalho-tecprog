@@ -1,35 +1,37 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <iostream>
-
+#include "Ente.h"
 #include "Gerenciador_Grafico.h"
+#include <SFML/Graphics.hpp>
+#include <functional>
 
-namespace Jogo{
-    class Menu{
-        private:
-        sf::RenderWindow * janelaMenu;
-        sf::Font * fonte;
-        sf::Texture * img;
-        sf::Sprite * fundo;
+namespace Jogo {
+class Menu : public Ente {
+public:
+  using CallbackOpcao = std::function<void()>;
 
+  Menu();
+  ~Menu() override;
 
-        sf::Vector2f coordMouse;
+  void limparOpcoes();
+  void addOpcao(const char *, const CallbackOpcao &);
 
-        std::vector<const char *> opcoes;
-        std::vector<sf::Vector2f> coords;
-        std::vector<sf::Text> texto;
-        std::vector<std::size_t> tamanhoFonte;
-        
-        public:
-        Menu()=default;
-        ~Menu() = default;
-        
-        void loopMenu();
-        void carregaBotoes();
-        void imprimeMenu();
+  void desenhar() override;
+  void executar() override;
+  void posicionarBotoes();
 
-        void execMenu();
+private:
+  float tempoDesdeUltimaOpcaoSelecionada = 0;
+  int opcaoAnteriormenteSelecionada = 0;
+  int opcaoSelecionada = 0;
+  float larguraBotao = 600;
+  float alturaBotao = 50;
+  sf::Font fonte;
 
-    };
-}
+  std::vector<std::pair<const char *, CallbackOpcao>> opcoes;
+  std::vector<sf::RectangleShape *> botoes;
+  std::vector<sf::Text *> textos;
+
+  void lidarComInput();
+  void pintarBotaoSelecionado();
+};
+} // namespace Jogo

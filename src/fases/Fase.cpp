@@ -29,6 +29,10 @@ Fase::~Fase() {
     delete entidade;
     entidade = nullptr;
   }
+
+  for (auto jogador : listaJogadores) {
+    jogador->removerObserver(this);
+  }
 }
 
 void Fase::carregarBackground() {
