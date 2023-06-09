@@ -39,6 +39,9 @@ void Jogo::inicializarMenuInicial() {
   });
 
   menuInicial.addOpcao("Jogar segunda fase", [this]() {
+    if (faseAtual)
+      return;
+
     faseAtual = new Fases::Fase_Segunda;
 
     adicionarJogadoresNaFase();
