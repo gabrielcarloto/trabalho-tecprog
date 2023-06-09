@@ -34,6 +34,11 @@ void Jogo::inicializarMenuInicial() {
 
     faseAtual = new Fases::Fase_Primeira;
 
+    if (!faseAtual) {
+      throw std::runtime_error(
+          "Jogo::inicializarMenuInicial -> Nao foi possivel instanciar fase\n");
+    }
+
     adicionarJogadoresNaFase();
     faseAtual->inicializarMapa();
   });
@@ -43,6 +48,11 @@ void Jogo::inicializarMenuInicial() {
       return;
 
     faseAtual = new Fases::Fase_Segunda;
+
+    if (!faseAtual) {
+      throw std::runtime_error(
+          "Jogo::inicializarMenuInicial -> Nao foi possivel instanciar fase\n");
+    }
 
     adicionarJogadoresNaFase();
     faseAtual->inicializarMapa();

@@ -304,15 +304,26 @@ void Fase::tratarEvento(EVENTOS evento, Entidades::Entidade *pEntidade) {
         "Fase::tratarEvento -> Ponteiro inválido para entidade");
 
   switch (evento) {
-  case EVENTOS::JOGADOR_FINALIZAR_FASE:
+  case EVENTOS::JOGADOR_FINALIZAR_FASE: {
     jogadorFinalizouFase = true;
-  case EVENTOS::JOGADOR_GAME_OVER:
     executando = false;
     break;
+  }
+  case EVENTOS::JOGADOR_GAME_OVER: {
+    resetarJogadores();
+    executando = false;
+    break;
+  }
   default:
     break;
   }
 }
 
 Fase *Fase::getProximaFase() const { return nullptr; }
+
+void Fase::resetarJogadores() {
+  for (auto jog : listaJogadores) {
+    jog->resetarStatus();
+  }
+}
 } // namespace Jogo::Fases

@@ -19,6 +19,7 @@ public:
   void colidir(Entidade *, sf::Vector2f) override;
   void setNome(const std::string &);
   void neutralizarse() override;
+  void resetarStatus();
 
 protected:
   void movimentar() override;

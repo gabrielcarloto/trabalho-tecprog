@@ -106,4 +106,9 @@ void Jogador::neutralizarse() {
 }
 
 void Jogador::setNome(const std::string &n) { nome = std::move(n); }
+
+void Jogador::resetarStatus() {
+  num_vidas = 3;
+  pontos = 0;
+}
 } // namespace Jogo::Entidades::Personagens

@@ -24,6 +24,7 @@ private:
   void atualizarGerenciadorGrafico();
   void adicionarJogadoresNaFase();
   void inicializarMenuInicial();
+  void resetarJogadores();
   void atualizarEventos();
   void atualizarJanela();
   void atualizarMenu();

@@ -59,6 +59,7 @@ protected:
   sf::Vector2f indiceParaPosicao(sf::FloatRect, unsigned int, unsigned int);
 
 private:
+  void resetarJogadores();
   void carregarBackground();
   void posicionarJogadores(unsigned int, unsigned int);
   void posicionarEntidade(unsigned int, unsigned int, Entidades::Entidade *);
