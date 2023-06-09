@@ -2,7 +2,7 @@
 #include "SFML/Window/Keyboard.hpp"
 #include <cmath>
 
-constexpr float VELOCIDADE_QUEDA_OBSTACULO_NEUTRALIZA = 100;
+constexpr float VELOCIDADE_QUEDA_OBSTACULO_NEUTRALIZA = 400;
 
 namespace Jogo::Entidades::Personagens {
 Personagem::Personagem(ID idPersonagem, const char *caminhoTextura,
