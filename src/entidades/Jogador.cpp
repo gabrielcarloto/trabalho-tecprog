@@ -55,6 +55,13 @@ void Jogador::executar() {
     pGG->atualizarView({x, y + SHIFT_Y});
 }
 
+void Jogador::colidir(float limiteX, float limiteY) {
+  if (x > limiteX - pFig->getGlobalBounds().width)
+    notificar(EVENTOS::JOGADOR_FINALIZAR_FASE, this);
+
+  Entidade::colidir(limiteX, limiteY);
+}
+
 void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
   Personagem::colidir(outra, intersecao);
   InfoColisao info = getInfoColisao(outra, intersecao);

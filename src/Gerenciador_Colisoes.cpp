@@ -119,22 +119,7 @@ void Gerenciador_Colisoes::gerenciar() {
 }
 
 void Gerenciador_Colisoes::colidirLimitesMapa(Entidades::Entidade *pEnt) {
-  sf::FloatRect globalBounds = pEnt->getFigura().getGlobalBounds();
-  sf::Vector2f pos = pEnt->getPosicao();
-
-  if (pos.x < 0)
-    pos.x = 0;
-
-  if (pos.x > limiteMapaX - globalBounds.width)
-    pos.x = limiteMapaX - globalBounds.width;
-
-  if (pos.y < 0)
-    pos.y = 0;
-
-  if (pos.y > limiteMapaY - globalBounds.height)
-    pos.y = limiteMapaY - globalBounds.height;
-
-  pEnt->setPosicao(pos);
+  pEnt->colidir(limiteMapaX, limiteMapaY);
 }
 
 void Gerenciador_Colisoes::incluirObstaculo(

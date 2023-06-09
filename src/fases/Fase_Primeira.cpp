@@ -5,6 +5,7 @@
 #include "../entidades/Inim_Facil.h"
 #include "../entidades/Obst_Facil.h"
 #include "../entidades/Plataforma.h"
+#include "Fase_Segunda.h"
 #include <cstdlib>
 
 namespace Jogo::Fases {
@@ -60,5 +61,9 @@ void Fase_Primeira::criarEntidadeAleatoriamente(unsigned int coluna,
   default:
     break;
   }
+}
+
+Fase *Fase_Primeira::getProximaFase() const {
+  return jogadorFinalizouFase ? new Fase_Segunda : nullptr;
 }
 } // namespace Jogo::Fases

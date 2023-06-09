@@ -31,6 +31,24 @@ void Entidade::mover() {
 
 sf::Vector2f Entidade::getPosicao() const { return {x, y}; }
 
+void Entidade::colidir(float limiteX, float limiteY) {
+  sf::FloatRect globalBounds = pFig->getGlobalBounds();
+
+  if (x < 0)
+    x = 0;
+
+  if (x > limiteX - globalBounds.width)
+    x = limiteX - globalBounds.width;
+
+  if (y < 0)
+    y = 0;
+
+  if (y > limiteY - globalBounds.height)
+    y = limiteY - globalBounds.height;
+
+  setPosicao({x, y});
+}
+
 void Entidade::colidir(Entidade *pEntidade, sf::Vector2f intersecao) {
   InfoColisao info = getInfoColisao(pEntidade, intersecao);
 

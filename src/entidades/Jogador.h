@@ -15,6 +15,7 @@ public:
           unsigned int n = 1);
 
   void executar() override;
+  void colidir(float, float) override;
   void colidir(Entidade *, sf::Vector2f) override;
   void setNome(const std::string &);
   void neutralizarse() override;

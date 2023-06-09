@@ -8,6 +8,7 @@ public:
   ~Fase_Primeira() = default;
 
   void inicializarMapa() override;
+  Fase *getProximaFase() const override;
 
 protected:
   void criarSapo(unsigned int, unsigned int);

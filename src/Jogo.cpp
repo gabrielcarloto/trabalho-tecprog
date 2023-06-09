@@ -61,9 +61,16 @@ void Jogo::executar() {
       pGerenciadorGrafico->desenharEnte(faseAtual);
       faseAtual->executar();
     } else if (faseAtual) {
+      Fases::Fase *proximaFase = faseAtual->getProximaFase();
       delete faseAtual;
-      faseAtual = nullptr;
-      pGerenciadorGrafico->atualizarView();
+      faseAtual = proximaFase;
+
+      if (faseAtual) {
+        faseAtual->adicionarJogador(pJog);
+        faseAtual->inicializarMapa();
+      } else {
+        pGerenciadorGrafico->atualizarView();
+      }
     }
 
     pGerenciadorGrafico->atualizaDeltaTempo();

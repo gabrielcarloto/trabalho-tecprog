@@ -305,10 +305,14 @@ void Fase::tratarEvento(EVENTOS evento, Entidades::Entidade *pEntidade) {
 
   switch (evento) {
   case EVENTOS::JOGADOR_FINALIZAR_FASE:
+    jogadorFinalizouFase = true;
   case EVENTOS::JOGADOR_GAME_OVER:
     executando = false;
+    break;
   default:
     break;
   }
 }
+
+Fase *Fase::getProximaFase() const { return nullptr; }
 } // namespace Jogo::Fases

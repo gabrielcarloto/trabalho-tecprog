@@ -34,6 +34,7 @@ public:
   void tratarEvento(EVENTOS, Entidades::Entidade *) override;
 
   virtual void inicializarMapa() = 0;
+  virtual Fase *getProximaFase() const;
 
 protected:
   std::list<Entidades::Entidade *> listaEntidades;
@@ -42,6 +43,7 @@ protected:
   Gerenciadores::Gerenciador_Colisoes gerenciadorCol;
   unsigned int contagemPlataformas = 0;
   unsigned int contagemGambas = 0;
+  bool jogadorFinalizouFase = false;
   bool executando = true;
 
   void carregarMapa(const char *);

@@ -18,6 +18,7 @@ public:
   virtual void setPosicao(const sf::Vector2<float> &);
 
   virtual void mover();
+  virtual void colidir(float, float);
   virtual void colidir(Entidade *, sf::Vector2f);
 
 protected:
