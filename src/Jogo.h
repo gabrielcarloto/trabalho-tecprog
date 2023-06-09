@@ -18,8 +18,17 @@ private:
   Gerenciadores::Gerenciador_Grafico *pGerenciadorGrafico = nullptr;
   std::list<Entidades::Personagens::Jogador *> listaJogadores;
   Fases::Fase *faseAtual = nullptr;
-  sf::Event event;
   Menu menuInicial;
+  sf::Event event;
+
+  void atualizarGerenciadorGrafico();
+  void adicionarJogadoresNaFase();
+  void inicializarMenuInicial();
+  void atualizarEventos();
+  void atualizarJanela();
+  void atualizarMenu();
+  void atualizarFase();
+  void criarJogador();
 
   using IteratorJogadores =
       std::list<Entidades::Personagens::Jogador *>::iterator;
