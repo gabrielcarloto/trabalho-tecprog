@@ -11,7 +11,7 @@ namespace Jogo::Gerenciadores {
 class Gerenciador_Colisoes {
 public:
   Gerenciador_Colisoes();
-  ~Gerenciador_Colisoes() = default;
+  ~Gerenciador_Colisoes();
 
   void gerenciar();
 

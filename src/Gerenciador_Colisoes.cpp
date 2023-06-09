@@ -13,6 +13,15 @@ Gerenciador_Colisoes::Gerenciador_Colisoes() {
   LJs[1] = nullptr;
 }
 
+Gerenciador_Colisoes::~Gerenciador_Colisoes() {
+  LIs.clear();
+  LOs.clear();
+  LPs.clear();
+
+  LJs[0] = nullptr;
+  LJs[1] = nullptr;
+}
+
 void Gerenciador_Colisoes::gerenciar() {
   if (!LJs[0])
     throw std::runtime_error("Gerenciador_Colisoes::gerenciar -> Pelo menos um "

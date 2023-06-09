@@ -21,18 +21,19 @@ Fase::Fase() : Ente(Ente::ID::FASE) {
 }
 
 Fase::~Fase() {
-  for (size_t i = 0; i < listaJogadores.size(); i++) {
-    listaEntidades.remove(listaJogadores[i]);
+  for (auto &jogador : listaJogadores) {
+    listaEntidades.remove(jogador);
+    jogador->removerObserver(this);
   }
+
+  listaJogadores.clear();
 
   for (auto entidade : listaEntidades) {
     delete entidade;
     entidade = nullptr;
   }
 
-  for (auto jogador : listaJogadores) {
-    jogador->removerObserver(this);
-  }
+  listaEntidades.clear();
 }
 
 void Fase::carregarBackground() {
