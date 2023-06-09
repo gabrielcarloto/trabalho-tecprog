@@ -106,7 +106,7 @@ void Menu::lidarComInput() {
       opcaoSelecionada = static_cast<int>(opcoes.size()) - 1;
   }
 
-  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
     tempoDesdeUltimaOpcaoSelecionada = 0;
     opcoes[opcaoSelecionada].second();
   }
