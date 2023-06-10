@@ -1,6 +1,7 @@
 #pragma once
 #include "../Ente.h"
 #include "../Gerenciador_Colisoes.h"
+#include "../ListaEntidades.h"
 #include "../entidades/Entidade.h"
 #include "../entidades/Gamba.h"
 #include "../entidades/Plataforma.h"
@@ -37,7 +38,7 @@ public:
   virtual Fase *getProximaFase() const;
 
 protected:
-  std::list<Entidades::Entidade *> listaEntidades;
+  Listas::ListaEntidades listaEntidades;
   std::map<const char, std::function<Entidades::Entidade *()>> mapaEntidades;
   std::vector<Entidades::Personagens::Jogador *> listaJogadores;
   Gerenciadores::Gerenciador_Colisoes gerenciadorCol;

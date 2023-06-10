@@ -21,8 +21,8 @@ Fase::Fase() : Ente(Ente::ID::FASE) {
 }
 
 Fase::~Fase() {
-  for (auto &jogador : listaJogadores) {
-    listaEntidades.remove(jogador);
+  for (auto jogador : listaJogadores) {
+    listaEntidades.remover(jogador);
     jogador->removerObserver(this);
   }
 
@@ -32,8 +32,6 @@ Fase::~Fase() {
     delete entidade;
     entidade = nullptr;
   }
-
-  listaEntidades.clear();
 }
 
 void Fase::carregarBackground() {
@@ -118,11 +116,11 @@ void Fase::adicionarEntidadesDefault() {
 }
 
 void Fase::removerEntidade(Entidades::Entidade *pEnt) {
-  listaEntidades.remove(pEnt);
+  listaEntidades.remover(pEnt);
 }
 
 void Fase::adicionarEntidade(Entidades::Projetil *pProjetil) {
-  listaEntidades.push_back(static_cast<Entidades::Entidade *>(pProjetil));
+  listaEntidades.incluir(static_cast<Entidades::Entidade *>(pProjetil));
   gerenciadorCol.incluirProjetil(pProjetil);
 }
 
@@ -136,7 +134,7 @@ void Fase::adicionarJogador(Entidades::Personagens::Jogador *pJogador) {
         "Fase::adicionarJogador -> Tentativa de adicionar jogador nulo");
 
   listaJogadores.push_back(pJogador);
-  listaEntidades.push_back(pJogador);
+  listaEntidades.incluir(pJogador);
   pJogador->adicionarObserver(this);
 }
 
@@ -166,7 +164,7 @@ void Fase::posicionarJogadores(unsigned int indiceColuna,
 void Fase::posicionarEntidade(unsigned int indiceColuna,
                               unsigned int indiceLinha,
                               Entidades::Entidade *entidade) {
-  listaEntidades.push_back(entidade);
+  listaEntidades.incluir(entidade);
 
   switch (entidade->getId()) {
   case OBSTACULO:
@@ -229,7 +227,7 @@ Entidades::Entidade *Fase::criarInimigo(char caractere, unsigned int col,
 
     static_cast<Entidades::Personagens::Inimigo *>(inim)->setFase(this);
 
-    listaEntidades.push_back(inim);
+    listaEntidades.incluir(inim);
     gerenciadorCol.incluirInimigo(
         static_cast<Entidades::Personagens::Inimigo *>(inim));
   }
@@ -252,7 +250,7 @@ Entidades::Entidade *Fase::criarObstaculo(char caractere, unsigned int col,
     obst->setPosicao(
         indiceParaPosicao(obst->getFigura().getGlobalBounds(), col, lin));
 
-    listaEntidades.push_back(obst);
+    listaEntidades.incluir(obst);
     gerenciadorCol.incluirObstaculo(
         static_cast<Entidades::Obstaculos::Obstaculo *>(obst));
   }
