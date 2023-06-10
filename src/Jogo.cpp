@@ -13,6 +13,11 @@ Jogo::~Jogo() {
   pGerenciadorGrafico->deletarInstancia();
   pGerenciadorGrafico = nullptr;
 
+  if (faseAtual) {
+    delete faseAtual;
+    faseAtual = nullptr;
+  }
+
   for (IteratorJogadores it = listaJogadores.begin();
        it != listaJogadores.end(); it++) {
     delete *it;
