@@ -1,7 +1,8 @@
 #include "Jogador.h"
 #include "Obstaculo.h"
 
-constexpr char CHAR_BLOCO = 'B', CHAR_BLOCO_ARRASTAVEL = 'A', CHAR_CHAO = 'C';
+constexpr char CHAR_BLOCO = 'B', CHAR_BLOCO_ARRASTAVEL = 'A', CHAR_CHAO = 'C',
+               CHAR_CAIXA_FLUTUANTE = '2';
 
 namespace Jogo::Entidades::Obstaculos {
 class Bloco : public Obstaculo {

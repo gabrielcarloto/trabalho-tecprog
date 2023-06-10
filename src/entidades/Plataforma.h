@@ -2,7 +2,7 @@
 #include "Jogador.h"
 #include "Obstaculo.h"
 
-constexpr char CHAR_PLATAFORMA = 'P';
+constexpr char CHAR_PLATAFORMA = 'P', CHAR_PLATAFORMA_QUE_SEMPRE_CAI = '3';
 
 namespace Jogo::Entidades::Obstaculos {
 // obstáculo médio

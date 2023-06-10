@@ -104,9 +104,20 @@ void Fase::adicionarEntidadesDefault() {
                                             true);
   };
 
+  mapaEntidades[CHAR_CAIXA_FLUTUANTE] = []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Bloco(CAMINHO_IMAGENS "/big-crate.png",
+                                            {}, true, false);
+  };
+
   mapaEntidades[CHAR_PLATAFORMA] = []() -> Entidades::Entidade * {
     return new Entidades::Obstaculos::Plataforma(
         CAMINHO_IMAGENS "/big-crate.png", {}, Uteis::chance(10));
+  };
+
+  mapaEntidades[CHAR_PLATAFORMA_QUE_SEMPRE_CAI] =
+      []() -> Entidades::Entidade * {
+    return new Entidades::Obstaculos::Plataforma(
+        CAMINHO_IMAGENS "/big-crate.png", {}, true);
   };
 
   mapaEntidades[CHAR_GAMBA] = []() -> Entidades::Entidade * {
