@@ -3,7 +3,7 @@
 #include "../entidades/CaixaVenenosa.h"
 #include "../entidades/Entidade.h"
 #include "../entidades/Jogador.h"
-#include "../entidades/Obst_Facil.h"
+#include "../entidades/Bloco.h"
 #include "SFML/Graphics/Rect.hpp"
 #include <cctype>
 #include <iostream>

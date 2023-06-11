@@ -1,5 +1,5 @@
 #include "Gerenciador_Colisoes.h"
-#include "entidades/Obst_Facil.h"
+#include "entidades/Bloco.h"
 #include "uteis.h"
 #include <algorithm>
 #include <cmath>

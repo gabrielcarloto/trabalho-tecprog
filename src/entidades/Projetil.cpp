@@ -1,6 +1,6 @@
 #include "Projetil.h"
 #include "Entidade.h"
-#include "Inim_Dificil.h"
+#include "Passaro.h"
 #include "Jogador.h"
 
 namespace Jogo::Entidades {

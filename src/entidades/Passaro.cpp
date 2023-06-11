@@ -1,4 +1,4 @@
-#include "Inim_Dificil.h"
+#include "Passaro.h"
 #include "../fases/Fase.h"
 
 constexpr int MALDADE_PADRAO_DIFICIL = 10, MALDADE_PADRAO_DIFICIL_BOSS = 30;

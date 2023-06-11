@@ -1,4 +1,4 @@
-#include "Obst_Facil.h"
+#include "Bloco.h"
 #include <cstdlib>
 
 namespace Jogo::Entidades::Obstaculos {

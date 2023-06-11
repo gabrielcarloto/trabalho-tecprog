@@ -1,5 +1,5 @@
 #include "Jogador.h"
-#include "Inim_Dificil.h"
+#include "Passaro.h"
 #include "Projetil.h"
 #include "SFML/System/Sleep.hpp"
 #include "SFML/System/Time.hpp"

@@ -1,9 +1,9 @@
 #include "Fase_Primeira.h"
 #include "../entidades/CaixaVenenosa.h"
 #include "../entidades/Gamba.h"
-#include "../entidades/Inim_Dificil.h"
-#include "../entidades/Inim_Facil.h"
-#include "../entidades/Obst_Facil.h"
+#include "../entidades/Passaro.h"
+#include "../entidades/Sapo.h"
+#include "../entidades/Bloco.h"
 #include "../entidades/Plataforma.h"
 #include "Fase_Segunda.h"
 #include <cstdlib>
