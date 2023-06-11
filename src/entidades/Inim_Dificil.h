@@ -3,7 +3,7 @@
 #include "Inimigo.h"
 #include "Projetil.h"
 
-constexpr char CHAR_INIM_DIFICIL = 'D';
+constexpr char CHAR_INIM_DIFICIL = 'D', CHAR_BOSS = '6';
 
 namespace Jogo::Entidades::Personagens {
 class Passaro : public Inimigo {

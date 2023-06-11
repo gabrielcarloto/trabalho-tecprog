@@ -4,7 +4,7 @@
 constexpr int MALDADE_PADRAO_DIFICIL = 10, MALDADE_PADRAO_DIFICIL_BOSS = 30;
 constexpr float DISTANCIA_X_PERSEGUIR_JOGADOR = TAMANHO_TILE * 5,
                 DISTANCIA_Y_PERSEGUIR_JOGADOR =
-                    static_cast<float>(TAMANHO_TILE) * 1.5f;
+                    static_cast<float>(TAMANHO_TILE) * 3.f;
 
 namespace Jogo::Entidades::Personagens {
 Passaro::Passaro(const char *path, bool boss, sf::Vector2f pos, float velo)

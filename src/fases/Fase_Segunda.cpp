@@ -28,6 +28,12 @@ void Fase_Segunda::inicializarMapa() {
         {0, 0}, 70);
   };
 
+  mapaEntidades[CHAR_BOSS] = []() -> Entidades::Entidade * {
+    return new Entidades::Personagens::Passaro(
+        CAMINHO_IMAGENS "/eagle-attack.png", sf::IntRect(122, 2, 32, 38), true,
+        {0, 0}, 70);
+  };
+
   carregarMapa(CAMINHO_FASE_SEGUNDA "/tilemap.txt");
 }
 
