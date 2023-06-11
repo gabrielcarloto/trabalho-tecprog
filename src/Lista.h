@@ -46,16 +46,16 @@ public:
   template <typename TI> class ListIterator {
     using ValueType = TI *;
     using PointerType = ValueType *;
-    using Node = typename Lista<TI>::template Elemento<TI>;
+    using Elemento = typename Lista<TI>::template Elemento<TI>;
 
-    Node *pointer;
+    Elemento *pElemento;
 
   public:
-    ListIterator(Node *ptr) : pointer(ptr) {}
-    ~ListIterator() { pointer = nullptr; }
+    ListIterator(Elemento *ptr) : pElemento(ptr) {}
+    ~ListIterator() { pElemento = nullptr; }
 
     ListIterator &operator++() {
-      pointer = pointer->getProximo();
+      pElemento = pElemento->getProximo();
       return *this;
     }
 
@@ -65,11 +65,11 @@ public:
       return it;
     }
 
-    PointerType operator->() { return &pointer->getInfo(); }
-    ValueType operator*() { return pointer->getInfo(); }
+    PointerType operator->() { return &pElemento->getInfo(); }
+    ValueType operator*() { return pElemento->getInfo(); }
 
     bool operator==(const ListIterator &other) const {
-      return pointer == other.pointer;
+      return pElemento == other.pElemento;
     }
 
     bool operator!=(const ListIterator &other) const {
