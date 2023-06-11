@@ -15,12 +15,14 @@ public:
   void executar() override;
   void mover() override;
   void deletarProjetil();
+  bool getBoss() const;
 
 protected:
   float perseguirJogador(sf::Vector2f) override;
 
 private:
   Projetil *projetil = nullptr;
+  bool ehBoss = false;
 
   void arremessar(sf::Vector2f);
   void construtora(bool);

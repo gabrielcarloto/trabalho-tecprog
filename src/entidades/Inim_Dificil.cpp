@@ -25,6 +25,8 @@ void Passaro::construtora(bool boss) {
   distanciaPerseguirJogadorX = DISTANCIA_X_PERSEGUIR_JOGADOR;
   distanciaPerseguirJogadorY = DISTANCIA_Y_PERSEGUIR_JOGADOR;
 
+  ehBoss = boss;
+
   if (boss) {
     setEscalaFigura(4, 4);
 
@@ -68,4 +70,6 @@ void Passaro::deletarProjetil() {
   fase->removerEntidade(projetil);
   projetil = nullptr;
 }
+
+bool Passaro::getBoss() const { return ehBoss; }
 } // namespace Jogo::Entidades::Personagens

@@ -1,4 +1,6 @@
 #include "Jogador.h"
+#include "Inim_Dificil.h"
+#include "Projetil.h"
 #include "SFML/System/Sleep.hpp"
 #include "SFML/System/Time.hpp"
 #include <SFML/Graphics.hpp>
@@ -69,11 +71,16 @@ void Jogador::colidir(Entidade *outra, sf::Vector2f intersecao) {
   if (outra->getId() == Ente::ID::INIMIGO) {
     if (info.baixo) {
       Inimigo *inim = static_cast<Inimigo *>(outra);
+      Passaro *pass = dynamic_cast<Passaro *>(inim);
 
-      pular(static_cast<float>(TAMANHO_TILE) *
-            static_cast<float>(std::fmax(
-                static_cast<float>(inim->getNivelMaldade()) / 10, 1)) /
-            2);
+      if (pass && pass->getBoss()) {
+        pular(static_cast<float>(TAMANHO_TILE) * 3);
+      } else {
+        pular(static_cast<float>(TAMANHO_TILE) *
+              static_cast<float>(std::fmax(
+                  static_cast<float>(inim->getNivelMaldade()) / 10, 1)) /
+              2);
+      }
 
       inim->operator--();
 
